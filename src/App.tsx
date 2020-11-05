@@ -12,19 +12,21 @@ import { LoadingScreen } from "./components";
 import { ConfigProvider } from "antd";
 import locale from "antd/es/locale/vi_VN";
 import "moment/locale/vi";
+import { ILogInState } from "./modules/LoginPage";
 
 interface IProps {
-    // LoginState: ILogInState;
+    LoginState: ILogInState;
     router: any;
 }
 
 class App extends React.Component<IProps, {}> {
     render() {
-        // const LoginState = this.props.LoginState as ILogInState;
-        // const { isLoading, accessToken } = LoginState;
+        const LoginState = this.props.LoginState as ILogInState;
+        const { isLoading, accessToken } = LoginState;
+        console.log("isLoading",isLoading)
         return (
             <React.Fragment>
-                {/* <ConnectedRouter history={storeConfig.history}>
+                <ConnectedRouter history={storeConfig.history}>
                     <React.Suspense fallback={<LoadingScreen size="large" />}>
                         {isLoading ? (
                             <LoadingScreen size="large" />
@@ -37,7 +39,7 @@ class App extends React.Component<IProps, {}> {
                             <AuthLayout routes={authRoutes} />
                         )}
                     </React.Suspense>
-                </ConnectedRouter> */}
+                </ConnectedRouter>
             </React.Fragment>
         );
     }

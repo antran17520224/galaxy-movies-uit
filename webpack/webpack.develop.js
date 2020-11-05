@@ -19,7 +19,7 @@ module.exports = webpackMerge(config, {
     devServer: {
         historyApiFallback: true,
         stats: "minimal",
-        port: 4040, // most frontend port
+        port: 4050, // most frontend port
         contentBase: "./build",
         inline: true,
     },

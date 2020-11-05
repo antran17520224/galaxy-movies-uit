@@ -6,9 +6,9 @@ import React, {
 import { routeName } from "./routes-name";
 import { NotAcceptPage } from "../common/Pages";
 
-// const LoginPage = React.lazy(() =>
-//     import("../modules/LoginPage/components/LoginPageContainer")
-// );
+const LoginPage = React.lazy(() =>
+    import("../modules/LoginPage/components/LoginPageContainer")
+);
 
 
 export interface RouteConfig {
@@ -19,11 +19,11 @@ export interface RouteConfig {
 }
 
 export const authRoutes: RouteConfig[] = [
-    // {
-    //     path: routeName.login,
-    //     extract: true,
-    //     component: LoginPage,
-    // },
+    {
+        path: routeName.login,
+        extract: true,
+        component: LoginPage,
+    },
 ];
 
 export const mainRoutes: RouteConfig[] = [
