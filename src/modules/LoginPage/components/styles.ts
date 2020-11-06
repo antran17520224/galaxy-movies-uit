@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         height: '100vh',
     },
     image: {
-        backgroundImage: 'url(images/inception-poster.jpg)',
+        backgroundImage: 'url(https://c4.wallpaperflare.com/wallpaper/764/590/391/inception-leonardo-dicaprio-movie-posters-2400x3500-entertainment-movies-hd-art-wallpaper-preview.jpg)',
         backgroundRepeat: 'no-repeat',
         backgroundColor:
             theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -43,8 +43,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             backgroundColor: '#b34638',
         }
     },
-    margin: {
-        marginTop: '20px'
-    }
+    marginTop: {
+        marginTop: '16px'
+    },
+    
+    textField: {
+        width: '100%',
+    },
 }));
 export default useStyles;

@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, Grid, Paper } from '@material-ui/core';
+import { Checkbox, FormControl, FormControlLabel, Grid, InputLabel, OutlinedInput, Paper, TextField } from '@material-ui/core';
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import useStyles from './styles';
@@ -12,6 +12,8 @@ interface IProps extends RouteComponentProps { }
 
 const LoginPage: React.FC<IProps> = (props) => {
 
+    const [isShowPass,setShowPass] = React.useState(false);
+
     const classes = useStyles();
 
     return (
@@ -23,40 +25,37 @@ const LoginPage: React.FC<IProps> = (props) => {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Đăng nhập
                         </Typography>
                     <form className={classes.form}>
-                        {/* <Field
+                        <TextField
+                            id="outlined-basic"
+                            label="Email"
                             variant="outlined"
+                            fullWidth
                             margin="normal"
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            component={renderTextField}
                         />
-                        <Field
-                            variant="outlined"
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type={isShowPass ? 'text' : 'password'}
-                            id="password"
-                            component={renderPasswordField}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        edge="end"
-                                        onClick={handleShowPassword}
-                                    >
-                                        {isShowPass ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        /> */}
+                        <FormControl className={clsx(classes.textField,classes.marginTop)} variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={isShowPass ? 'text' : 'password'}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={() => setShowPass(!isShowPass)}
+                                            edge="end"
+                                        >
+                                            {isShowPass ? <Visibility />  : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                labelWidth={70}
+                            />
+                        </FormControl>
                         <FormControlLabel
+                            className={classes.marginTop}
                             control={<Checkbox value="remember" color="primary" />}
                             label="Remember me"
                         />
@@ -67,7 +66,7 @@ const LoginPage: React.FC<IProps> = (props) => {
                             color="primary"
                             className={classes.submit}
                         >
-                            Sign In
+                            Đăng nhập
                             </Button>
                         <Button
                             type="submit"
@@ -85,15 +84,15 @@ const LoginPage: React.FC<IProps> = (props) => {
                         >
                             Google
                                     </Button>
-                        <Grid container className={classes.margin}>
+                        <Grid container className={classes.marginTop}>
                             <Grid item xs>
                                 <Link to="/forgot-password">
-                                    Forgot password?
+                                    Quên mật khẩu
                                     </Link>
                             </Grid>
                             <Grid item>
                                 <Link to="/sign-up">
-                                    {"Don't have an account? Sign Up"}
+                                    Tạo tài khoản mới
                                 </Link>
                             </Grid>
                         </Grid>
