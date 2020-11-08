@@ -9,7 +9,9 @@ import { NotAcceptPage } from "../common/Pages";
 const LoginPage = React.lazy(() =>
     import("../modules/LoginPage/components/LoginPageContainer")
 );
-
+const HomePage = React.lazy(()=>
+    import("../modules/HomePage/components/HomePageContgainer")
+);
 
 export interface RouteConfig {
     path: string;
@@ -27,12 +29,12 @@ export const authRoutes: RouteConfig[] = [
 ];
 
 export const mainRoutes: RouteConfig[] = [
-    // {
-    //     path: routeName.verify,
-    //     extract: true,
-    //     component: VerifyPage,
-    //     permission: "",
-    // },
+    {
+        path: routeName.home,
+        extract: true,
+        component: HomePage,
+        permission: "",
+    },
     // {
     //     path: routeName.shopOwner,
     //     extract: true,

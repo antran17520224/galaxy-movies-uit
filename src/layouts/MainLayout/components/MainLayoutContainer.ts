@@ -1,15 +1,8 @@
+import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
 import IStore from "../../../redux/store/IStore";
 import * as mainLayoutActions from "../actions";
-import { Dispatch, bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import MainLayout from "./MainLayout";
-import { RouteConfig } from "../../../routes";
-import { RouteProps } from "react-router-dom";
-
-interface IProps {
-    routes: RouteConfig[];
-    router: RouteProps;
-}
 
 function mapStateToProps(store: IStore) {
     return {
@@ -29,4 +22,4 @@ function mapDispatchToProps(dispatch: Dispatch<IStore>) {
 export default connect<{}, {}>(
     mapStateToProps,
     mapDispatchToProps
-)<IProps>(MainLayout);
+)(MainLayout);

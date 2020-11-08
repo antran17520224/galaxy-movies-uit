@@ -1,7 +1,6 @@
 import * as React from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
-import { blue } from "@ant-design/colors";
 
 interface IProps {
     component?: React.ReactNode;
@@ -31,7 +30,8 @@ export const LoadingScreen: React.FC<IProps> = ({
                 zIndex: 10,
             }}
         >
-            {component ? component : <Spin size={size} />}
+            {/* {component ? component : <Spin size={size} />} */}
+            Loading
         </div>
     );
 };
