@@ -6,3 +6,15 @@ export const handleLogout = (): IActions.IHandleLogout => {
         type: Keys.HANDLE_LOGOUT,
     };
 };
+
+export const toggleSideBar = () : IActions.IToggleSideBar => {
+    return {
+        type: Keys.TOGGLE_SIDE_BAR
+    }
+}
+
+export const isLogin = () :IActions.IIsLogin => {
+    return {
+        type : Keys.IS_LOGIN
+    }
+}

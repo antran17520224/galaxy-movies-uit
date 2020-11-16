@@ -15,7 +15,7 @@ const HomePage = React.lazy(()=>
 
 export interface RouteConfig {
     path: string;
-    extract: Boolean;
+    exact : Boolean;
     component: ComponentClass | FunctionComponent | LazyExoticComponent<any>;
     permission?: string;
 }
@@ -23,15 +23,20 @@ export interface RouteConfig {
 export const authRoutes: RouteConfig[] = [
     {
         path: routeName.login,
-        extract: true,
+        exact: true,
         component: LoginPage,
     },
 ];
 
 export const mainRoutes: RouteConfig[] = [
     {
+        path: routeName.login,
+        exact: true,
+        component: LoginPage,
+    },
+    {
         path: routeName.home,
-        extract: true,
+        exact : true,
         component: HomePage,
         permission: "",
     },

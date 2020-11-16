@@ -11,22 +11,25 @@ export const reducer: Reducer<IMainLayoutState> = (
     action: ActionTypes
 ): IMainLayoutState => {
     switch (action.type) {
-        case Keys.TOGGLE_MODAL:
-            return onToggleModal(state, action);
+        case Keys.TOGGLE_SIDE_BAR:
+            return onToggleSideBar(state, action);
         case Keys.HANDLE_LOGOUT:
             return onHandleLogout(state, action);
+        case Keys.IS_LOGIN:
+            return onIsLogin(state, action);
         default:
             return state;
     }
 };
 
 //IActions: the interface of current action
-const onToggleModal = (
+const onToggleSideBar = (
     state: IMainLayoutState,
-    action: IActions.IToggleModal
+    action: IActions.IToggleSideBar
 ) => {
     return {
         ...state,
+        isToggleSideBar : !state.isToggleSideBar,
     };
 };
 
@@ -38,3 +41,12 @@ const onHandleLogout = (
         ...state,
     };
 };
+
+const onIsLogin = (
+    state: IMainLayoutState,
+    action: IActions.IIsLogin
+) => {
+    return {
+        ...state,
+    }
+}

@@ -19,9 +19,10 @@ export class AuthLayout extends React.Component<IProps, {}> {
                         />
                     ))}
 
-                    {this.props.routes.length > 0 ? (
+                    {/* {this.props.routes.length > 0 ? (
                         <Redirect to={this.props.routes[0].path} />
-                    ) : null}
+                    ) : null} */}
+                    
                 </Switch>
                 {this.props.children}
             </React.Fragment>

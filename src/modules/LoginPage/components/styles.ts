@@ -1,24 +1,8 @@
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         height: '100vh',
-
-
-    },
-
-    image: {
-        backgroundImage: 'url(https://c4.wallpaperflare.com/wallpaper/764/590/391/inception-leonardo-dicaprio-movie-posters-2400x3500-entertainment-movies-hd-art-wallpaper-preview.jpg)',
-        backgroundRepeat: 'no-repeat',
-        backgroundColor:
-            theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    },
-    paper: {
-        margin: theme.spacing(8, 4),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
     },
     avatar: {
         margin: theme.spacing(1),
@@ -63,7 +47,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
     forgotPassword : {
         textAlign : 'center',
-        marginTop : '13px'
+        marginTop : '13px',
+        padding: '13px 0'
     },
     createAccount : {
         backgroundColor: '#42b72a',

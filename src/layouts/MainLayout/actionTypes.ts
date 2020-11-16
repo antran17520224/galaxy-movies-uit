@@ -4,6 +4,9 @@
 
 import * as IActions from "./IActions";
 
-type ActionTypes = IActions.IToggleModal | IActions.IHandleLogout;
+type ActionTypes =
+    | IActions.IToggleSideBar
+    | IActions.IHandleLogout
+    | IActions.IIsLogin
 
 export default ActionTypes;

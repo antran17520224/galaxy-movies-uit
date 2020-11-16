@@ -1,5 +1,9 @@
-export interface IMainLayoutState {}
+export interface IMainLayoutState {
+    isToggleSideBar : boolean;
+}
 /**
  --- InitialState
  */
-export const initialState: IMainLayoutState = {};
+export const initialState: IMainLayoutState = {
+    isToggleSideBar : false
+};

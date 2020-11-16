@@ -1,25 +1,27 @@
 import { ThemeProvider } from "@material-ui/core";
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ConfigProvider } from "antd";
-import locale from "antd/es/locale/vi_VN";
 import { ConnectedRouter } from "connected-react-router";
 import "moment/locale/vi";
 import * as React from "react";
 import { connect, Provider } from "react-redux";
-import { validateMessages } from "./common";
+import { RouteComponentProps } from "react-router-dom";
 import theme from "./common/Theme";
 import { LoadingScreen } from "./components";
-import { AuthLayout } from "./layouts/index";
 import MainLayout from "./layouts/MainLayout/components/MainLayoutContainer";
+import { IMainLayoutProps } from "./layouts/MainLayout/model/IMainLayoutProps";
 import { ILogInState } from "./modules/LoginPage";
 import { storeConfig } from "./redux/store/configureStore.dev";
-import { authRoutes, mainRoutes } from "./routes";
+import { mainRoutes, RouteConfig } from "./routes";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-interface IProps {
+interface IProps extends RouteComponentProps, IMainLayoutProps {
     LoginState: ILogInState;
     router: any;
+    window?: () => Window;
+    routes?: RouteConfig[];
+    children?: React.ReactElement;
 }
-
 class App extends React.Component<IProps, {}> {
     render() {
         const LoginState = this.props.LoginState as ILogInState;
@@ -30,15 +32,10 @@ class App extends React.Component<IProps, {}> {
                     <ThemeProvider theme={theme}>
                         <CssBaseline />
                         <React.Suspense fallback={<LoadingScreen size="large" />}>
-                            {isLoading ? (
-                                <LoadingScreen size="large" />
-                            ) : accessToken === null ? (
-                                <MainLayout
-                                    routes={mainRoutes}
-                                />
-                            ) : (
-                                        <AuthLayout routes={authRoutes} />
-                                    )}
+                            <MainLayout
+                                {...this.props}
+                                routes={mainRoutes}
+                            />
                         </React.Suspense>
                     </ThemeProvider>
                 </ConnectedRouter>
@@ -60,9 +57,7 @@ const AppWithState: React.ComponentClass<{}> = connect<any, any>(
 const AppWithRedux: React.FC = () => {
     return (
         <Provider store={storeConfig.store}>
-            <ConfigProvider locale={locale} form={{ validateMessages }}>
                 <AppWithState />
-            </ConfigProvider>
         </Provider>
     );
 };

@@ -7,13 +7,14 @@ import Keys from "./actionTypeKeys";
 import { IMainLayoutState } from "./model/IMainLayoutState";
 import { IError } from "../../common";
 
-export interface IToggleModal extends Action {
-    readonly type: Keys.TOGGLE_MODAL;
-    payload: {
-        type: number;
-    };
+export interface IToggleSideBar extends Action {
+    readonly type: Keys.TOGGLE_SIDE_BAR;
 }
 
 export interface IHandleLogout extends Action {
     readonly type: Keys.HANDLE_LOGOUT;
+}
+
+export interface IIsLogin extends Action {
+    readonly type: Keys.IS_LOGIN;
 }

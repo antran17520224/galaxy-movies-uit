@@ -14,21 +14,21 @@ import {
     TextField,
     Typography
 } from '@material-ui/core';
-// import Visibility from '@material-ui/icons/Visibility';
-// import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import clsx from 'classnames';
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { CustomButton } from '../../../components';
+import { ILogInProps } from '../model/ILoginProps';
 import useStyles from './styles';
-
-interface IProps extends RouteComponentProps { }
+import './LoginPage.scss';
+interface IProps extends RouteComponentProps, ILogInProps { }
 interface Inputs {
     email: string,
     password: string,
-    remember : boolean,
+    remember: boolean,
 }
 
 const LoginPage: React.FC<IProps> = (props) => {
@@ -38,20 +38,15 @@ const LoginPage: React.FC<IProps> = (props) => {
     const { register, handleSubmit, errors } = useForm<Inputs>();
 
     const classes = useStyles();
-    const onClick = () => {
-        setLoading(true);
-        setTimeout(() => setLoading(false), 3000); //3 seconds
-    }
 
     const onSubmit = (data: Inputs) => {
         console.log(data);
     }
 
     return (
-        <Grid container className={classes.root}>
-            <Grid item xs={false} sm={4} md={7} className={classes.image} />
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-                <div className={classes.paper}>
+        <React.Fragment>
+            <div className="wrapper-login-page">
+                <div className="wrapper-form">
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
@@ -93,7 +88,7 @@ const LoginPage: React.FC<IProps> = (props) => {
                                             onClick={() => setShowPass(!isShowPass)}
                                             edge="end"
                                         >
-                                            {/* {isShowPass ? <Visibility /> : <VisibilityOff />} */}
+                                            {isShowPass ? <Visibility /> : <VisibilityOff />}
                                         </IconButton>
                                     </InputAdornment>
                                 }
@@ -142,14 +137,14 @@ const LoginPage: React.FC<IProps> = (props) => {
 
                     </form>
                     <Box className={classes.forgotPassword}>
-                        <Typography >
+                        <Typography onClick={() => { }} >
                             Quên mật khẩu
                         </Typography>
                     </Box>
                     <Divider style={{
-                        marginTop : '10px',
+                        marginTop: '10px',
                         width: '100%'
-                    }}/>
+                    }} />
                     <Box className="text-align-center">
                         <CustomButton
                             fullWidth
@@ -158,10 +153,9 @@ const LoginPage: React.FC<IProps> = (props) => {
                             label="Tạo tài khoản"
                         />
                     </Box>
-
                 </div>
-            </Grid>
-        </Grid>
+            </div>
+        </React.Fragment>
     )
 }
 
