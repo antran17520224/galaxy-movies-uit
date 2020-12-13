@@ -12,12 +12,12 @@
     background-attachment: fixed;
     background-repeat: no-repeat;
     position: absolute;
-    top: 40px;
+    top: 0px;
     left: 0px;
     width: 100%;
-    height: calc(100% + 100px);
+    height: 100%;
   }
-  .wrapper-form{
+  .wrapper-form {
     background: #fff;
     position: relative;
     border-radius: 20px;
@@ -25,6 +25,61 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 70px;
+    width: 100%;
+  }
+  .avatar {
+    background-color: #f50057;
+    margin: 8px;
+  }
+  .wrapper-tabs {
+    margin-bottom: 15px;
+  }
+  .form {
+    width: 100%;
+    margin-top: 8px;
+    p {
+      color: #b40843;
+      margin: 5px;
+      &::before {
+        content: "⚠";
+        margin-right: 4px;
+      }
+    }
+  }
+  .form-control {
+    margin-top: 16px;
+  }
+  .text-field {
+    width: 100%;
+  }
+  .btn-register {
+    background-color: #42b72a;
+    &:hover {
+      background-color: #40a02c;
+    }
+  }
+  .btn-login {
+    text-transform: inherit;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    margin: 10px 0;
+  }
+  .btn-fb {
+    background-color: #4465ac;
+    &:hover {
+      background-color: #3b5999;
+    }
+  }
+  .btn-gg {
+    background-color: #dd4b39;
+    &:hover {
+      background-color: #b34638;
+    }
+  }
+  .forgot-pass {
+    text-align: center;
+    padding: 13px 0;
   }
 }

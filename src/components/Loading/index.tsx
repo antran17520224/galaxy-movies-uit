@@ -1,19 +1,16 @@
 import * as React from "react";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 interface IProps {
-    component?: React.ReactNode;
-    size?: "small" | "large" | "default";
-    backdrop?: boolean;
+    time: number;
 }
 
-export const LoadingScreen: React.FC<IProps> = ({
-    size,
-    component,
-    backdrop,
-}: IProps) => {
-    return (
+export const LoadingScreen: React.FC<IProps> = ({ time }) => {
+    const [isLoading, setLoading] = React.useState(true);
+    setTimeout(() => {
+        setLoading(false);
+    }, time);
+    return isLoading ? (
         <div
             style={{
                 position: "absolute",
@@ -24,14 +21,12 @@ export const LoadingScreen: React.FC<IProps> = ({
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: backdrop
-                    ? "rgba(250,250,250,0.7)"
-                    : "transparent",
+                backgroundColor: "rgba(0,0,0,0.5)",
                 zIndex: 10,
+                transition: "0.3s all ease",
             }}
         >
-            {/* {component ? component : <Spin size={size} />} */}
-            Loading
+            <CircularProgress color="secondary" />
         </div>
-    );
+    ) : null;
 };

@@ -2,10 +2,16 @@ import { makeStyles, createStyles, Theme, fade } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme: Theme) => createStyles({
     grow: {
         flexGrow: 1,
-        height: '64px'
     },
-    colorPrimary: {
-        background: 'radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)'
+    backgroundTransparent: {
+        // background: 'radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)'
+        background: 'transparent',
+        boxShadow : 'none',
+        transition : '0.4s all ease',
+    },
+    bgHeader : { 
+        background : '#000 url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center',
+        boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
     },
     // background : '#000 url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center',
     menuButton: {

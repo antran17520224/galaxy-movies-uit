@@ -1,26 +1,17 @@
 import Keys from "./actionTypeKeys";
 import * as IActions from "./IActions";
+import { HOME_PAGE_MODAL } from "./model/IHomePageState";
 
 //#region POST Employee Login Actions
 
 //#region Get Permissions Actions
-export const getPermissions = (): IActions.IGetPermissions => {
+export const toggleModal = (type : HOME_PAGE_MODAL): IActions.IToggleModal => {
     return {
-        type: Keys.GET_PERMISSIONS,
+        type: Keys.TOGGLE_MODAL,
+        payload : {
+            type
+        }
     };
 };
-export const getPermissionsSuccess = (
-    res: any
-): IActions.IGetPermissionsSuccess => {
-    return {
-        type: Keys.GET_PERMISSIONS_SUCCESS,
-        payload: res,
-    };
-};
-export const getPermissionsFail = (res: any): IActions.IGetPermissionsFail => {
-    return {
-        type: Keys.GET_PERMISSIONS_FAIL,
-        payload: res,
-    };
-};
+
 //#endregion

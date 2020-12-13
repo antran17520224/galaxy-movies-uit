@@ -1,17 +1,16 @@
 import { Box } from "@material-ui/core";
+import Fab from '@material-ui/core/Fab';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Zoom from '@material-ui/core/Zoom';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import * as React from "react";
 import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
 import SideBar from "../../../components/Drawer";
+import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import { RouteConfig } from "../../../routes";
 import { IMainLayoutProps } from "../model/IMainLayoutProps";
 import useStyles from './styles';
-import clsx from 'classnames';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Container from '@material-ui/core/Container';
-import Fab from '@material-ui/core/Fab';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Zoom from '@material-ui/core/Zoom';
 
 
 interface IProps extends RouteComponentProps, IMainLayoutProps {
@@ -75,8 +74,9 @@ const MainLayout: React.FC<IProps> = (props) => {
                     )
                 }
             </Switch>
+            <Footer />
             <ScrollTop {...props}>
-                <Fab color="secondary" size="small" aria-label="scroll back to top">
+                <Fab  color="secondary" size="small" aria-label="scroll back to top" style={{outline : 'none'}}>
                     <KeyboardArrowUpIcon />
                 </Fab>
             </ScrollTop>

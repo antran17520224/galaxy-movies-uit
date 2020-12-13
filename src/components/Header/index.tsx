@@ -7,6 +7,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -18,23 +19,13 @@ import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { IMainLayoutProps } from '../../layouts/MainLayout/model/IMainLayoutProps';
 import useStyles from './styles';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Slide from '@material-ui/core/Slide';
+import './Header.scss';
 
 interface IProps extends RouteComponentProps, IMainLayoutProps {
     window?: () => Window;
     children?: React.ReactElement;
 }
-function HideOnScroll(props: IProps) {
-    const { children, window } = props;
-    const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
-    return (
-        <Slide appear={false} direction="down" in={!trigger}>
-            {children}
-        </Slide>
-    );
-}
 
 const Header: React.FC<IProps> = (props) => {
 
@@ -81,8 +72,7 @@ const Header: React.FC<IProps> = (props) => {
         >
             {
                 accessToken === null ? (
-                    <MenuItem onClick={handleMenuClose}><Link className={classes.link} to="/login" >Login</Link></MenuItem>
-
+                    <MenuItem onClick={handleMenuClose}><Link className={classes.link} to="/login" >Đăng nhập</Link></MenuItem>
                 ) :
                     (
                         <>
@@ -136,76 +126,90 @@ const Header: React.FC<IProps> = (props) => {
             </MenuItem>
         </Menu>
     );
+    const { window } = props;
+    const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
     return (
-        <div className={clsx(classes.grow)}>
-            <HideOnScroll {...props} >
-                <AppBar position="fixed" classes={{
-                    colorPrimary: classes.colorPrimary
-                }}>
-                    <Toolbar>
-                        <IconButton
-                            edge="start"
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={props.actions.toggleSideBar}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography className={classes.title} variant="h6" noWrap >
-                            Material-UI
+        <div className="wrapper-header">
+            <AppBar
+                position="fixed"
+                className={clsx("bg-trans", {
+                    "bg-header": trigger === true
+                })}
+            >
+                <Toolbar>
+                    <IconButton
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={props.actions.toggleSideBar}
+                        style={{ outline: 'none' }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography className={classes.title} variant="h6" noWrap >
+                        Material-UI
                             </Typography>
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon />
-                            </div>
-                            <InputBase
-                                placeholder="Search…"
-                                classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput,
-                                }}
-                                inputProps={{ 'aria-label': 'search' }}
-                            />
+                    <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                            <SearchIcon />
                         </div>
-                        <div className={classes.grow} />
-                        <div className={classes.sectionDesktop}>
-                            <IconButton aria-label="show 4 new mails" color="inherit">
-                                <Badge badgeContent={4} color="secondary">
-                                    <MailIcon />
-                                </Badge>
-                            </IconButton>
-                            <IconButton aria-label="show 17 new notifications" color="inherit">
-                                <Badge badgeContent={17} color="secondary">
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
-                            <IconButton
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-controls={menuId}
-                                aria-haspopup="true"
-                                onClick={handleProfileMenuOpen}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                        </div>
-                        <div className={classes.sectionMobile}>
-                            <IconButton
-                                aria-label="show more"
-                                aria-controls={mobileMenuId}
-                                aria-haspopup="true"
-                                onClick={handleMobileMenuOpen}
-                                color="inherit"
-                            >
-                                <MoreIcon />
-                            </IconButton>
-                        </div>
-                    </Toolbar>
-                </AppBar>
-            </HideOnScroll>
+                        <InputBase
+                            placeholder="Search…"
+                            classes={{
+                                root: classes.inputRoot,
+                                input: classes.inputInput,
+                            }}
+                            inputProps={{ 'aria-label': 'search' }}
+                        />
+                    </div>
+                    <div className={classes.grow} />
+                    <div className={classes.sectionDesktop}>
+                        <IconButton
+                            aria-label="show 4 new mails"
+                            color="inherit"
+                            style={{ outline: 'none' }}
+
+                        >
+                            <Badge badgeContent={4} color="secondary">
+                                <MailIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            aria-label="show 17 new notifications"
+                            color="inherit"
+                            style={{ outline: 'none' }}
+                        >
+                            <Badge badgeContent={17} color="secondary">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-controls={menuId}
+                            aria-haspopup="true"
+                            onClick={handleProfileMenuOpen}
+                            color="inherit"
+                            style={{ outline: 'none' }}
+                        >
+                            <AccountCircle />
+                        </IconButton>
+                    </div>
+                    <div className={classes.sectionMobile}>
+                        <IconButton
+                            aria-label="show more"
+                            aria-controls={mobileMenuId}
+                            aria-haspopup="true"
+                            onClick={handleMobileMenuOpen}
+                            color="inherit"
+                        >
+                            <MoreIcon />
+                        </IconButton>
+                    </div>
+                </Toolbar>
+            </AppBar>
             {renderMobileMenu}
             {renderMenu}
         </div>

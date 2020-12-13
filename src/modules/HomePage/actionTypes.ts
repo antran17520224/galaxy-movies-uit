@@ -7,8 +7,6 @@ import * as IActions from "./IActions";
 type ActionTypes =
     | IActions.IHandleClear
 
-    | IActions.IGetPermissions
-    | IActions.IGetPermissionsSuccess
-    | IActions.IGetPermissionsFail
+    | IActions.IToggleModal
 
 export default ActionTypes;

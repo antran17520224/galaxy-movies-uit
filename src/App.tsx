@@ -31,7 +31,7 @@ class App extends React.Component<IProps, {}> {
                 <ConnectedRouter history={storeConfig.history}>
                     <ThemeProvider theme={theme}>
                         <CssBaseline />
-                        <React.Suspense fallback={<LoadingScreen size="large" />}>
+                        <React.Suspense fallback={<LoadingScreen time={1000} />}>
                             <MainLayout
                                 {...this.props}
                                 routes={mainRoutes}

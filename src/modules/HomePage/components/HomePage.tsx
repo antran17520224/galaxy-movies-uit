@@ -2,8 +2,9 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Slider from "react-slick";
 import { IHomePageProps } from '../model/IHomePageProps';
-import './HomePageStyles.scss';
+import './HomePage.scss';
 import { Banner } from './Banner';
+import { TrailerModal } from './Trailer';
 interface IProps extends RouteComponentProps, IHomePageProps { }
 
 const HomePage: React.FC<IProps> = (props) => {
@@ -23,7 +24,7 @@ const HomePage: React.FC<IProps> = (props) => {
         )
     }
     const sliderProps = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 700,
         slidesToShow: 1,
@@ -36,17 +37,33 @@ const HomePage: React.FC<IProps> = (props) => {
     return (
         <React.Fragment>
             <Slider {...sliderProps} >
-                <Banner />
-                <Banner />
-                <Banner />
-                <Banner />
-                <Banner />
-                <Banner />
-                <Banner />
-                <Banner />
-                <Banner />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
             </Slider>
+            <Slider {...sliderProps} >
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+                <Banner {...props} />
+            </Slider>
+            <div style={{
+                width: '100%'
+            }}>
+                <TrailerModal {...props} />
 
+            </div>
 
         </React.Fragment>
     )

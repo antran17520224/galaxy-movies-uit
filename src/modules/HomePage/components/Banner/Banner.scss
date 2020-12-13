@@ -1,0 +1,72 @@
+.wrapper-banner {
+  .wrapper-img {
+    height: 95vh;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  .content-banner {
+    width: 570px;
+    position: absolute;
+    top: 50%;
+    margin-left: 65px;
+    transform: translateY(-40%);
+    .title-banner {
+      margin-bottom: 30px;
+      h1 {
+        font-size: 75px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #fff;
+        transition: 0.3s all ease;
+      }
+    }
+    .des-banner {
+      span {
+        color: #fff;
+        font-size: 17px;
+        padding-right: 23px;
+        margin-left: 23px;
+        color: #fff;
+        font-size: 17px;
+      }
+      .span1 {
+        border-right: 1.7px solid #fff;
+        margin-left: 0;
+      }
+      .span2 {
+        border-right: 1.7px solid #fff;
+      }
+    }
+    .wrapper-button {
+      margin-top: 30px;
+      .button-booking {
+        background: #24baef;
+        padding: 1.3rem 3.5rem;
+        transition: 0.2s all ease;
+        margin-right: 1.5rem;
+        font-weight: 600;
+        color: #fff;
+        outline: none;
+      }
+      .button-booking:hover {
+        box-shadow: 0 4px 11px rgba(36, 186, 239, 0.35);
+      }
+      .button-trailer {
+        background: transparent;
+        border: 2px solid #f7faff;
+        padding: 1.3rem 3.2rem;
+        transition: 0.3s all ease;
+        font-weight: 600;
+        color: #fff;
+        outline: none;
+        &:hover {
+          background: #f7faff;
+          box-shadow: 0 4px 11px rgba(255, 255, 255, 0.35);
+          color : #19272e;
+        }
+      }
+    }
+  }
+}

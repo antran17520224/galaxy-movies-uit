@@ -1,3 +1,4 @@
+import { HOME_PAGE_MODAL } from './model/IHomePageState';
 /**
  * @file All actions interface will be listed here
  */
@@ -7,6 +8,8 @@ import Keys from "./actionTypeKeys";
 import { IError } from "../../common";
 
 
+
+//#region  IHandleClear IActions
 export interface IHandleClear extends Action {
     readonly type: Keys.HANDLE_CLEAR;
     payload: {
@@ -14,16 +17,17 @@ export interface IHandleClear extends Action {
     };
 }
 
-//#region  Get Permissions IActions
-export interface IGetPermissions extends Action {
-    readonly type: Keys.GET_PERMISSIONS;
-}
-export interface IGetPermissionsSuccess extends Action {
-    readonly type: Keys.GET_PERMISSIONS_SUCCESS;
-    payload: any;
-}
-export interface IGetPermissionsFail extends Action {
-    readonly type: Keys.GET_PERMISSIONS_FAIL;
-    payload: any;
+//#endregion
+
+//#region Toggle Modals
+export interface IToggleModal extends Action {
+    readonly type: Keys.TOGGLE_MODAL;
+    payload : {
+        type: HOME_PAGE_MODAL
+    }
 }
 //#endregion
+
+
+
+

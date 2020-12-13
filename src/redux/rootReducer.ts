@@ -7,14 +7,16 @@ import { connectRouter } from "connected-react-router";
 import IStore from "./store/IStore";
 
 // Place for reducers' app
-import LoginPage, { name as nameOfLoginPage } from "../modules/LoginPage";
 import MainLayout, {name as nameOfMainLayout} from "../layouts/MainLayout";
+import LoginPage, { name as nameOfLoginPage } from "../modules/LoginPage";
+import HomePage, { name as nameOfHomePage } from "../modules/HomePage";
 
 
 /*----Reducers List-----------------*/
 const reducers = {
-    [nameOfLoginPage]: LoginPage,
     [nameOfMainLayout]: MainLayout,
+    [nameOfLoginPage]: LoginPage,
+    [nameOfHomePage]: HomePage,
 
 };
 
