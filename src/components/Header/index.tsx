@@ -29,7 +29,7 @@ interface IProps extends RouteComponentProps, IMainLayoutProps {
 
 const Header: React.FC<IProps> = (props) => {
 
-
+    const { window } = props;
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -126,7 +126,6 @@ const Header: React.FC<IProps> = (props) => {
             </MenuItem>
         </Menu>
     );
-    const { window } = props;
     const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
     return (

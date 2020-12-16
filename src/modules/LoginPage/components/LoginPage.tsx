@@ -14,6 +14,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
+import {Spin} from 'antd';
 
 // import FacebookLogin from 'react-facebook-login';
 
@@ -68,7 +69,7 @@ const LoginPage: React.FC<IProps> = (props) => {
     
     return (
         <React.Fragment>
-            <LoadingScreen time={1000} />
+            {/* <LoadingScreen spinning={true} delay={1000} /> */}
             <div className="wrapper-login-page">
                 <div className="wrapper-form">
                     <Avatar className="avatar">

@@ -1,32 +1,29 @@
-import * as React from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import * as React from 'react';
+import { Spin } from 'antd';
 
 interface IProps {
-    time: number;
+	component?: React.ReactNode;
+	size?: 'small' | 'large' | 'default';
+	backdrop?: boolean;
 }
 
-export const LoadingScreen: React.FC<IProps> = ({ time }) => {
-    const [isLoading, setLoading] = React.useState(true);
-    setTimeout(() => {
-        setLoading(false);
-    }, time);
-    return isLoading ? (
-        <div
-            style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "rgba(0,0,0,0.5)",
-                zIndex: 10,
-                transition: "0.3s all ease",
-            }}
-        >
-            <CircularProgress color="secondary" />
-        </div>
-    ) : null;
+export const LoadingScreen: React.FC<IProps> = ({ size, component, backdrop }: IProps) => {
+	return (
+		<div
+			style={{
+				position: 'absolute',
+				top: 0,
+				left: 0,
+				width: '100%',
+				height: '100%',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				backgroundColor: backdrop ? 'rgba(250,250,250,0.7)' : 'transparent',
+				zIndex: 10,
+			}}
+		>
+			{component ? component : <Spin size={size} />}
+		</div>
+	);
 };
