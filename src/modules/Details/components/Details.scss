@@ -1,0 +1,201 @@
+.wrapper-details-page{
+    .wrapper-banner {
+        // display: none;
+        position: relative;
+        height: 100%;
+        .wrapper-img {
+            height: 100%;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: 0;
+            height: 80px;
+            background-image: linear-gradient(
+                to top,
+                rgba(20, 20, 20, 0) 0,
+                rgba(20, 20, 20, 0.15) 15%,
+                rgba(20, 20, 20, 0.35) 29%,
+                #141414 100%
+            );
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            height: 200px;
+            background-image: linear-gradient(
+                to bottom,
+                rgba(20, 20, 20, 0) 0,
+                rgba(20, 20, 20, 0.15) 15%,
+                rgba(20, 20, 20, 0.35) 29%,
+                rgba(20, 20, 20, 0.58) 44%,
+                #141414 68%,
+                #141414 100%
+            );
+        }
+    
+        .maturity-rating {
+            position: absolute;
+            right: 0;
+            bottom: 33%;
+            padding: 1vw 4vw 1vw 1vw;
+            border: solid 3px #dcdcdc;
+            border-style: none none none solid;
+            background-color: rgba(51, 51, 51, 0.6);
+            display: flex;
+            align-items: center;
+            height: 2.4vw;
+            .maturity-number {
+                color: #fff;
+                font-size: 1.1vw;
+                font-weight: 700;
+            }
+        }
+        .trailer-vignette {
+            background: -webkit-linear-gradient(
+                13deg,
+                rgba(0, 0, 0, 0.6) 0,
+                rgba(0, 0, 0, 0) 85%
+            );
+            background: -moz-
+                oldlinear-gradient(
+                    13deg,
+                    rgba(0, 0, 0, 0.6) 0,
+                    rgba(0, 0, 0, 0) 85%
+                );
+            background: -o-linear-gradient(
+                13deg,
+                rgba(0, 0, 0, 0.6) 0,
+                rgba(0, 0, 0, 0) 85%
+            );
+            background: linear-gradient(
+                77deg,
+                rgba(20, 20, 20, 0.6) 0,
+                rgba(0, 0, 0, 0) 85%
+            );
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 26.09%;
+            bottom: 0;
+            opacity: 1;
+            -webkit-transition: opacity 0.5s;
+            -o-transition: opacity 0.5s;
+            -moz-transition: opacity 0.5s;
+            transition: opacity 0.5s;
+            z-index: 2;
+        }
+    }
+    .wrapper-details {
+        background-color: #141414;
+        height: 100%;
+        color: #fff;
+        // padding: 100px;
+        // &:before {
+        //     content: "";
+        //     background: url("../../../assets/images/bgFixed.png");
+        //     background-position: top;
+        //     background-size: cover;
+        //     background-attachment: fixed;
+        //     background-repeat: no-repeat;
+        //     position: absolute;
+        //     top: 0px;
+        //     left: 0px;
+        //     width: 100%;
+        //     height: calc(100% + 200px);
+        //     z-index: -1;
+        //   }
+        .wrapper-grid {
+            position: relative;
+            top: -200px;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            justify-content: space-around;
+            .grid-image {
+                height: 500px;
+                width: 300px;
+                padding: 7px;
+                margin-top: 12px;
+                background-color: #fff;
+                border-radius: 6px;
+                box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+                margin-left: 65px;
+                img {
+                    height: -webkit-fill-available;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            .grid-description {
+                margin-left: 65px;
+                font-size: 15px;
+                h2 {
+                    font-size: 40px;
+                    margin: 0;
+                }
+                p {
+                    font-size: 23px;
+                    letter-spacing: 0px;
+                    margin: 10px 0;
+                }
+                li {
+                    margin-bottom: 20px;
+                    div {
+                        display: inline-block;
+                    }
+                }
+                li div:nth-child(odd) {
+                    margin-right: 50px;
+                    width: 90px;
+                    font-weight: 600;
+                }
+                .cast div:nth-child(even) {
+                }
+                .classify-details {
+                    font-size: 20px;
+                    color: rgb(255, 89, 89);
+                    font-weight: 600;
+                }
+                .wrapper-button {
+                    margin-top: 27px;
+                    .button-booking {
+                        background: #24baef;
+                        padding: 1.3rem 3.5rem;
+                        transition: 0.2s all ease;
+                        margin-right: 1.5rem;
+                        font-weight: 600;
+                        color: #fff;
+                        outline: none;
+                    }
+                    .button-booking:hover {
+                        box-shadow: 0 4px 11px rgba(36, 186, 239, 0.35);
+                    }
+                    .button-trailer {
+                        background: transparent;
+                        border: 2px solid #f7faff;
+                        padding: 1.3rem 3.2rem;
+                        transition: 0.3s all ease;
+                        font-weight: 600;
+                        color: #fff;
+                        outline: none;
+                        &:hover {
+                            background: #f7faff;
+                            box-shadow: 0 4px 11px rgba(255, 255, 255, 0.35);
+                            color: #19272e;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

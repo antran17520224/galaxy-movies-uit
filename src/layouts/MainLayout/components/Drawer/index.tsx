@@ -1,19 +1,16 @@
-import { RouteComponentProps } from 'react-router-dom';
-import React from 'react';
-import clsx from 'classnames';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
+import { SwipeableDrawer } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import clsx from 'classnames';
+import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { IMainLayoutProps } from '../../model/IMainLayoutProps';
 import useStyles from './styles';
-import { IMainLayoutProps } from '../../layouts/MainLayout/model/IMainLayoutProps';
-import { SwipeableDrawer } from '@material-ui/core';
 
 interface IProps extends RouteComponentProps, IMainLayoutProps { }
 type Anchor = 'top' | 'left' | 'bottom' | 'right';

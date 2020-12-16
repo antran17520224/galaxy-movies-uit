@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button } from "@material-ui/core";
 import TicketIcon from "../../../../components/Icons/TicketIcon";
 import TheatersIcon from "@material-ui/icons/Theaters";
-import { RouteComponentProps } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { IHomePageProps } from "../../model/IHomePageProps";
 import { HOME_PAGE_MODAL } from "../../model/IHomePageState";
 import "./Banner.scss";
@@ -17,7 +17,7 @@ export const Banner: React.FC<IProps> = props => {
                 <div className="wrapper-img">
                     <img src={bannerImage} alt="banner" />
                 </div>
-                
+
                 <div className="content-banner">
                     <div className="title-banner">
                         <h1>Tiệc trăng máu</h1>
@@ -33,12 +33,18 @@ export const Banner: React.FC<IProps> = props => {
                         <span>1hr 55mins</span>
                     </div>
                     <div className="wrapper-button">
-                        <Button variant="contained" className="button-booking">
-                            Đặt vé
-                            <span style={{ marginLeft: "14px" }}>
-                                <TicketIcon />
-                            </span>
-                        </Button>
+                        <Link to="/details">
+                            <Button
+                                variant="contained"
+                                className="button-booking"
+                            >
+                                Đặt vé
+                                <span style={{ marginLeft: "14px" }}>
+                                    <TicketIcon />
+                                </span>
+                            </Button>
+                        </Link>
+
                         <Button
                             variant="contained"
                             className="button-trailer"
@@ -57,7 +63,6 @@ export const Banner: React.FC<IProps> = props => {
                     <Box className="maturity-number">18+</Box>
                 </Box>
                 <div className="trailer-vignette"></div>
-                <div className="bottom-vignette"></div>
             </div>
         </React.Fragment>
     );

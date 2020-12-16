@@ -4,6 +4,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         position: 'fixed',
         bottom: theme.spacing(2),
         right: theme.spacing(2),
+        zIndex : 99
     }
 }));
 export default useStyles;

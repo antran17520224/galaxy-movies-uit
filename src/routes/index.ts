@@ -10,9 +10,11 @@ const LoginPage = React.lazy(() =>
     import("../modules/LoginPage/components/LoginPageContainer")
 );
 const HomePage = React.lazy(()=>
-    import("../modules/HomePage/components/HomePageContgainer")
+    import("../modules/HomePage/components/HomePageContainer")
 );
-
+const DetailsPage = React.lazy(()=>
+    import("../modules/Details/components/DetailsPageContainer")
+);
 export interface RouteConfig {
     path: string;
     exact : Boolean;
@@ -20,13 +22,6 @@ export interface RouteConfig {
     permission?: string;
 }
 
-export const authRoutes: RouteConfig[] = [
-    {
-        path: routeName.login,
-        exact: true,
-        component: LoginPage,
-    },
-];
 
 export const mainRoutes: RouteConfig[] = [
     {
@@ -38,14 +33,12 @@ export const mainRoutes: RouteConfig[] = [
         path: routeName.home,
         exact : true,
         component: HomePage,
-        permission: "",
     },
-    // {
-    //     path: routeName.shopOwner,
-    //     extract: true,
-    //     component: ShopOwnerPage,
-    //     permission: "",
-    // },
+    {
+        path: routeName.details,
+        exact : true,
+        component: DetailsPage,
+    },
 ];
 
 export const otherRoutes: RouteConfig[] = [

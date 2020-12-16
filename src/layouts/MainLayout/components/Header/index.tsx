@@ -1,46 +1,45 @@
-
-import AppBar from '@material-ui/core/AppBar';
-import Badge from '@material-ui/core/Badge';
-import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import SearchIcon from '@material-ui/icons/Search';
-import clsx from 'classnames';
-import React from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { IMainLayoutProps } from '../../layouts/MainLayout/model/IMainLayoutProps';
-import useStyles from './styles';
-import './Header.scss';
+import AppBar from "@material-ui/core/AppBar";
+import Badge from "@material-ui/core/Badge";
+import IconButton from "@material-ui/core/IconButton";
+import InputBase from "@material-ui/core/InputBase";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MailIcon from "@material-ui/icons/Mail";
+import MenuIcon from "@material-ui/icons/Menu";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import SearchIcon from "@material-ui/icons/Search";
+import clsx from "classnames";
+import React from "react";
+import { Link, RouteComponentProps } from "react-router-dom";
+import { IMainLayoutProps } from "../../model/IMainLayoutProps";
+import "./Header.scss";
+import useStyles from "./styles";
 
 interface IProps extends RouteComponentProps, IMainLayoutProps {
     window?: () => Window;
     children?: React.ReactElement;
+    isFixed: boolean;
 }
 
-
-const Header: React.FC<IProps> = (props) => {
-
+const Header: React.FC<IProps> = props => {
     const { window } = props;
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [
+        mobileMoreAnchorEl,
+        setMobileMoreAnchorEl
+    ] = React.useState<null | HTMLElement>(null);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const {
-        accessToken
-    } = props.store.LoginPage;
-
+    const { accessToken } = props.store.LoginPage;
+    const { isFixed } = props;
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -58,42 +57,40 @@ const Header: React.FC<IProps> = (props) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
-    const menuId = 'primary-search-account-menu';
+    const menuId = "primary-search-account-menu";
     const renderMenu = (
-
         <Menu
             anchorEl={anchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
             id={menuId}
             keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            transformOrigin={{ vertical: "top", horizontal: "right" }}
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            {
-                accessToken === null ? (
-                    <MenuItem onClick={handleMenuClose}><Link className={classes.link} to="/login" >Đăng nhập</Link></MenuItem>
-                ) :
-                    (
-                        <>
-                            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-                        </>
-                    )
-
-            }
-
+            {accessToken === null ? (
+                <MenuItem onClick={handleMenuClose}>
+                    <Link className={classes.link} to="/login">
+                        Đăng nhập
+                    </Link>
+                </MenuItem>
+            ) : (
+                <>
+                    <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+                    <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+                </>
+            )}
         </Menu>
     );
 
-    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const mobileMenuId = "primary-search-account-menu-mobile";
     const renderMobileMenu = (
         <Menu
             anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
             id={mobileMenuId}
             keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            transformOrigin={{ vertical: "top", horizontal: "right" }}
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
@@ -106,7 +103,10 @@ const Header: React.FC<IProps> = (props) => {
                 <p>Messages</p>
             </MenuItem>
             <MenuItem>
-                <IconButton aria-label="show 11 new notifications" color="inherit">
+                <IconButton
+                    aria-label="show 11 new notifications"
+                    color="inherit"
+                >
                     <Badge badgeContent={11} color="secondary">
                         <NotificationsIcon />
                     </Badge>
@@ -128,10 +128,11 @@ const Header: React.FC<IProps> = (props) => {
     );
     const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
+
     return (
         <div className="wrapper-header">
             <AppBar
-                position="fixed"
+                position={isFixed ? "fixed" : "absolute"}
                 className={clsx("bg-trans", {
                     "bg-header": trigger === true
                 })}
@@ -143,13 +144,13 @@ const Header: React.FC<IProps> = (props) => {
                         color="inherit"
                         aria-label="open drawer"
                         onClick={props.actions.toggleSideBar}
-                        style={{ outline: 'none' }}
+                        style={{ outline: "none" }}
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography className={classes.title} variant="h6" noWrap >
+                    <Typography className={classes.title} variant="h6" noWrap>
                         Material-UI
-                            </Typography>
+                    </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
@@ -158,9 +159,9 @@ const Header: React.FC<IProps> = (props) => {
                             placeholder="Search…"
                             classes={{
                                 root: classes.inputRoot,
-                                input: classes.inputInput,
+                                input: classes.inputInput
                             }}
-                            inputProps={{ 'aria-label': 'search' }}
+                            inputProps={{ "aria-label": "search" }}
                         />
                     </div>
                     <div className={classes.grow} />
@@ -168,8 +169,7 @@ const Header: React.FC<IProps> = (props) => {
                         <IconButton
                             aria-label="show 4 new mails"
                             color="inherit"
-                            style={{ outline: 'none' }}
-
+                            style={{ outline: "none" }}
                         >
                             <Badge badgeContent={4} color="secondary">
                                 <MailIcon />
@@ -178,7 +178,7 @@ const Header: React.FC<IProps> = (props) => {
                         <IconButton
                             aria-label="show 17 new notifications"
                             color="inherit"
-                            style={{ outline: 'none' }}
+                            style={{ outline: "none" }}
                         >
                             <Badge badgeContent={17} color="secondary">
                                 <NotificationsIcon />
@@ -191,7 +191,7 @@ const Header: React.FC<IProps> = (props) => {
                             aria-haspopup="true"
                             onClick={handleProfileMenuOpen}
                             color="inherit"
-                            style={{ outline: 'none' }}
+                            style={{ outline: "none" }}
                         >
                             <AccountCircle />
                         </IconButton>
@@ -212,7 +212,7 @@ const Header: React.FC<IProps> = (props) => {
             {renderMobileMenu}
             {renderMenu}
         </div>
-    )
-}
+    );
+};
 
 export default Header;

@@ -1,17 +1,22 @@
 import { Box } from "@material-ui/core";
-import Fab from '@material-ui/core/Fab';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Zoom from '@material-ui/core/Zoom';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Fab from "@material-ui/core/Fab";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import Zoom from "@material-ui/core/Zoom";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import * as React from "react";
-import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
-import SideBar from "../../../components/Drawer";
-import Footer from "../../../components/Footer";
-import Header from "../../../components/Header";
+import {
+    Redirect,
+    Route,
+    RouteComponentProps,
+    Switch,
+    useLocation
+} from "react-router-dom";
+import SideBar from "./Drawer";
+import Footer from "./Footer";
+import Header from "./Header";
 import { RouteConfig } from "../../../routes";
 import { IMainLayoutProps } from "../model/IMainLayoutProps";
-import useStyles from './styles';
-
+import useStyles from "./styles";
 
 interface IProps extends RouteComponentProps, IMainLayoutProps {
     routes?: RouteConfig[];
@@ -25,64 +30,73 @@ function ScrollTop(props: IProps) {
     const trigger = useScrollTrigger({
         target: window ? window() : undefined,
         disableHysteresis: true,
-        threshold: 100,
+        threshold: 100
     });
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        const anchor = ((event.target as HTMLDivElement).ownerDocument || document).querySelector('#top',);
-        console.log("anchor", anchor)
+        const anchor = (
+            (event.target as HTMLDivElement).ownerDocument || document
+        ).querySelector("#top");
         if (anchor) {
-            anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            anchor.scrollIntoView({ behavior: "smooth", block: "center" });
         }
     };
 
     return (
         <Zoom in={trigger}>
-            <div onClick={handleClick} role="presentation" className={classes.root}>
+            <div
+                onClick={handleClick}
+                role="presentation"
+                className={classes.root}
+            >
                 {children}
             </div>
         </Zoom>
     );
 }
-const MainLayout: React.FC<IProps> = (props) => {
-
-    const classes = useStyles();
+const MainLayout: React.FC<IProps> = props => {
     const { accessToken } = props.store.LoginPage;
+    const { pathname } = useLocation();
+
+    const [isFixed,setIsFixed] = React.useState(false);
+
+    React.useEffect(() => {
+        pathname === '/' ?  setIsFixed(true) :  setIsFixed(false)
+    }, [pathname]);
+
     return (
         <React.Fragment>
             <div id="top"></div>
-            <Header {...props} />
+            <Header {...props} isFixed={isFixed} />
 
             <Box>
                 <SideBar {...props} />
             </Box>
             <Switch>
-                {props.routes.map((item) => (
+                {props.routes.map(item => (
                     <Route
                         key={item.path}
                         path={item.path}
                         component={item.component}
+                        exact
                     />
                 ))}
-
-                {/* {props.routes.length > 0 ? (
-                    <Redirect to={props.routes[0].path} />
-                ) : null} */}
-                {
-                    accessToken !== null && (
-                        <Redirect to="/" />
-                    )
-                }
+                {accessToken !== null && <Redirect to="/" />}
+                <Redirect from="*" to="/" />
             </Switch>
             <Footer />
             <ScrollTop {...props}>
-                <Fab  color="secondary" size="small" aria-label="scroll back to top" style={{outline : 'none'}}>
+                <Fab
+                    color="secondary"
+                    size="small"
+                    aria-label="scroll back to top"
+                    style={{ outline: "none",zIndex : 99 }}
+                >
                     <KeyboardArrowUpIcon />
                 </Fab>
             </ScrollTop>
         </React.Fragment>
-    )
-}
+    );
+};
 
 export default MainLayout;
-

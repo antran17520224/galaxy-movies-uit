@@ -1,5 +1,3 @@
-import { IPermission } from "../../../common";
-
 export enum HOME_PAGE_MODAL {
     TRAILER_MODAL = 0,
 }

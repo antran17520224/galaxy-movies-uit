@@ -1,8 +1,8 @@
 import { Container, Grid } from "@material-ui/core";
 import React, { Component } from "react";
+import paymentPng from "../../../../assets/images/footer/payment.png";
+import logoWhite from "../../../../assets/images/logo/logo_white.webp";
 import "./Footer.scss";
-import paymentPng from "../../assets/images/footer/payment.png";
-import logoWhite from "../../assets/images/logo/logo_white.webp";
 
 class Footer extends Component {
     render() {
@@ -119,6 +119,9 @@ class Footer extends Component {
                                 </div>
                             </Grid>
                         </Grid>
+                        <div className="copyright">
+                            <p>Copyright © Galaxy Movies 2020 | Made with <span>♥</span> by AnTranUIT </p>
+                        </div>
                     </Container>
                 </div>
             </React.Fragment>

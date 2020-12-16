@@ -4,11 +4,11 @@ import Modal from "@material-ui/core/Modal";
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import YouTube from "react-youtube";
-import { IHomePageProps } from "../../model/IHomePageProps";
-import { HOME_PAGE_MODAL } from "../../model/IHomePageState";
+import { IDetailsProps } from "../../model/IDetailsProps";
+import { DETAILS_MODAL } from "../../model/IDetailsState";
 import "./Trailer.scss";
 
-interface IProps extends RouteComponentProps, IHomePageProps {}
+interface IProps extends RouteComponentProps, IDetailsProps {}
 
 export const TrailerModal: React.FC<IProps> = (props: IProps) => {
     const [open, setOpen] = React.useState(false);
@@ -26,7 +26,7 @@ export const TrailerModal: React.FC<IProps> = (props: IProps) => {
         console.log("event Play", e);
     };
 
-    const { isShowTrailerModal } = props.store.HomePage;
+    const { isShowTrailer } = props.store.DetailPage;
 
     const opts = {
         height: "390",
@@ -42,9 +42,11 @@ export const TrailerModal: React.FC<IProps> = (props: IProps) => {
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 className="trailer-modal"
-                open={isShowTrailerModal}
+                open={isShowTrailer}
                 onClose={() =>
-                    props.actions.toggleModal(HOME_PAGE_MODAL.TRAILER_MODAL)
+                    props.actions.toggleModal({
+                        type : DETAILS_MODAL.TRAILER_MODAL
+                    })
                 }
                 closeAfterTransition
                 BackdropComponent={Backdrop}
@@ -52,7 +54,7 @@ export const TrailerModal: React.FC<IProps> = (props: IProps) => {
                     timeout: 500
                 }}
             >
-                <Fade in={isShowTrailerModal}>
+                <Fade in={isShowTrailer}>
                     <YouTube
                         className="youtube-iframe"
                         videoId="wXUdkQ0XiNA"

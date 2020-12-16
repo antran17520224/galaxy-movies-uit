@@ -1,7 +1,15 @@
 .wrapper-footer{
-    padding: 0 5px 30px;
+    padding: 0 5px 15px;
     background-color: #141414;
     color: #ccc;
+    .copyright{
+        width: 100%;
+        text-align: center;
+        span{
+            color: rgb(248, 50, 83);
+            font-size: 13px;
+        }
+    }
     .footer-container{
         padding: 0 40px;
     }

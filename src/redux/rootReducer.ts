@@ -10,6 +10,7 @@ import IStore from "./store/IStore";
 import MainLayout, {name as nameOfMainLayout} from "../layouts/MainLayout";
 import LoginPage, { name as nameOfLoginPage } from "../modules/LoginPage";
 import HomePage, { name as nameOfHomePage } from "../modules/HomePage";
+import DetailsPage, { name as nameOfDetailsPage } from "../modules/Details";
 
 
 /*----Reducers List-----------------*/
@@ -17,6 +18,7 @@ const reducers = {
     [nameOfMainLayout]: MainLayout,
     [nameOfLoginPage]: LoginPage,
     [nameOfHomePage]: HomePage,
+    [nameOfDetailsPage]: DetailsPage,
 
 };
 
