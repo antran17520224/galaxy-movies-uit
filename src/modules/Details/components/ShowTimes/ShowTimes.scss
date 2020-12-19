@@ -1,0 +1,121 @@
+.wrapper-booking {
+    color: #fff;
+    position: relative;
+    height: 1000px;
+    &:before {
+        content: "";
+        background: url("../../../../assets/images/bgFixed.png");
+        background-position: top;
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: calc(100% + 200px);
+        z-index: -1;
+    }
+    .title-showtimes {
+        margin: 0;
+        padding: 20px 0px;
+        text-align: center;
+        font-size: 36px;
+        color: #fff;
+    }
+    .wrapper-tabs {
+        border-top: 3px solid #24baef;
+        margin: 0 250px;
+        header {
+            background-color: transparent;
+            color: #ccc;
+        }
+        .tabs {
+            .date-tab {
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+    .wrapper-list-showtimes {
+        padding: 15px 0px;
+        .wrapper-showtime {
+            padding-bottom: 100px;
+            position: relative;
+            padding-top: 15px;
+            .theater {
+                background: #1c2936;
+                box-shadow: 3px 5px 21px 0px rgba(5, 12, 17, 1);
+                .text {
+                    padding: 15px;
+                    .theater-name {
+                        font-size: 20px;
+                        margin: 0;
+                    }
+                    .theater-location {
+                        color: #c2d8fc;
+                        font-size: 13px;
+                    }
+                }
+                .wrapper-button-location {
+                    .button-location {
+                        width: 100%;
+                        background-color: #24baef;
+                        color: #fff;
+                        transition: 0.2s all ease;
+                        &:hover {
+                            box-shadow: 0 4px 11px rgba(36, 186, 239, 0.35);
+                        }
+                    }
+                }
+            }
+            .classify {
+                color: #f50057;
+                margin: 0 30px;
+                font-weight: 600;
+                display: flex;
+                justify-content: center;
+                div {
+                    width: 46px;
+                    border: 3px solid #f50057;
+                    border-radius: 2px;
+                    text-align: center;
+                    padding: 5px 5px;
+                    font-size: 15px;
+                    margin: auto;
+                }
+            }
+            .wrapper-time {
+                display: flex;
+                .wrapper-button-time {
+                    margin: 0 10px;
+                    .button-time {
+                        background-color: #10171e;
+                        color: rgb(148, 147, 147);
+                        font-size: 20px;
+                        font-weight: 600;
+                        transition: all 0.2s ease;
+                        &:hover {
+                            background-color: #24baef;
+                            color: #fff;
+                            box-shadow: 0 4px 11px rgba(36, 186, 239, 0.35);
+                        }
+                    }
+                }
+            } 
+            
+        }
+        .wrapper-showtime::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: url(../../../../assets/images/line-gradient.png) center center
+                no-repeat;
+        }
+        
+    }
+}

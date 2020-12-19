@@ -1,6 +1,6 @@
-.wrapper-details-page{
+.wrapper-details-page {
     .wrapper-banner {
-        // display: none;
+        display: none;
         position: relative;
         height: 100%;
         .wrapper-img {
@@ -42,7 +42,7 @@
                 #141414 100%
             );
         }
-    
+
         .maturity-rating {
             position: absolute;
             right: 0;
@@ -96,27 +96,28 @@
         }
     }
     .wrapper-details {
-        background-color: #141414;
         height: 100%;
         color: #fff;
-        // padding: 100px;
-        // &:before {
-        //     content: "";
-        //     background: url("../../../assets/images/bgFixed.png");
-        //     background-position: top;
-        //     background-size: cover;
-        //     background-attachment: fixed;
-        //     background-repeat: no-repeat;
-        //     position: absolute;
-        //     top: 0px;
-        //     left: 0px;
-        //     width: 100%;
-        //     height: calc(100% + 200px);
-        //     z-index: -1;
-        //   }
+        position: relative;
+        // background: #141414;
+        // top: -200px;
+        padding: 100px;
+        &:before {
+            content: "";
+            background: url("../../../assets/images/bgFixed.png");
+            background-position: top;
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: calc(100% + 200px);
+            z-index: -1;
+        }
         .wrapper-grid {
             position: relative;
-            top: -200px;
             z-index: 3;
             width: 100%;
             height: 100%;
@@ -144,37 +145,46 @@
                     margin: 0;
                 }
                 p {
-                    font-size: 23px;
+                    font-size: 17px;
                     letter-spacing: 0px;
-                    margin: 10px 0;
+                    margin: 20px 0;
+                    color: #ccc;
+                }
+                .cast{
+                    display: inline-block;
+                    width: 78%;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
                 }
                 li {
                     margin-bottom: 20px;
                     div {
                         display: inline-block;
                     }
+                    
                 }
                 li div:nth-child(odd) {
                     margin-right: 50px;
                     width: 90px;
                     font-weight: 600;
                 }
-                .cast div:nth-child(even) {
-                }
+                
                 .classify-details {
                     font-size: 20px;
                     color: rgb(255, 89, 89);
                     font-weight: 600;
                 }
+                
                 .wrapper-button {
                     margin-top: 27px;
                     .button-booking {
+                        color: #fff;
                         background: #24baef;
-                        padding: 1.3rem 3.5rem;
+                        padding: 20px;
                         transition: 0.2s all ease;
                         margin-right: 1.5rem;
                         font-weight: 600;
-                        color: #fff;
                         outline: none;
                     }
                     .button-booking:hover {
@@ -183,7 +193,7 @@
                     .button-trailer {
                         background: transparent;
                         border: 2px solid #f7faff;
-                        padding: 1.3rem 3.2rem;
+                        padding: 17px 40px;
                         transition: 0.3s all ease;
                         font-weight: 600;
                         color: #fff;

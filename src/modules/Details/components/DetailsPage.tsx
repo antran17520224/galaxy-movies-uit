@@ -1,6 +1,6 @@
 import { Box, Button, Grid } from "@material-ui/core";
-import React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import React, { useRef } from "react";
+import { Link, RouteComponentProps } from "react-router-dom";
 import bannerImage from "../../../assets/images/banner.webp";
 import { IDetailsProps } from "../model/IDetailsProps";
 import "./Details.scss";
@@ -9,9 +9,18 @@ import TheatersIcon from "@material-ui/icons/Theaters";
 import TicketIcon from "../../../components/Icons/TicketIcon";
 import { DETAILS_MODAL } from "../model/IDetailsState";
 import { TrailerModal } from "./Trailer";
+import { ShowTimes } from "./ShowTimes";
 interface IProps extends RouteComponentProps, IDetailsProps {}
 
 const DetailsPage: React.FC<IProps> = props => {
+    const scrollToRef = ref => window.scrollTo({
+        behavior : 'smooth',
+        top : ref.current.offsetTop,
+        left : 0
+    });
+
+    const myRef = useRef();
+    const executeScroll = () => scrollToRef(myRef);
     return (
         <React.Fragment>
             <div className="wrapper-details-page">
@@ -49,7 +58,7 @@ const DetailsPage: React.FC<IProps> = props => {
                                         <li className="classify">
                                             <div>Phân loại</div>
                                             <div className="classify-details">
-                                                Phim dành cho khán giả từ 18
+                                                C18 - Phim dành cho khán giả từ 18
                                                 tuổi trở lên
                                             </div>
                                         </li>
@@ -57,9 +66,9 @@ const DetailsPage: React.FC<IProps> = props => {
                                             <div>Đạo diễn</div>
                                             <div>Trấn Thành</div>
                                         </li>
-                                        <li className="cast">
+                                        <li>
                                             <div>Diễn viên</div>
-                                            <div>
+                                            <div className="cast">
                                                 Trấn Thành, Trường Giang, Ngô
                                                 Kiến Huy,Thu Trang, Tiến
                                                 Luật,...
@@ -91,6 +100,7 @@ const DetailsPage: React.FC<IProps> = props => {
                                     <Button
                                         variant="contained"
                                         className="button-booking"
+                                        onClick={executeScroll}
                                     >
                                         Mua vé ngay
                                         <span style={{ marginLeft: "10px" }}>
@@ -122,6 +132,8 @@ const DetailsPage: React.FC<IProps> = props => {
                 </div>
             </div>
             <TrailerModal {...props} />
+            <div ref={myRef}></div>
+            <ShowTimes {...props} />
         </React.Fragment>
     );
 };

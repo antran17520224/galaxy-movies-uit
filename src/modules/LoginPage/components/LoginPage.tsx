@@ -1,20 +1,17 @@
 import {
     Avatar,
-    Box,
-    Typography
+    Box
 } from '@material-ui/core';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { RouteComponentProps } from 'react-router-dom';
-import { LoadingScreen } from '../../../components';
 import { ILogInProps } from '../model/ILoginProps';
-import './LoginPage.scss';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import LoginForm from './LoginForm';
+import './LoginPage.scss';
 import RegisterForm from './RegisterForm';
-import {Spin} from 'antd';
 
 // import FacebookLogin from 'react-facebook-login';
 
