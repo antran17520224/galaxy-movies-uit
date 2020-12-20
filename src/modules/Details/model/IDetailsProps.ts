@@ -1,7 +1,7 @@
 import IStore from "../../../redux/store/IStore";
-import * as loginActions from '../actions'
+import * as detailsActions from '../actions'
 
 export interface IDetailsProps {
     store: IStore;
-    actions: typeof loginActions;
+    actions: typeof detailsActions;
 }

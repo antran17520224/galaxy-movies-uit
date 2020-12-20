@@ -11,6 +11,7 @@ import MainLayout, {name as nameOfMainLayout} from "../layouts/MainLayout";
 import LoginPage, { name as nameOfLoginPage } from "../modules/LoginPage";
 import HomePage, { name as nameOfHomePage } from "../modules/HomePage";
 import DetailsPage, { name as nameOfDetailsPage } from "../modules/Details";
+import TicketingPage, { name as nameOfTicketingPage } from "../modules/Ticketing";
 
 
 /*----Reducers List-----------------*/
@@ -19,6 +20,7 @@ const reducers = {
     [nameOfLoginPage]: LoginPage,
     [nameOfHomePage]: HomePage,
     [nameOfDetailsPage]: DetailsPage,
+    [nameOfTicketingPage]: TicketingPage,
 
 };
 

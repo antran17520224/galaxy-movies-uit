@@ -15,6 +15,9 @@ const HomePage = React.lazy(()=>
 const DetailsPage = React.lazy(()=>
     import("../modules/Details/components/DetailsPageContainer")
 );
+const TicketingPage = React.lazy(()=>
+    import("../modules/Ticketing/components/TicketingPageContainer")
+);
 export interface RouteConfig {
     path: string;
     exact : Boolean;
@@ -38,6 +41,11 @@ export const mainRoutes: RouteConfig[] = [
         path: routeName.details,
         exact : true,
         component: DetailsPage,
+    },
+    {
+        path: routeName.ticketing,
+        exact : true,
+        component: TicketingPage,
     },
 ];
 
