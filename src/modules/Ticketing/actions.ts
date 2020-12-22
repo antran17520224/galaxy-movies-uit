@@ -15,3 +15,15 @@ export const toggleModal = (data: {
     };
 };
 //#endregion
+
+//#region showNextButton Actions
+
+export const showNextButton = (isShow : boolean): IActions.IShowNextButton => {
+    return {
+        type: Keys.IS_SHOW_NEXT_BUTTON,
+        payload :{
+            isShow
+        }
+    };
+};
+//#endregion

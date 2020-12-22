@@ -16,3 +16,12 @@ export interface IToggleModal extends Action {
 }
 //#endregion
 
+//#region IShowNextButton
+export interface IShowNextButton extends Action {
+    readonly type: Keys.IS_SHOW_NEXT_BUTTON;
+    payload :{
+        isShow : boolean;
+    }
+}
+//#endregion
+

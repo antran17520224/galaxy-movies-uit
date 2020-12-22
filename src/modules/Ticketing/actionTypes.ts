@@ -6,6 +6,7 @@ import * as IActions from "./IActions";
 
 type ActionTypes =
     | IActions.IToggleModal
+    | IActions.IShowNextButton
    
 
 export default ActionTypes;

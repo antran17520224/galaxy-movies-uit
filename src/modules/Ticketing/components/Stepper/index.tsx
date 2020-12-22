@@ -17,8 +17,13 @@ import FastfoodIcon from "@material-ui/icons/Fastfood";
 import PaymentIcon from "@material-ui/icons/Payment";
 import clsx from "clsx";
 import React from "react";
-import { Seats } from "../Seats";
+import { Seats } from "./Seats";
 import "./Stepper.scss";
+import { ITicketingProps } from "../../model/ITicketingProps";
+import { Ticket } from "../Ticket";
+import { Foods } from "./Foods";
+
+interface IProps extends ITicketingProps {}
 
 const ColorlibConnector = withStyles({
     alternativeLabel: {
@@ -97,7 +102,9 @@ const useStyles = makeStyles((theme: Theme) =>
             width: "100%"
         },
         button: {
-            marginRight: theme.spacing(1)
+            marginRight: theme.spacing(1),
+            position: "absolute",
+            right: "18%"
         },
         instructions: {
             marginTop: theme.spacing(1),
@@ -126,24 +133,22 @@ function getSteps() {
     return ["Chọn ghế", "Chọn đồ ăn", "Thanh toán", "Đặt vé thành công"];
 }
 
-function getStepContent(step: number) {
-    switch (step) {
-        case 0:
-            return <Seats />;
-        case 1:
-            return "What is an ad group anyways?";
-        case 2:
-            return "This is the bit I really care about!";
-        default:
-            return "Unknown step";
-    }
-}
-interface IProps {}
 export const CustomizedSteppers: React.FC<IProps> = props => {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
-
+    const getStepContent = (step: number) => {
+        switch (step) {
+            case 0:
+                return <Seats {...props} />;
+            case 1:
+                return <Foods {...props} />;
+            case 2:
+                return "This is the bit I really care about!";
+            default:
+                return "Unknown step";
+        }
+    };
     const handleNext = () => {
         setActiveStep(prevActiveStep => prevActiveStep + 1);
     };
@@ -155,6 +160,7 @@ export const CustomizedSteppers: React.FC<IProps> = props => {
     const handleReset = () => {
         setActiveStep(0);
     };
+    const { isShowNextButton } = props.store.TicketingPage;
 
     return (
         <div className={classes.root}>
@@ -192,19 +198,24 @@ export const CustomizedSteppers: React.FC<IProps> = props => {
                         </Button>
                     </>
                 ) : (
-                    <div className="wrapper-step-content">
-                        {getStepContent(activeStep)}
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleNext}
-                            className={classes.button}
-                        >
-                            {activeStep === steps.length - 1
-                                ? "Hoàn thành"
-                                : "Kế tiếp"}
-                        </Button>
-                    </div>
+                    <>
+                        <div className="wrapper-step-content">
+                            {getStepContent(activeStep)}
+                            <Ticket {...props} />
+                        </div>
+                        {isShowNextButton && (
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleNext}
+                                className={classes.button}
+                            >
+                                {activeStep === steps.length - 1
+                                    ? "Hoàn thành"
+                                    : "Kế tiếp"}
+                            </Button>
+                        )}
+                    </>
                 )}
             </>
         </div>
