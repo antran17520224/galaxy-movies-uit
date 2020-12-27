@@ -5,45 +5,122 @@
 import { Action } from "redux";
 import Keys from "./actionTypeKeys";
 import { IError } from "../../common";
-import { IEmployeeInfo } from "./model/ILoginState";
+import {
+    MODAL_USER_LOGIN,
+    IRegister,
+    USER_PAGE_CLEAR
+} from "./model/ILoginState";
 
 export interface IHandleClear extends Action {
     readonly type: Keys.HANDLE_CLEAR;
     payload: {
-        type: string;
+        type: USER_PAGE_CLEAR;
     };
 }
 
-//#region POST Employee Login IActions
-export interface IPostEmployeeLogin extends Action {
-    readonly type: Keys.POST_EMPLOYEE_LOGIN;
-    payload: IEmployeeInfo;
-}
-
-export interface IPostEmployeeLoginSuccess extends Action {
-    readonly type: Keys.POST_EMPLOYEE_LOGIN_SUCCESS;
+//#region Toggle Modal
+export interface IToggleModal extends Action {
+    readonly type: Keys.TOGGLE_MODAL;
     payload: {
-        accessToken: string;
-        refreshToken: string;
+        type: MODAL_USER_LOGIN;
+        data?: IRegister;
     };
-}
-
-export interface IPostEmployeeLoginFail extends Action {
-    readonly type: Keys.POST_EMPLOYEE_LOGIN_FAIL;
-    payload: Array<IError>;
 }
 //#endregion
 
-//#region  Get Permissions IActions
-export interface IGetPermissions extends Action {
-    readonly type: Keys.GET_PERMISSIONS;
+//#region User Register IActions
+export interface IUserRegister extends Action {
+    readonly type: Keys.USER_REGISTER;
+    payload: IRegister;
 }
-export interface IGetPermissionsSuccess extends Action {
-    readonly type: Keys.GET_PERMISSIONS_SUCCESS;
+
+export interface IUserRegisterSuccess extends Action {
+    readonly type: Keys.USER_REGISTER_SUCCESS;
     payload: any;
 }
-export interface IGetPermissionsFail extends Action {
-    readonly type: Keys.GET_PERMISSIONS_FAIL;
+
+export interface IUserRegisterFail extends Action {
+    readonly type: Keys.USER_REGISTER_FAIL;
+    payload: IError[];
+}
+//#endregion
+
+//#region Active Account IActions
+export interface IActiveAccount extends Action {
+    readonly type: Keys.ACTIVE_ACCOUNT;
+    payload: {
+        code: string;
+    };
+}
+
+export interface IActiveAccountSuccess extends Action {
+    readonly type: Keys.ACTIVE_ACCOUNT_SUCCESS;
     payload: any;
+}
+
+export interface IActiveAccountFail extends Action {
+    readonly type: Keys.ACTIVE_ACCOUNT_FAIL;
+    payload: IError[];
+}
+//#endregion
+
+//#region User Login IActions
+export interface IUserLogin extends Action {
+    readonly type: Keys.USER_LOGIN;
+    payload: {
+        email: string;
+        password : string;
+        remember: boolean;
+    };
+}
+
+export interface IUserLoginSuccess extends Action {
+    readonly type: Keys.USER_LOGIN_SUCCESS;
+    payload: any;
+}
+
+export interface IUserLoginFail extends Action {
+    readonly type: Keys.USER_LOGIN_FAIL;
+    payload: IError[];
+}
+//#endregion
+
+//#region Sent Mail Forgot IActions
+export interface ISentMailForgot extends Action {
+    readonly type: Keys.SENT_MAIL_FORGOT;
+    payload: {
+        email: string;
+    };
+}
+
+export interface ISentMailForgotSuccess extends Action {
+    readonly type: Keys.SENT_MAIL_FORGOT_SUCCESS;
+    payload: any;
+}
+
+export interface ISentMailForgotFail extends Action {
+    readonly type: Keys.SENT_MAIL_FORGOT_FAIL;
+    payload: IError[];
+}
+//#endregion
+
+//#region Reset Password IActions
+export interface IResetPassword extends Action {
+    readonly type: Keys.RESET_PASSWORD;
+    payload: {
+        newPassword: string;
+        confirmPassword: string;
+        codeReset: string;
+    };
+}
+
+export interface IResetPasswordSuccess extends Action {
+    readonly type: Keys.RESET_PASSWORD_SUCCESS;
+    payload: any;
+}
+
+export interface IResetPasswordFail extends Action {
+    readonly type: Keys.RESET_PASSWORD_FAIL;
+    payload: IError[];
 }
 //#endregion

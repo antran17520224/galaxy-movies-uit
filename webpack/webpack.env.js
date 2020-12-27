@@ -1,19 +1,19 @@
 const URL = {
     dev: {
         siteUrl: "",
-        API_URL: "https://staging.pawnpd.tk/api",
+        API_URL: "https://datve.herokuapp.com/api",
     },
     production: {
         siteUrl: "",
-        API_URL: "https://staging.pawnpd.tk/api",
+        API_URL: "https://datve.herokuapp.com/api",
     },
     qa: {
         siteUrl: "",
-        API_URL: "https://staging.pawnpd.tk/api",
+        API_URL: "https://datve.herokuapp.com/api",
     },
     test: {
-        siteUrl: "https://admin.pawnpd.tk",
-        API_URL: "https://staging.pawnpd.tk/api",
+        siteUrl: "",
+        API_URL: "https://datve.herokuapp.com/api",
     },
 };
 

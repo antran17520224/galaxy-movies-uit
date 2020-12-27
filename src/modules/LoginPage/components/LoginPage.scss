@@ -1,87 +1,96 @@
 .wrapper-login-page {
-  margin: auto;
-  width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  &:before {
-    content: "";
-    background: url("../../../assets/images/bgFixed.png");
-    background-position: top;
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: calc(100% + 200px);
-    z-index: -1;
-  }
-  .wrapper-form {
-    background: #fff;
-    position: relative;
-    border-radius: 10px;
-    padding: 20px;
+    margin: auto;
+    width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
-    margin-bottom: 75px;
-    width: 100%;
-  }
-  .avatar {
-    background-color: #f50057;
-    margin: 8px;
-  }
-  .wrapper-tabs {
-    margin-bottom: 15px;
-  }
-  .form {
-    width: 100%;
-    margin-top: 8px;
-    p {
-      color: #b40843;
-      margin: 5px;
-      &::before {
-        content: "⚠";
-        margin-right: 4px;
-      }
+    &:before {
+        content: "";
+        background: url("../../../assets/images/bgFixed.png");
+        background-position: top;
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: calc(100% + 375px);
+        z-index: -1;
     }
-  }
-  .form-control {
-    margin-top: 16px;
-  }
-  .text-field {
-    width: 100%;
-  }
-  .btn-register {
-    background-color: #42b72a;
-    &:hover {
-      background-color: #40a02c;
+    .form-dialog {
+        width: 100%;
+        margin-top: 8px;
+        p {
+            color: #b40843;
+            margin: 5px;
+            &::before {
+                content: "⚠";
+                margin-right: 4px;
+            }
+        }
     }
-  }
-  .btn-login {
-    text-transform: inherit;
-    font-size: 17px;
-    font-weight: 600;
-    color: #fff;
-    margin: 10px 0;
-  }
-  .btn-fb {
-    background-color: #4465ac;
-    &:hover {
-      background-color: #3b5999;
+    .wrapper-form {
+        background: #fff;
+        position: relative;
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 100px;
+        margin-bottom: 75px;
+        width: 100%;
     }
-  }
-  .btn-gg {
-    background-color: #dd4b39;
-    &:hover {
-      background-color: #b34638;
+    .avatar {
+        background-color: #f50057;
+        margin: 8px;
     }
-  }
-  .forgot-pass {
-    text-align: center;
-    padding: 13px 0;
-  }
+    .wrapper-tabs {
+        margin-bottom: 15px;
+    }
+    .form {
+        width: 100%;
+        margin-top: 8px;
+        p {
+            color: #b40843;
+            margin: 5px;
+            &::before {
+                content: "⚠";
+                margin-right: 4px;
+            }
+        }
+    }
+    .form-control {
+        margin-top: 16px;
+        .radio-group{
+            flex-direction: initial;
+        }
+    }
+    .text-field {
+        width: 100%;
+    }
+    .btn-register {
+        background-color: #42b72a;
+        &:hover {
+            background-color: #40a02c;
+        }
+    }
+    .btn-login {
+        text-transform: inherit;
+        font-size: 17px;
+        font-weight: 600;
+        color: #fff;
+        margin: 10px 0;
+        background-color: #24baef;
+        transition: all 0.2s ease;
+        &:hover{
+            background-color: #23b0e4;
+            box-shadow: 0 4px 11px rgba(36, 186, 239, 0.35);
+        }
+    }
+    .forgot-pass {
+        text-align: center;
+        padding: 13px 0;
+    }
 }

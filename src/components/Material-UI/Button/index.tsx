@@ -18,8 +18,7 @@ export interface ICustomButton {
     type?:
     | 'submit'
     | 'button'
-    className?: string
-
+    className?: string;
 }
 
 export const CustomButton: React.FC<ICustomButton> = ({ loading, ...props }) => {

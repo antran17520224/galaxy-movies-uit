@@ -20,6 +20,7 @@ const DetailsPage: React.FC<IProps> = props => {
     });
 
     const myRef = useRef();
+    console.log('myRef',myRef)
     const executeScroll = () => scrollToRef(myRef);
     return (
         <React.Fragment>

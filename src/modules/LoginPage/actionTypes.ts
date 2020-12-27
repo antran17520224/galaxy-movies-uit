@@ -6,11 +6,21 @@ import * as IActions from "./IActions";
 
 type ActionTypes =
     | IActions.IHandleClear
-    | IActions.IPostEmployeeLogin
-    | IActions.IPostEmployeeLoginSuccess
-    | IActions.IPostEmployeeLoginFail
-    | IActions.IGetPermissions
-    | IActions.IGetPermissionsSuccess
-    | IActions.IGetPermissionsFail
+    | IActions.IToggleModal
+    | IActions.IUserRegister
+    | IActions.IUserRegisterSuccess
+    | IActions.IUserRegisterFail
+    | IActions.IActiveAccount
+    | IActions.IActiveAccountSuccess
+    | IActions.IActiveAccountFail
+    | IActions.IUserLogin
+    | IActions.IUserLoginSuccess
+    | IActions.IUserLoginFail
+    | IActions.ISentMailForgot
+    | IActions.ISentMailForgotSuccess
+    | IActions.ISentMailForgotFail
+    | IActions.IResetPassword
+    | IActions.IResetPasswordSuccess
+    | IActions.IResetPasswordFail
 
 export default ActionTypes;

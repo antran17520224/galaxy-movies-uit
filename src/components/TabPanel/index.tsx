@@ -5,10 +5,11 @@ interface TabPanelProps {
     children?: React.ReactNode;
     index: any;
     value: any;
+    className? : string;
 }
 
 export const TabPanel = (props: TabPanelProps) => {
-    const { children, value, index, ...other } = props;
+    const { children, value, index, className,...other } = props;
     return (
         <div
             role="tabpanel"
@@ -16,6 +17,7 @@ export const TabPanel = (props: TabPanelProps) => {
             id={`scrollable-auto-tabpanel-${index}`}
             aria-labelledby={`scrollable-auto-tab-${index}`}
             {...other}
+            className={className}
         >
             {value === index && (
                 <Box>

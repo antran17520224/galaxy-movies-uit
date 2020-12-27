@@ -8,40 +8,43 @@ import {
     InputLabel,
     OutlinedInput,
     TextField,
-    Typography
-} from '@material-ui/core';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
-import React from 'react';
+    Typography,
+    Link
+} from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { RouteComponentProps } from 'react-router-dom';
-import { CustomButton } from '../../../../components';
-import { ILogInProps } from '../../model/ILoginProps';
+import { RouteComponentProps } from "react-router-dom";
+import { CustomButton } from "../../../../components";
+import { ILogInProps } from "../../model/ILoginProps";
+import { MODAL_USER_LOGIN } from "../../model/ILoginState";
 
 // import FacebookLogin from 'react-facebook-login';
 
-
-interface IProps extends RouteComponentProps, ILogInProps { }
+interface IProps extends RouteComponentProps, ILogInProps {}
 interface Inputs {
-    email: string,
-    password: string,
-    remember: boolean,
+    email: string;
+    password: string;
+    remember: boolean;
 }
 
-const LoginForm: React.FC<IProps> = (props) => {
-
+const LoginForm: React.FC<IProps> = props => {
     const [isShowPass, setShowPass] = React.useState(false);
 
     const { register, handleSubmit, errors } = useForm<Inputs>();
 
-    const responseFacebook = (response) => {
-        console.log(response);
-    }
     const onSubmit = (data: Inputs) => {
-        console.log(data);
-    }
+        console.log("data login", data);
+        const { email, password,remember } = data;
+        props.actions.userLogin({
+            email,
+            password,
+            remember : remember ? true : false 
+        });
+    };
     return (
         <React.Fragment>
-            <form className="form" onSubmit={handleSubmit(onSubmit)} >
+            <form className="form" onSubmit={handleSubmit(onSubmit)}>
                 <TextField
                     id="email"
                     label="Email"
@@ -58,16 +61,18 @@ const LoginForm: React.FC<IProps> = (props) => {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                             message: "Email không hợp lệ"
                         }
-
                     })}
                 />
                 {errors.email && <p>{errors.email.message}</p>}
-                <FormControl className="form-control text-field" variant="outlined">
+                <FormControl
+                    className="form-control text-field"
+                    variant="outlined"
+                >
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <OutlinedInput
                         id="password"
                         name="password"
-                        type={isShowPass ? 'text' : 'password'}
+                        type={isShowPass ? "text" : "password"}
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
@@ -75,24 +80,30 @@ const LoginForm: React.FC<IProps> = (props) => {
                                     onClick={() => setShowPass(!isShowPass)}
                                     edge="end"
                                 >
-                                    {isShowPass ? <Visibility /> : <VisibilityOff />}
+                                    {isShowPass ? (
+                                        <Visibility />
+                                    ) : (
+                                        <VisibilityOff />
+                                    )}
                                 </IconButton>
                             </InputAdornment>
                         }
                         labelWidth={70}
                         inputRef={register({
                             required: "Bạn phải nhập mật khẩu",
-                            maxLength: {
-                                value: 20,
-                                message: 'Mật khẩu phải ít hơn 20 ký tự'
-                            }
                         })}
                     />
                 </FormControl>
                 {errors.password && <p>{errors.password.message}</p>}
                 <FormControlLabel
                     className="mt-8"
-                    control={<Checkbox value={true} color="primary" name="remember" />}
+                    control={
+                        <Checkbox
+                            value={true}
+                            color="primary"
+                            name="remember"
+                        />
+                    }
                     label="Nhớ tài khoản"
                     inputRef={register()}
                 />
@@ -105,39 +116,24 @@ const LoginForm: React.FC<IProps> = (props) => {
                     fullWidth
                     className="btn-login btn-normal"
                 />
-                {/* <FacebookLogin
-                            appId="381048913133778"
-                            autoLoad
-                            callback={responseFacebook}
-                            render={renderProps => (
-                                <button style={{ background: 'blue', color: '#fff' }} onClick={renderProps.onClick}>This is my custom FB button</button>
-                            )}
-                        /> */}
-                <CustomButton
-                    type="submit"
-                    // loading={isLoading}
-                    fullWidth
-                    variant="contained"
-                    className="btn-login btn-fb"
-                    label="Facebook"
-                />
-                <CustomButton
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    className="btn-login btn-gg"
-                    label="Google"
-                />
-
             </form>
             <Box className="forgot-pass">
-                <Typography onClick={() => { }} >
+                <Link
+                    onClick={() =>
+                        props.actions.toggleModal({
+                            type: MODAL_USER_LOGIN.MODAL_FORGOT_PASSWORD
+                        })
+                    }
+                    variant="body2"
+                    style={{
+                        cursor : 'pointer',
+                    }}
+                >
                     Quên mật khẩu
-                </Typography>
+                </Link>
             </Box>
-            
         </React.Fragment>
-    )
-}
+    );
+};
 
 export default LoginForm;

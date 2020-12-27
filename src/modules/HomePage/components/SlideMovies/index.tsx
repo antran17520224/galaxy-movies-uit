@@ -58,7 +58,8 @@ const SlideMovies: React.FC<IProps> = props => {
     return (
         <React.Fragment>
             <div className="wrapper-slider">
-                <div className="wrapper-showing">
+                
+                <div id="showing" className="wrapper-showing">
                     <div className="header-title">Phim đang chiếu</div>
                     <Slider {...slideProps}>
                         <div className="wrapper-movies">
@@ -219,8 +220,8 @@ const SlideMovies: React.FC<IProps> = props => {
                     </div>
                 </div>
                 {/* next section */}
-                <div className="wrapper-showing">
-                    <div className="header-title">Phim hay trong tuần</div>
+                <div id="top-rating" className="wrapper-showing">
+                    <div className="header-title">Phim top rating</div>
                     <Slider {...slideProps}>
                         <div className="wrapper-movies">
                             <div className="wrapper-poster">
@@ -351,7 +352,7 @@ const SlideMovies: React.FC<IProps> = props => {
                     </div>
                 </div>
                 {/* next section */}
-                <div className="wrapper-showing">
+                <div id="coming-soon" className="wrapper-showing">
                     <div className="header-title">Phim sắp chiếu</div>
                     <Slider {...slideProps}>
                         <div className="wrapper-movies">

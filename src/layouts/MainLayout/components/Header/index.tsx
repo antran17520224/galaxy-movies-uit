@@ -75,10 +75,17 @@ const Header: React.FC<IProps> = props => {
                     </Link>
                 </MenuItem>
             ) : (
-                <>
-                    <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-                </>
+                <div>
+                    <MenuItem onClick={handleMenuClose}>
+                        Tài khoản của tôi
+                    </MenuItem>
+                    <MenuItem onClick={() => {
+                        localStorage.clear();
+                        location.reload();
+                    }}>
+                        Đăng xuất
+                    </MenuItem>
+                </div>
             )}
         </Menu>
     );
@@ -127,7 +134,6 @@ const Header: React.FC<IProps> = props => {
         </Menu>
     );
     const trigger = useScrollTrigger({ target: window ? window() : undefined });
-
 
     return (
         <div className="wrapper-header">

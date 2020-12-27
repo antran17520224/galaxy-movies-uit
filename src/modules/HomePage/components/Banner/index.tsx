@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button } from "@material-ui/core";
 import TicketIcon from "../../../../components/Icons/TicketIcon";
 import TheatersIcon from "@material-ui/icons/Theaters";
-import { Link, RouteComponentProps } from "react-router-dom";
+import { Link,RouteComponentProps } from "react-router-dom";
 import { IHomePageProps } from "../../model/IHomePageProps";
 import { HOME_PAGE_MODAL } from "../../model/IHomePageState";
 import "./Banner.scss";

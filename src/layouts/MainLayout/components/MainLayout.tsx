@@ -55,13 +55,18 @@ function ScrollTop(props: IProps) {
     );
 }
 const MainLayout: React.FC<IProps> = props => {
-    const { accessToken } = props.store.LoginPage;
+    const { isRememberAccount, accessToken } = props.store.LoginPage;
     const { pathname } = useLocation();
 
-    const [isFixed,setIsFixed] = React.useState(false);
+    const [isFixed, setIsFixed] = React.useState(false);
 
     React.useEffect(() => {
-        pathname === '/' ?  setIsFixed(true) :  setIsFixed(false)
+        pathname === "/" ? setIsFixed(true) : setIsFixed(false);
+        if (isRememberAccount && accessToken) {
+            setInterval(() => {
+                localStorage.removeItem("accessToken");
+            }, 60 * 60 * 24 * 30 * 12);
+        }
     }, [pathname]);
 
     return (
@@ -81,7 +86,6 @@ const MainLayout: React.FC<IProps> = props => {
                         exact
                     />
                 ))}
-                {accessToken !== null && <Redirect to="/" />}
                 <Redirect from="*" to="/" />
             </Switch>
             <Footer />
@@ -90,7 +94,7 @@ const MainLayout: React.FC<IProps> = props => {
                     color="secondary"
                     size="small"
                     aria-label="scroll back to top"
-                    style={{ outline: "none",zIndex : 99 }}
+                    style={{ outline: "none", zIndex: 99 }}
                 >
                     <KeyboardArrowUpIcon />
                 </Fab>

@@ -1,36 +1,41 @@
-import { SwipeableDrawer } from '@material-ui/core';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import clsx from 'classnames';
-import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { IMainLayoutProps } from '../../model/IMainLayoutProps';
-import useStyles from './styles';
+import { SwipeableDrawer } from "@material-ui/core";
+import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import HdIcon from '@material-ui/icons/Hd';
+import HomeIcon from "@material-ui/icons/Home";
+import LocalMoviesIcon from '@material-ui/icons/LocalMovies';
+import MailIcon from "@material-ui/icons/Mail";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MovieFilterIcon from '@material-ui/icons/MovieFilter';
+import clsx from "classnames";
+import React from "react";
+import { RouteComponentProps } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';
+import { IMainLayoutProps } from "../../model/IMainLayoutProps";
+import useStyles from "./styles";
 
-interface IProps extends RouteComponentProps, IMainLayoutProps { }
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
+interface IProps extends RouteComponentProps, IMainLayoutProps {}
+type Anchor = "top" | "left" | "bottom" | "right";
 
-const SideBar: React.FC<IProps> = (props) => {
+const SideBar: React.FC<IProps> = props => {
     const classes = useStyles();
     const [state, setState] = React.useState({
         top: false,
         left: false,
         bottom: false,
-        right: false,
+        right: false
     });
 
     const toggleDrawer = (anchor: Anchor, open: boolean) => (
-        event: React.KeyboardEvent | React.MouseEvent,
+        event: React.KeyboardEvent | React.MouseEvent
     ) => {
         if (
-            event.type === 'keydown' &&
-            ((event as React.KeyboardEvent).key === 'Tab' ||
-                (event as React.KeyboardEvent).key === 'Shift')
+            event.type === "keydown" &&
+            ((event as React.KeyboardEvent).key === "Tab" ||
+                (event as React.KeyboardEvent).key === "Shift")
         ) {
             return;
         }
@@ -39,23 +44,54 @@ const SideBar: React.FC<IProps> = (props) => {
     };
 
     const list = () => (
-        <div
-            className={clsx(classes.list)}
-            role="presentation"
-        >
+        <div className={clsx(classes.list)} role="presentation">
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem button key={text}>
                         <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
-                ))}
+                ))} */}
+                <Link to="/" onClick={props.actions.toggleSideBar}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText>Trang chủ</ListItemText>
+                    </ListItem>
+                </Link>
+                <Link to="/#showing" onClick={props.actions.toggleSideBar}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <LocalMoviesIcon />
+                        </ListItemIcon>
+                        <ListItemText>Phim đang chiếu</ListItemText>
+                    </ListItem>
+                </Link>
+                <Link to="/#top-rating" onClick={props.actions.toggleSideBar}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MovieFilterIcon />
+                        </ListItemIcon>
+                        <ListItemText>Phim top rating</ListItemText>
+                    </ListItem>
+                </Link>
+                <Link to="/#coming-soon" onClick={props.actions.toggleSideBar}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HdIcon />
+                        </ListItemIcon>
+                        <ListItemText>Phim sắp chiếu</ListItemText>
+                    </ListItem>
+                </Link>
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                {["All mail", "Trash", "Spam"].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemIcon>
+                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                        </ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -63,10 +99,8 @@ const SideBar: React.FC<IProps> = (props) => {
         </div>
     );
 
-    const {
-        isToggleSideBar
-    } = props.store.MainLayout;
-    
+    const { isToggleSideBar } = props.store.MainLayout;
+
     return (
         <SwipeableDrawer
             anchor="left"
@@ -75,12 +109,12 @@ const SideBar: React.FC<IProps> = (props) => {
             onClose={props.actions.toggleSideBar}
             variant="temporary"
             classes={{
-                paper: classes.drawerPaper,
+                paper: classes.drawerPaper
             }}
         >
             {list()}
         </SwipeableDrawer>
-    )
-}
+    );
+};
 
 export default SideBar;

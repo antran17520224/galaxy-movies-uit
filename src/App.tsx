@@ -5,6 +5,8 @@ import "moment/locale/vi";
 import * as React from "react";
 import { connect, Provider } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import theme from "./common/Theme";
 import { LoadingScreen } from "./components";
 import MainLayout from "./layouts/MainLayout/components/MainLayoutContainer";
@@ -12,8 +14,9 @@ import { IMainLayoutProps } from "./layouts/MainLayout/model/IMainLayoutProps";
 import { ILogInState } from "./modules/LoginPage";
 import { storeConfig } from "./redux/store/configureStore.dev";
 import { mainRoutes, RouteConfig } from "./routes";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 interface IProps extends RouteComponentProps, IMainLayoutProps {
     LoginState: ILogInState;
@@ -31,6 +34,7 @@ class App extends React.Component<IProps, {}> {
                 <ConnectedRouter history={storeConfig.history}>
                     <ThemeProvider theme={theme}>
                         <CssBaseline />
+                        <ToastContainer />
                         <React.Suspense fallback={<LoadingScreen size="large" />}>
                             <MainLayout
                                 {...this.props}

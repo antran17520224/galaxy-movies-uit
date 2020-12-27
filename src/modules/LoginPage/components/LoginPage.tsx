@@ -1,73 +1,50 @@
-import {
-    Avatar,
-    Box
-} from '@material-ui/core';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import React from 'react';
-import { useForm } from "react-hook-form";
-import { RouteComponentProps } from 'react-router-dom';
-import { ILogInProps } from '../model/ILoginProps';
-import LoginForm from './LoginForm';
-import './LoginPage.scss';
-import RegisterForm from './RegisterForm';
+import { Avatar, Box } from "@material-ui/core";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import React from "react";
+import { RouteComponentProps, useHistory } from "react-router-dom";
+import { ILogInProps } from "../model/ILoginProps";
+import { USER_PAGE_CLEAR } from "../model/ILoginState";
+import { DialogConfirm } from "./DialogConfirm";
+import { FormActiveAccount } from "./FormActiveAccount";
+import LoginForm from "./LoginForm";
+import "./LoginPage.scss";
+import RegisterForm from "./RegisterForm";
+import { TabPanel } from "../../../components/TabPanel";
+import { LoadingCustom } from "../../../components/Loading";
+import { FormForgotPassword } from "./FormForgotPassword";
+import { FormResetPassword } from "./FormResetPassword";
 
-// import FacebookLogin from 'react-facebook-login';
+interface IProps extends RouteComponentProps, ILogInProps {}
 
-
-interface IProps extends RouteComponentProps, ILogInProps { }
-interface Inputs {
-    email: string,
-    password: string,
-    remember: boolean,
-}
-interface TabPanelProps {
-    children?: React.ReactNode;
-    dir?: string;
-    index: any;
-    value: any;
-}
-
-function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`full-width-tabpanel-${index}`}
-            aria-labelledby={`full-width-tab-${index}`}
-            className="w-100"
-            {...other}
-        >
-            {value === index && (
-                <Box>
-                    {children}
-                </Box>
-            )}
-        </div>
-    );
-}
-
-const LoginPage: React.FC<IProps> = (props) => {
-
-    const [isShowPass, setShowPass] = React.useState(false);
+const LoginPage: React.FC<IProps> = props => {
     const [tab, setTab] = React.useState(0);
-    const { register, handleSubmit, errors } = useForm<Inputs>();
-
-    const responseFacebook = (response) => {
-        console.log(response);
-    }
-
+    const {
+        dataToRegister,
+        isAccountActivated,
+        accessToken,
+        isProcessing
+    } = props.store.LoginPage;
     const handleChange = (event: React.ChangeEvent<{}>, tab: number) => {
         setTab(tab);
     };
-    
+    const history = useHistory();
+    React.useEffect(() => {
+        if (isAccountActivated) {
+            setTab(0);
+            props.actions.handleClear({
+                type: USER_PAGE_CLEAR.CLEAR_STATE_ACTIVE
+            });
+        }
+        if (accessToken) {
+            history.push("./");
+        }
+    }, [isAccountActivated, accessToken]);
     return (
         <React.Fragment>
-            {/* <LoadingScreen spinning={true} delay={1000} /> */}
             <div className="wrapper-login-page">
+                <LoadingCustom spinning={isProcessing} />
                 <div className="wrapper-form">
                     <Avatar className="avatar">
                         <LockOutlinedIcon />
@@ -83,7 +60,7 @@ const LoginPage: React.FC<IProps> = (props) => {
                         <Tab label="Đăng nhập" />
                         <Tab label="Đăng ký" />
                     </Tabs>
-                    <TabPanel value={tab} index={0}>
+                    <TabPanel value={tab} index={0} className="w-100">
                         <LoginForm {...props} />
                     </TabPanel>
                     <TabPanel value={tab} index={1}>
@@ -91,8 +68,12 @@ const LoginPage: React.FC<IProps> = (props) => {
                     </TabPanel>
                 </div>
             </div>
+            {dataToRegister && <DialogConfirm {...props} />}
+            <FormActiveAccount {...props} />
+            <FormForgotPassword {...props} />
+            <FormResetPassword {...props} />
         </React.Fragment>
-    )
-}
+    );
+};
 
 export default LoginPage;

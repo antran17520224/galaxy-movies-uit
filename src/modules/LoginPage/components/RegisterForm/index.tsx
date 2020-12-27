@@ -1,49 +1,42 @@
+import DateFnsUtils from "@date-io/date-fns";
 import {
-    Box,
-    Checkbox,
+    Button,
     FormControl,
     FormControlLabel,
+    FormLabel,
     Grid,
     IconButton,
     InputAdornment,
     InputLabel,
     OutlinedInput,
-    TextField,
-    Typography
-} from '@material-ui/core';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
-import React from 'react';
-import { useForm } from "react-hook-form";
-import { RouteComponentProps } from 'react-router-dom';
-import { CustomButton } from '../../../../components';
-import { ILogInProps } from '../../model/ILoginProps';
-import DateFnsUtils from '@date-io/date-fns';
+    Radio,
+    RadioGroup,
+    TextField
+} from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import {
-    MuiPickersUtilsProvider,
     KeyboardDatePicker,
-} from '@material-ui/pickers';
+    MuiPickersUtilsProvider
+} from "@material-ui/pickers";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { RouteComponentProps } from "react-router-dom";
+import { CustomButton } from "../../../../components";
+import { ILogInProps } from "../../model/ILoginProps";
+import { IRegister, MODAL_USER_LOGIN } from "../../model/ILoginState";
 
-// import FacebookLogin from 'react-facebook-login';
+interface IProps extends RouteComponentProps, ILogInProps {}
 
-
-interface IProps extends RouteComponentProps, ILogInProps { }
-interface Inputs {
-    fullName: string,
-    phone: string,
-    dateOfBirth: string,
-    email: string,
-    password: string,
-    confirmPassword: string,
-}
-
-const RegisterForm: React.FC<IProps> = (props) => {
-
+const RegisterForm: React.FC<IProps> = props => {
     const [isShowPass, setShowPass] = React.useState(false);
     const [isShowConfirmPass, setShowConfirmPass] = React.useState(false);
-    const [selectedDate, setSelectedDate] = React.useState<Date | null>();
+    const [selectedDate, setSelectedDate] = React.useState<Date | null>(
+        new Date()
+    );
+    const [gender, setGender] = React.useState("female");
 
+    const { register, handleSubmit, errors, watch } = useForm<IRegister>();
 
-    const { register, handleSubmit, errors, watch } = useForm<Inputs>();
     const password = React.useRef({});
     password.current = watch("password", "");
 
@@ -51,12 +44,28 @@ const RegisterForm: React.FC<IProps> = (props) => {
         setSelectedDate(date);
     };
 
-    const onSubmit = (data: Inputs) => {
-        console.log(data);
-    }
+    const handleChangeGender = event => {
+        setGender(event.target.value);
+    };
+
+    const onSubmit = (data: IRegister) => {
+        const dataRegister = {
+            ...data,
+            dateOfBirth : selectedDate.toISOString(),
+            gender
+        };
+
+        props.actions.toggleModal({
+            type: MODAL_USER_LOGIN.MODAL_CONFIRM_REGISTER,
+            data: dataRegister
+        });
+    };
+
+    const { isProcessing } = props.store.LoginPage;
+
     return (
         <React.Fragment>
-            <form className="form" onSubmit={handleSubmit(onSubmit)} >
+            <form className="form" onSubmit={handleSubmit(onSubmit)}>
                 <TextField
                     id="fullName"
                     label="Họ Tên"
@@ -64,7 +73,7 @@ const RegisterForm: React.FC<IProps> = (props) => {
                     fullWidth
                     name="fullName"
                     inputRef={register({
-                        required: "Bạn phải nhập họ tên",
+                        required: "Họ và tên không được bỏ trống",
                         maxLength: {
                             value: 30,
                             message: "Họ tên không được quá 50 ký tự"
@@ -75,7 +84,7 @@ const RegisterForm: React.FC<IProps> = (props) => {
                         },
                         pattern: {
                             value: /^[A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ]+(?:\s[A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ]+)+$/i,
-                            message: "Họ tên không hợp lệ"
+                            message: "Họ và tên không hợp lệ"
                         }
                     })}
                 />
@@ -88,7 +97,7 @@ const RegisterForm: React.FC<IProps> = (props) => {
                     name="email"
                     className="form-control"
                     inputRef={register({
-                        required: "Bạn phải nhập Email",
+                        required: "Email không được bỏ trống",
                         maxLength: {
                             value: 30,
                             message: "Email không được quá 30 ký tự"
@@ -97,16 +106,18 @@ const RegisterForm: React.FC<IProps> = (props) => {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                             message: "Email không hợp lệ"
                         }
-
                     })}
                 />
                 {errors.email && <p>{errors.email.message}</p>}
-                <FormControl className="form-control text-field" variant="outlined">
+                <FormControl
+                    className="form-control text-field"
+                    variant="outlined"
+                >
                     <InputLabel htmlFor="password">Mật khẩu</InputLabel>
                     <OutlinedInput
                         id="password"
                         name="password"
-                        type={isShowPass ? 'text' : 'password'}
+                        type={isShowPass ? "text" : "password"}
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
@@ -114,51 +125,74 @@ const RegisterForm: React.FC<IProps> = (props) => {
                                     onClick={() => setShowPass(!isShowPass)}
                                     edge="end"
                                 >
-                                    {isShowPass ? <Visibility /> : <VisibilityOff />}
+                                    {isShowPass ? (
+                                        <Visibility />
+                                    ) : (
+                                        <VisibilityOff />
+                                    )}
                                 </IconButton>
                             </InputAdornment>
                         }
                         labelWidth={70}
                         inputRef={register({
-                            required: "Bạn phải nhập mật khẩu",
+                            required: "Mật khẩu không được bỏ trống",
                             maxLength: {
                                 value: 30,
-                                message: 'Mật khẩu không được quá 30 ký tự'
+                                message: "Mật khẩu không được quá 30 ký tự"
                             },
-                            minLength : {
-                                value : 8,
-                                message: 'Mật khẩu ít nhất 8 ký tự'
+                            minLength: {
+                                value: 8,
+                                message: "Mật khẩu ít nhất 8 ký tự"
+                            },
+                            pattern: {
+                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/i,
+                                message:
+                                    "Mật khẩu phải chứa chữ hoa, chữ thường, ký tự đặc biệt và số"
                             }
                         })}
                     />
                 </FormControl>
                 {errors.password && <p>{errors.password.message}</p>}
-                <FormControl className="form-control text-field" variant="outlined">
-                    <InputLabel htmlFor="confirmPassword">Nhập lại mật khẩu</InputLabel>
+                <FormControl
+                    className="form-control text-field"
+                    variant="outlined"
+                >
+                    <InputLabel htmlFor="confirmPassword">
+                        Nhập lại mật khẩu
+                    </InputLabel>
                     <OutlinedInput
                         id="confirmPassword"
                         name="confirmPassword"
-                        type={isShowPass ? 'text' : 'password'}
+                        type={isShowConfirmPass ? "text" : "password"}
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
                                     aria-label="toggle password visibility"
-                                    onClick={() => setShowConfirmPass(!isShowConfirmPass)}
+                                    onClick={() =>
+                                        setShowConfirmPass(!isShowConfirmPass)
+                                    }
                                     edge="end"
                                 >
-                                    {isShowConfirmPass ? <Visibility /> : <VisibilityOff />}
+                                    {isShowConfirmPass ? (
+                                        <Visibility />
+                                    ) : (
+                                        <VisibilityOff />
+                                    )}
                                 </IconButton>
                             </InputAdornment>
                         }
                         labelWidth={70}
                         inputRef={register({
-                            required: "Bạn phải nhập xác nhận mật khẩu",
+                            required: "Xác nhận mật khẩu không được bỏ trống",
                             validate: value =>
-                                value === password.current || "Mật khẩu nhập lại không chính xác"
+                                value === password.current ||
+                                "Mật khẩu nhập lại không chính xác"
                         })}
                     />
                 </FormControl>
-                {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+                {errors.confirmPassword && (
+                    <p>{errors.confirmPassword.message}</p>
+                )}
                 <Grid container className="form-control" spacing={2}>
                     <Grid item xs={6}>
                         <TextField
@@ -168,7 +202,7 @@ const RegisterForm: React.FC<IProps> = (props) => {
                             fullWidth
                             name="phone"
                             inputRef={register({
-                                required: "Bạn phải nhập số điện thoại",
+                                required: "Số điện thoại không được bỏ trống",
                                 minLength: {
                                     value: 10,
                                     message: "Số điện thoại ít nhất 10 ký tự"
@@ -177,7 +211,6 @@ const RegisterForm: React.FC<IProps> = (props) => {
                                     value: /[0-9]$/i,
                                     message: "Số điện thoại không hợp lệ"
                                 }
-
                             })}
                         />
                         {errors.phone && <p>{errors.phone.message}</p>}
@@ -185,27 +218,66 @@ const RegisterForm: React.FC<IProps> = (props) => {
                     <Grid item xs={6}>
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker
+                                name="dateOfBirth"
                                 id="date-picker-dialog"
                                 label="Ngày sinh"
-                                format="MM/dd/yyyy"
+                                format="dd/MM/yyyy"
                                 value={selectedDate}
                                 onChange={handleDateChange}
                                 KeyboardButtonProps={{
-                                    'aria-label': 'change date',
+                                    "aria-label": "change date"
                                 }}
                                 fullWidth
                             />
                         </MuiPickersUtilsProvider>
                     </Grid>
                 </Grid>
-
-
-                {/* 
-                add textField for address or not
-                css background */}
+                <TextField
+                    id="address"
+                    label="Địa chỉ"
+                    name="address"
+                    placeholder="Địa chỉ"
+                    multiline
+                    fullWidth
+                    variant="outlined"
+                    className="form-control"
+                    inputRef={register({
+                        required: "Địa chỉ không được bỏ trống",
+                        maxLength: {
+                            value: 300,
+                            message: "Địa chỉ không được quá 300 ký tự"
+                        }
+                    })}
+                />
+                {errors.address && <p>{errors.address.message}</p>}
+                <FormControl component="fieldset" className="form-control">
+                    <FormLabel component="legend">Giới tính</FormLabel>
+                    <RadioGroup
+                        aria-label="gender"
+                        name="gender"
+                        value={gender}
+                        onChange={handleChangeGender}
+                        className="radio-group"
+                    >
+                        <FormControlLabel
+                            value="female"
+                            control={<Radio />}
+                            label="Nữ"
+                        />
+                        <FormControlLabel
+                            value="male"
+                            control={<Radio />}
+                            label="Nam"
+                        />
+                        <FormControlLabel
+                            value="other"
+                            control={<Radio />}
+                            label="Khác"
+                        />
+                    </RadioGroup>
+                </FormControl>
                 <CustomButton
                     type="submit"
-                    // loading={isLoading}
                     fullWidth
                     variant="contained"
                     className="btn-login btn-register"
@@ -213,7 +285,7 @@ const RegisterForm: React.FC<IProps> = (props) => {
                 />
             </form>
         </React.Fragment>
-    )
-}
+    );
+};
 
 export default RegisterForm;

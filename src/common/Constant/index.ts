@@ -1,5 +1,5 @@
 import { IError, IValidateMessage } from "./../Interface";
 
-export const NAME_CINEMA = 'AB-Movies'
+export const URL_CINEMA = 'www.galaxy-movies.heroku.com'
 
 
