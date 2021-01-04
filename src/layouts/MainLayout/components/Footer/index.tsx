@@ -12,7 +12,7 @@ class Footer extends Component {
                 <div className="wrapper-footer">
                     <Container maxWidth="xl">
                         <Grid container className="footer-container">
-                            <Grid item xs={3}>
+                            <Grid item lg={3} sm={12}>
                                 <div className="footer-grid">
                                     <a
                                         className="logo d-block"
@@ -32,42 +32,34 @@ class Footer extends Component {
                                             17520224@gm.uit.edu.com
                                         </p>
                                         <p>
-                                            <strong>VN :</strong> 0909-090-999
+                                            <strong>VN :</strong> 035-692-6627
                                         </p>
                                         <p>
                                             <strong>International :</strong>{" "}
-                                            +84123 333 7777
+                                            +8435-692-6627
                                         </p>
                                     </div>
                                 </div>
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item lg={3} sm={6}>
                                 {/* about us */}
                                 <div className="footer-grid">
                                     <h3>ABOUT US</h3>
                                     <ul className="list-unstyled">
                                         <li>
-                                            <a href="/">Scotch Corporate</a>
+                                            <a href="https://www.facebook.com/AnTran190599/">
+                                                Trần Quốc An
+                                            </a>
                                         </li>
                                         <li>
-                                            <a href="/">Careers</a>
-                                        </li>
-                                        <li>
-                                            <a href="/">Privacy Policy</a>
-                                        </li>
-                                        <li>
-                                            <a href="/">Terms of Use</a>
-                                        </li>
-                                        <li>
-                                            <a href="/">Why Buy Direct</a>
-                                        </li>
-                                        <li>
-                                            <a href="/">Newsletter</a>
+                                            <a href="https://www.facebook.com/bach.nguyenphan/">
+                                                Nguyễn Phan Bách
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item lg={3} sm={6}>
                                 {/* SUPPORT */}
                                 <div className="footer-grid">
                                     <h3>SUPPORT</h3>
@@ -78,15 +70,6 @@ class Footer extends Component {
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/">Shipping Policy</a>
-                                        </li>
-                                        <li>
-                                            <a href="cart.html">Returns</a>
-                                        </li>
-                                        <li>
-                                            <a href="/">Order Status</a>
-                                        </li>
-                                        <li>
                                             <a href="support.html">
                                                 Contact Us
                                             </a>
@@ -94,7 +77,7 @@ class Footer extends Component {
                                     </ul>
                                 </div>
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item lg={3} sm={12}>
                                 {/* PAYMENT AND FOLLOW */}
                                 <div className="footer-grid">
                                     <div className="payment_methods">
@@ -120,7 +103,10 @@ class Footer extends Component {
                             </Grid>
                         </Grid>
                         <div className="copyright">
-                            <p>Copyright © Galaxy Movies 2020 | Made with <span>♥</span> by AnTranUIT </p>
+                            <p>
+                                Copyright © Galaxy Movies 2020 | Made with{" "}
+                                <span>♥</span> by AnTranUIT{" "}
+                            </p>
                         </div>
                     </Container>
                 </div>

@@ -34,7 +34,6 @@
             font-weight: 600;
             span {
                 color: #fff;
-                font-size: 17px;
                 padding-right: 23px;
                 margin-left: 23px;
                 font-size: 17px;
@@ -160,5 +159,92 @@
         -moz-transition: opacity 0.5s;
         transition: opacity 0.5s;
         z-index: 2;
+    }
+}
+@media only screen and (max-width: 1280px) {
+    .wrapper-banner .content-banner .title-banner h1 {
+        font-size: 60px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .wrapper-banner .content-banner .wrapper-button .button-booking {
+        padding: 1rem 2.5rem;
+    }
+    .wrapper-banner .content-banner .wrapper-button .button-trailer {
+        font-size: 14px;
+        padding: 0.7rem 1.9rem;
+    }
+
+    .wrapper-banner .content-banner {
+        width: 46%;
+    }
+    .wrapper-banner .content-banner .title-banner {
+        margin-bottom: 15px;
+    }
+    .wrapper-banner .content-banner .title-banner h1 {
+        font-size: 45px;
+    }
+}
+@media only screen and (max-width: 540px) {
+    .wrapper-banner .content-banner .wrapper-button .button-trailer {
+        font-size: 11px;
+        padding: 0.5rem 1rem;
+        svg {
+            font-size: 16px;
+        }
+    }
+    .wrapper-banner .content-banner .wrapper-button .button-booking {
+        padding: 0.65rem 1.4rem;
+        font-size: 11px;
+        margin-right: 1rem;
+    }
+    .wrapper-banner .content-banner .des-banner span {
+        font-size: 13px;
+        padding-right: 12px;
+        margin-left: 13px;
+    }
+    .wrapper-banner .content-banner .title-banner h1 {
+        font-size: 25px;
+    }
+    .wrapper-banner .content-banner .wrapper-button {
+        margin-top: 15px;
+    }
+    .wrapper-banner .content-banner {
+        width: 48%;
+    }
+}
+@media only screen and (max-width: 411px) {
+    .wrapper-banner .content-banner {
+        margin-left: 35px;
+        bottom: 16%;
+    }
+    .wrapper-banner .content-banner .wrapper-button .button-trailer {
+        font-size: 9px;
+        padding: 7px 10px;
+        border: 1.5px solid #fff;
+    }
+    .wrapper-banner .content-banner .wrapper-button .button-booking {
+        font-size: 9px;
+        margin-right: 9px;
+        padding: 9px 16px;
+    }
+    .wrapper-banner .content-banner .des-banner span {
+        font-size: 11px;
+        padding-right: 11px;
+        margin-left: 12px;
+    }
+    .wrapper-banner .content-banner .title-banner p {
+        font-size: 8px;
+    }
+    .wrapper-banner .content-banner .wrapper-button{
+        margin-top: 9px;
+    }
+    .wrapper-banner .content-banner .title-banner{
+        margin-bottom: 10px;
+    }
+}
+@media only screen and (max-width: 375px){
+    .wrapper-banner .content-banner{
+        display: none;
     }
 }

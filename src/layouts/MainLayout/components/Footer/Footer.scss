@@ -142,4 +142,14 @@
     }
     
 }
-
+@media only screen and (max-width : 600px) {
+    .footer-grid{
+        padding-top: 40px;
+    }
+}
+@media only screen and (max-width : 411px) {
+    .wrapper-footer .footer-container{
+        padding: 0px 17px;
+        justify-content: space-between;
+    }
+}

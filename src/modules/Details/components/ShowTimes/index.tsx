@@ -71,6 +71,17 @@ export const ShowTimes: React.FC<IProps> = props => {
             }
         }
     }, [arrayDate.length, arrayDayAndMonth.length]);
+
+    // const dataAPI = [
+    //     {
+    //         date: "1/12/2021",
+    //         nameMovie: "tiệc trăng máu",
+    //         time: "19:50",
+    //         Cinema: "BHD Start",
+    //         addressCinema: "Thủ đức"
+    //     }
+    // ];
+    // console.log('arrayDayAndMonth',arrayDayAndMonth);
     return (
         <React.Fragment>
             <div className="wrapper-booking">
@@ -146,7 +157,7 @@ export const ShowTimes: React.FC<IProps> = props => {
                                             >
                                                 17:05
                                             </Button>
-                                        </Link> 
+                                        </Link>
                                     </div>
                                     <div className="wrapper-button-time">
                                         <Button
