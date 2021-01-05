@@ -23,10 +23,9 @@ export const TrailerModal: React.FC<IProps> = (props: IProps) => {
 
     const videoOnPlay = e => {
         // e.target.pauseVideo();
-        console.log("event Play", e);
     };
 
-    const { isShowTrailerModal } = props.store.HomePage;
+    const { isShowTrailerModal,codeTrailer } = props.store.HomePage;
 
     const opts = {
         height: "390",
@@ -44,7 +43,9 @@ export const TrailerModal: React.FC<IProps> = (props: IProps) => {
                 className="trailer-modal"
                 open={isShowTrailerModal}
                 onClose={() =>
-                    props.actions.toggleModal(HOME_PAGE_MODAL.TRAILER_MODAL)
+                    props.actions.toggleModal({
+                        type : HOME_PAGE_MODAL.TRAILER_MODAL
+                    })
                 }
                 closeAfterTransition
                 BackdropComponent={Backdrop}
@@ -55,7 +56,7 @@ export const TrailerModal: React.FC<IProps> = (props: IProps) => {
                 <Fade in={isShowTrailerModal}>
                     <YouTube
                         className="youtube-iframe"
-                        videoId="wXUdkQ0XiNA"
+                        videoId={codeTrailer}
                         opts={{
                             playerVars: {
                                 autoplay: 1

@@ -22,11 +22,9 @@ export const TrailerModal: React.FC<IProps> = (props: IProps) => {
     };
 
     const videoOnPlay = e => {
-        // e.target.pauseVideo();
-        console.log("event Play", e);
     };
 
-    const { isShowTrailer } = props.store.DetailPage;
+    const { isShowTrailer, codeTrailer } = props.store.DetailPage;
 
     const opts = {
         height: "390",
@@ -45,7 +43,7 @@ export const TrailerModal: React.FC<IProps> = (props: IProps) => {
                 open={isShowTrailer}
                 onClose={() =>
                     props.actions.toggleModal({
-                        type : DETAILS_MODAL.TRAILER_MODAL
+                        type: DETAILS_MODAL.TRAILER_MODAL
                     })
                 }
                 closeAfterTransition
@@ -57,7 +55,7 @@ export const TrailerModal: React.FC<IProps> = (props: IProps) => {
                 <Fade in={isShowTrailer}>
                     <YouTube
                         className="youtube-iframe"
-                        videoId="wXUdkQ0XiNA"
+                        videoId={codeTrailer}
                         opts={{
                             playerVars: {
                                 autoplay: 1

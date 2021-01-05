@@ -93,9 +93,9 @@ const SlideMovies: React.FC<IProps> = props => {
                                         variant="contained"
                                         className="button-trailer"
                                         onClick={() =>
-                                            props.actions.toggleModal(
-                                                HOME_PAGE_MODAL.TRAILER_MODAL
-                                            )
+                                            props.actions.toggleModal({
+                                                type : HOME_PAGE_MODAL.TRAILER_MODAL
+                                            })
                                         }
                                     >
                                         Trailer

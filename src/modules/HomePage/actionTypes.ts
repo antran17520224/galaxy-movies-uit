@@ -8,5 +8,14 @@ type ActionTypes =
     | IActions.IHandleClear
 
     | IActions.IToggleModal
+    | IActions.IGetAllMovies
+    | IActions.IGetAllMoviesSuccess
+    | IActions.IGetAllMoviesFail
+
+    | IActions.IGetMoviesByStatus
+    | IActions.IGetMoviesByStatusSuccess 
+    | IActions.IGetMoviesByStatusFail
+
+    | IActions.IHandleCurrentMovies
 
 export default ActionTypes;

@@ -7,9 +7,7 @@ interface IProps {
     size?: "small" | "large" | "default";
     backdrop?: boolean;
 }
-interface ILoadingProps {
-    spinning?: boolean;
-}
+
 export const LoadingScreen: React.FC<IProps> = ({
     size,
     component,
@@ -58,13 +56,18 @@ export const LoadingComponent: React.FC<ILoadingProps> = ({
         </div>
     ) : null;
 };
-
+interface ILoadingProps {
+    spinning?: boolean;
+    opacity? : number
+}
 export const LoadingCustom: React.FC<ILoadingProps> = ({
-    spinning
+    spinning,opacity
 }: ILoadingProps) => {
     return spinning ? (
         <React.Fragment>
-            <div className="wrapper-loading-custom">
+            <div className="wrapper-loading-custom" style={{
+                opacity : opacity
+            }}>
                 <div className="arc"></div>
                 <h1>
                     <span>LOADING</span>

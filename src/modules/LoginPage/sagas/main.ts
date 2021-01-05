@@ -170,7 +170,6 @@ function* handleUserForgotPassword(action) {
 function* handleResetPassword(action) {
     try {
         const res = yield call(AuthApi.resetPassword, action.payload);
-        console.log('res',res);
         yield delay(500);
         if (res.data.message !== undefined) {
             toast.success("✔️ Đổi mật khẩu thành công !", {

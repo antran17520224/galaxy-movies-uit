@@ -10,8 +10,8 @@ import { DETAILS_MODAL } from "./model/IDetailsState";
 export interface IToggleModal extends Action {
     readonly type: Keys.TOGGLE_MODAL;
     payload: {
-        currentMovie? : any,
         type: DETAILS_MODAL;
+        codeTrailer? : string;
     };
 }
 //#endregion

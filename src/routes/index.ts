@@ -20,7 +20,7 @@ const TicketingPage = React.lazy(()=>
 );
 export interface RouteConfig {
     path: string;
-    exact : Boolean;
+    exact : boolean;
     component: ComponentClass | FunctionComponent | LazyExoticComponent<any>;
     permission?: string;
 }
@@ -29,7 +29,7 @@ export interface RouteConfig {
 export const mainRoutes: RouteConfig[] = [
     {
         path: routeName.login,
-        exact: true,
+        exact: false,
         component: LoginPage,
     },
     {
@@ -39,12 +39,12 @@ export const mainRoutes: RouteConfig[] = [
     },
     {
         path: routeName.details,
-        exact : true,
+        exact : false,
         component: DetailsPage,
     },
     {
         path: routeName.ticketing,
-        exact : true,
+        exact : false,
         component: TicketingPage,
     },
 ];

@@ -1,6 +1,6 @@
 export const routeName = {
     login : '/login',
     home: '/',
-    details: '/details',
+    details: '/details/:slug',
     ticketing: '/ticketing'
 };

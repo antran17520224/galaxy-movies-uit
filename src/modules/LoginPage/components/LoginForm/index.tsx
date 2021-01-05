@@ -34,7 +34,6 @@ const LoginForm: React.FC<IProps> = props => {
     const { register, handleSubmit, errors } = useForm<Inputs>();
 
     const onSubmit = (data: Inputs) => {
-        console.log("data login", data);
         const { email, password,remember } = data;
         props.actions.userLogin({
             email,

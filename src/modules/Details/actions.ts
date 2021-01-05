@@ -4,7 +4,7 @@ import { DETAILS_MODAL } from "./model/IDetailsState";
 
 //#region toggleModal Actions
 export const toggleModal = (data: {
-    currentMovie?: any;
+    codeTrailer? : string;
     type: DETAILS_MODAL;
 }): IActions.IToggleModal => {
     return {

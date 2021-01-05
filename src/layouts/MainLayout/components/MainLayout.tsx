@@ -83,10 +83,10 @@ const MainLayout: React.FC<IProps> = props => {
                         key={item.path}
                         path={item.path}
                         component={item.component}
-                        exact
+                        exact={item.exact}
                     />
                 ))}
-                <Redirect from="*" to="/" />
+                {/* <Redirect from="*" to="/" /> */}
             </Switch>
             <Footer />
             <ScrollTop {...props}>

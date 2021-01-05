@@ -18,7 +18,7 @@
         .title-banner {
             margin-bottom: 30px;
             h1 {
-                font-size: 70px;
+                font-size: 50px;
                 font-weight: 700;
                 line-height: 1.2;
                 color: #fff;
@@ -26,7 +26,7 @@
             }
             p {
                 color: #fff;
-                font-size: 1.4vw;
+                font-size: 1.3vw;
                 font-weight: 400;
             }
         }
@@ -163,7 +163,7 @@
 }
 @media only screen and (max-width: 1280px) {
     .wrapper-banner .content-banner .title-banner h1 {
-        font-size: 60px;
+        font-size: 45px;
     }
 }
 @media only screen and (max-width: 768px) {
@@ -177,13 +177,18 @@
 
     .wrapper-banner .content-banner {
         width: 46%;
+        bottom: 28%;
     }
     .wrapper-banner .content-banner .title-banner {
         margin-bottom: 15px;
     }
     .wrapper-banner .content-banner .title-banner h1 {
-        font-size: 45px;
+        font-size: 33px;
     }
+    .wrapper-banner .content-banner .wrapper-button{
+        margin-top: 15px;
+    }
+
 }
 @media only screen and (max-width: 540px) {
     .wrapper-banner .content-banner .wrapper-button .button-trailer {
@@ -194,7 +199,7 @@
         }
     }
     .wrapper-banner .content-banner .wrapper-button .button-booking {
-        padding: 0.65rem 1.4rem;
+        padding: 0.55rem 1.4rem;
         font-size: 11px;
         margin-right: 1rem;
     }
@@ -204,13 +209,14 @@
         margin-left: 13px;
     }
     .wrapper-banner .content-banner .title-banner h1 {
-        font-size: 25px;
+        font-size: 13px;
     }
     .wrapper-banner .content-banner .wrapper-button {
         margin-top: 15px;
     }
     .wrapper-banner .content-banner {
-        width: 48%;
+        width: 50%;
+        bottom: 22%;
     }
 }
 @media only screen and (max-width: 411px) {
