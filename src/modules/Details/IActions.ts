@@ -1,3 +1,4 @@
+import { IError } from './../../common/Interface/index';
 /**
  * @file All actions interface will be listed here
  */
@@ -12,7 +13,29 @@ export interface IToggleModal extends Action {
     payload: {
         type: DETAILS_MODAL;
         codeTrailer? : string;
+        lat? : number;
+        long? : number;
     };
 }
 //#endregion
+export interface IHandleClearSessionRecords extends Action {
+    readonly type: Keys.HANDLE_CLEAR_SESSION_RECORD;
+}
+//#region IGetSessionByMovieId
+export interface IGetSessionByMovieId extends Action {
+    readonly type: Keys.GET_SESSION_BY_MOVIE_ID;
+    payload: {
+        movieId? : string;
+    };
+}
+export interface IGetSessionByMovieIdSuccess extends Action {
+    readonly type: Keys.GET_SESSION_BY_MOVIE_ID_SUCCESS;
+    payload: any
+}
+export interface IGetSessionByMovieIdFail extends Action {
+    readonly type: Keys.GET_SESSION_BY_MOVIE_ID_FAIL;
+    payload: any
+}
+//#endregion
+
 

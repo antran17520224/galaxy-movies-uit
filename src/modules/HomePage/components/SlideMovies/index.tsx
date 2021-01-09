@@ -1,25 +1,29 @@
-import React from "react";
-import "./SlideMovies.scss";
-import Slider from "react-slick";
-import poster1 from "../../../../assets/images/poster-movies-home/1.jpg";
-import poster2 from "../../../../assets/images/poster-movies-home/2.jpg";
-import poster3 from "../../../../assets/images/poster-movies-home/3.jpg";
-import poster4 from "../../../../assets/images/poster-movies-home/4.png";
-import poster5 from "../../../../assets/images/poster-movies-home/5.jpg";
-import poster6 from "../../../../assets/images/poster-movies-home/6.jpg";
-import poster7 from "../../../../assets/images/poster-movies-home/7.jpg";
-import poster8 from "../../../../assets/images/poster-movies-home/8.jpg";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { Button } from "@material-ui/core";
-import TicketIcon from "../../../../components/Icons/TicketIcon";
-import { HOME_PAGE_MODAL } from "../../model/IHomePageState";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import TheatersIcon from "@material-ui/icons/Theaters";
+import moment from "moment";
+import React from "react";
+import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import TicketIcon from "../../../../components/Icons/TicketIcon";
 import { IHomePageProps } from "../../model/IHomePageProps";
-
+import { HOME_PAGE_MODAL } from "../../model/IHomePageState";
+import "./SlideMovies.scss";
 interface IProps extends IHomePageProps {}
 
 const SlideMovies: React.FC<IProps> = props => {
+    const { movieShowing, movieComingSoon } = props.store.HomePage;
+
+    React.useEffect(() => {
+        props.actions.getMoviesByStatus({
+            status: "showing"
+        });
+        props.actions.getMoviesByStatus({
+            status: "coming-soon"
+        });
+    }, []);
+
     const slideProps = {
         dots: false,
         infinite: true,
@@ -68,163 +72,68 @@ const SlideMovies: React.FC<IProps> = props => {
             }
         ]
     };
-
     return (
         <React.Fragment>
             <div className="wrapper-slider">
-                
                 <div id="showing" className="wrapper-showing">
                     <div className="header-title">Phim đang chiếu</div>
                     <Slider {...slideProps}>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster1} alt="Movies" />
-                                <div className="wrapper-button">
-                                    <Button
-                                        variant="contained"
-                                        className="button-booking"
-                                    >
-                                        Đặt vé
-                                        <span style={{ marginLeft: "10px" }}>
-                                            <TicketIcon />
-                                        </span>
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        className="button-trailer"
-                                        onClick={() =>
-                                            props.actions.toggleModal({
-                                                type : HOME_PAGE_MODAL.TRAILER_MODAL
-                                            })
-                                        }
-                                    >
-                                        Trailer
-                                        <TheatersIcon
-                                            style={{
-                                                marginLeft: "5px",
-                                                fontSize: "18px"
-                                            }}
-                                        />
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
+                        {movieShowing.map((movie,index) => (
+                            <div className="wrapper-movies" key={index}>
+                                <div className="wrapper-poster">
+                                    <img src={movie.smallImage} alt="Movies" />
+                                    <div className="wrapper-button">
+                                        <Link to={`/details/${movie.name}`}>
+                                            <Button
+                                                variant="contained"
+                                                className="button-booking"
+                                                onClick={() => {
+                                                    props.actions.handleCurrentMovie({
+                                                        currentMovie: movie
+                                                    });
+                                                }}
+                                            >
+                                                Đặt vé
+                                                <span style={{ marginLeft: "10px" }}>
+                                                    <TicketIcon />
+                                                </span>
+                                            </Button>
+                                        </Link>
 
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster2} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
+                                        <Button
+                                            variant="contained"
+                                            className="button-trailer"
+                                            onClick={() =>
+                                                props.actions.toggleModal({
+                                                    type: HOME_PAGE_MODAL.TRAILER_MODAL,
+                                                    code : movie.trailer
+                                                })
+                                            }
+                                        >
+                                            Trailer
+                                            <TheatersIcon
+                                                style={{
+                                                    marginLeft: "5px",
+                                                    fontSize: "18px"
+                                                }}
+                                            />
+                                        </Button>
+                                    </div>
                                 </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster3} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
+                                <div className="wrapper-description">
+                                    <div className="des-k-y-m">
+                                        <span className="des-year">
+                                            {moment(movie.launchDate).format("YYYY")}
+                                        </span>
+                                        <span className="des-kind">{movie.genre}</span>
+                                        <span className="des-maturity">
+                                            {movie.maturity}+
+                                        </span>
+                                    </div>
+                                    <h3 className="des-name">{movie.name}</h3>
                                 </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
                             </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster4} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster5} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster6} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster7} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster8} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
+                        ))}
                     </Slider>
                     <div className="nextArrow">
                         <ArrowForwardIosIcon />
@@ -233,262 +142,66 @@ const SlideMovies: React.FC<IProps> = props => {
                         <ArrowBackIosIcon />
                     </div>
                 </div>
-                {/* next section */}
-                <div id="top-rating" className="wrapper-showing">
-                    <div className="header-title">Phim top rating</div>
-                    <Slider {...slideProps}>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster1} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster3} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster5} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster7} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster2} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster4} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster6} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster8} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                    </Slider>
-                    <div className="nextArrow">
-                        <ArrowForwardIosIcon />
-                    </div>
-                    <div className="prevArrow">
-                        <ArrowBackIosIcon />
-                    </div>
-                </div>
-                {/* next section */}
+
                 <div id="coming-soon" className="wrapper-showing">
                     <div className="header-title">Phim sắp chiếu</div>
                     <Slider {...slideProps}>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster1} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
+                        {movieComingSoon.map((movie,index) => (
+                            <div className="wrapper-movies" key={index}>
+                                <div className="wrapper-poster">
+                                    <img src={movie.smallImage} alt="Movies" />
+                                    <div className="wrapper-button">
+                                        <Link to={`/details/${movie.name}`}>
+                                            <Button
+                                                variant="contained"
+                                                className="button-booking"
+                                                onClick={() => {
+                                                    props.actions.handleCurrentMovie({
+                                                        currentMovie: movie
+                                                    });
+                                                }}
+                                            >
+                                                Đặt vé
+                                                <span style={{ marginLeft: "10px" }}>
+                                                    <TicketIcon />
+                                                </span>
+                                            </Button>
+                                        </Link>
+
+                                        <Button
+                                            variant="contained"
+                                            className="button-trailer"
+                                            onClick={() =>
+                                                props.actions.toggleModal({
+                                                    type: HOME_PAGE_MODAL.TRAILER_MODAL,
+                                                    code : movie.trailer
+                                                })
+                                            }
+                                        >
+                                            Trailer
+                                            <TheatersIcon
+                                                style={{
+                                                    marginLeft: "5px",
+                                                    fontSize: "18px"
+                                                }}
+                                            />
+                                        </Button>
+                                    </div>
                                 </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster2} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
+                                <div className="wrapper-description">
+                                    <div className="des-k-y-m">
+                                        <span className="des-year">
+                                            {moment(movie.launchDate).format("YYYY")}
+                                        </span>
+                                        <span className="des-kind">{movie.genre}</span>
+                                        <span className="des-maturity">
+                                            {movie.maturity}+
+                                        </span>
+                                    </div>
+                                    <h3 className="des-name">{movie.name}</h3>
                                 </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
                             </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster5} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster7} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster4} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster6} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster3} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="wrapper-movies">
-                            <div className="wrapper-poster">
-                                <img src={poster1} alt="Movies" />
-                            </div>
-                            <div className="wrapper-description">
-                                <div className="des-k-y-m">
-                                    <span className="des-year">2020</span>
-                                    <span className="des-kind">Hành động</span>
-                                    <span className="des-maturity">18+</span>
-                                </div>
-                                <h3 className="des-name">
-                                    The Croods: A New Age
-                                </h3>
-                            </div>
-                        </div>
+                        ))}
                     </Slider>
                     <div className="nextArrow">
                         <ArrowForwardIosIcon />

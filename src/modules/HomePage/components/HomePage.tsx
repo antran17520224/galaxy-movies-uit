@@ -8,6 +8,7 @@ import { TrailerModal } from "./Trailer";
 import SlideMovies from "./SlideMovies";
 import Discount from "./Discount";
 import { LoadingCustom } from "../../../components";
+
 interface IProps extends RouteComponentProps, IHomePageProps {}
 
 const HomePage: React.FC<IProps> = props => {
@@ -21,6 +22,7 @@ const HomePage: React.FC<IProps> = props => {
             </div>
             <SlideMovies {...props} />
             <Discount {...props} />
+            
         </React.Fragment>
     );
 };

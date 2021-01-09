@@ -2,11 +2,7 @@ import { Reducer } from "redux";
 import Keys from "./actionTypeKeys";
 import ActionTypes from "./actionTypes";
 import * as IActions from "./IActions";
-import {
-    DETAILS_MODAL,
-    IDetailsState,
-    initialState
-} from "./model/IDetailsState";
+import { DETAILS_MODAL, IDetailsState, initialState } from "./model/IDetailsState";
 
 export const name = "DetailPage";
 
@@ -17,7 +13,14 @@ export const reducer: Reducer<IDetailsState> = (
     switch (action.type) {
         case Keys.TOGGLE_MODAL:
             return onToggleModal(state, action);
-
+        case Keys.GET_SESSION_BY_MOVIE_ID:
+            return onGetSessionByMovieId(state, action);
+        case Keys.GET_SESSION_BY_MOVIE_ID_SUCCESS:
+            return onGetSessionByMovieIdSuccess(state, action);
+        case Keys.GET_SESSION_BY_MOVIE_ID_FAIL:
+            return onGetSessionByMovieIdFail(state, action);
+            case Keys.HANDLE_CLEAR_SESSION_RECORD:
+                return onHandleClear(state, action);
         default:
             return state;
     }
@@ -25,7 +28,10 @@ export const reducer: Reducer<IDetailsState> = (
 
 //#region onToggleModal Reducers
 const onToggleModal = (state: IDetailsState, action: IActions.IToggleModal) => {
-    const { type, codeTrailer } = action.payload;
+    const { type, codeTrailer,lat,long } = action.payload;
+    const coordinate = {
+        lat,long
+    }
     switch (type) {
         case DETAILS_MODAL.TRAILER_MODAL:
             return {
@@ -33,10 +39,58 @@ const onToggleModal = (state: IDetailsState, action: IActions.IToggleModal) => {
                 isShowTrailer: !state.isShowTrailer,
                 codeTrailer
             };
+            case DETAILS_MODAL.MAP_MODAL:
+                return {
+                    ...state,
+                    toggleMapModal : !state.toggleMapModal,
+                    coordinate,
+                }
         default:
             return {
                 ...state
             };
     }
+};
+//#endregion
+
+//#region handleClear Reducers
+const onHandleClear = (state: IDetailsState, action: IActions.IHandleClearSessionRecords) => {
+    return {
+        ...state,
+        sessionRecords : []
+    }
+};
+//#endregion
+
+//#region onGetSessionByMovieId
+const onGetSessionByMovieId = (
+    state: IDetailsState,
+    action: IActions.IGetSessionByMovieId
+) => {
+    return {
+        ...state,
+        isProcessing: true
+    };
+};
+const onGetSessionByMovieIdSuccess = (
+    state: IDetailsState,
+    action: IActions.IGetSessionByMovieIdSuccess
+) => {
+    const { data } = action.payload;
+	
+    return {
+        ...state,
+        isProcessing: false,
+        sessionRecords : data
+    };
+};
+const onGetSessionByMovieIdFail = (
+    state: IDetailsState,
+    action: IActions.IGetSessionByMovieIdFail
+) => {
+    return {
+        ...state,
+        isProcessing: false
+    };
 };
 //#endregion

@@ -6,7 +6,6 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { IHomePageProps } from "../../model/IHomePageProps";
 import { HOME_PAGE_MODAL } from "../../model/IHomePageState";
 import "./Banner.scss";
-import bannerImage from "../../../../assets/images/banner.webp";
 import moment from "moment";
 interface IProps extends RouteComponentProps, IHomePageProps {}
 
@@ -22,8 +21,7 @@ export const Banner: React.FC<IProps> = props => {
             <React.Fragment>
                 <div className="wrapper-banner">
                     <div className="wrapper-img">
-                        {/* <img src={movieBanner.bigImage} alt="banner" /> */}
-                        <img src={bannerImage} alt="banner" />
+                        <img src={movieBanner.bigImage} alt="banner" />
                     </div>
 
                     <div className="content-banner">

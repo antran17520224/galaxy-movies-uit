@@ -6,6 +6,8 @@ import { DETAILS_MODAL } from "./model/IDetailsState";
 export const toggleModal = (data: {
     codeTrailer? : string;
     type: DETAILS_MODAL;
+    long? : number;
+    lat? : number
 }): IActions.IToggleModal => {
     return {
         type: Keys.TOGGLE_MODAL,
@@ -15,3 +17,34 @@ export const toggleModal = (data: {
     };
 };
 //#endregion
+
+//#region getSessionByMovieId Actions
+export const getSessionByMovieId = (data: {
+    movieId? : string;
+}): IActions.IGetSessionByMovieId => {
+    return {
+        type: Keys.GET_SESSION_BY_MOVIE_ID,
+        payload: {
+            ...data
+        }
+    };
+};
+export const getSessionByMovieIdSuccess = (res): IActions.IGetSessionByMovieIdSuccess => {
+    return {
+        type: Keys.GET_SESSION_BY_MOVIE_ID_SUCCESS,
+        payload: res
+    };
+};
+export const getSessionByMovieIdFail = (res): IActions.IGetSessionByMovieIdFail => {
+    return {
+        type: Keys.GET_SESSION_BY_MOVIE_ID_FAIL,
+        payload: res
+    };
+};
+//#endregion
+
+export const handleClearSessionRecords = (): IActions.IHandleClearSessionRecords => {
+    return {
+        type: Keys.HANDLE_CLEAR_SESSION_RECORD,
+    };
+};

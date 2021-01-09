@@ -1,10 +1,8 @@
 import { Box, Button, Grid } from "@material-ui/core";
 import React, { useRef } from "react";
 import { Link, RouteComponentProps, useHistory } from "react-router-dom";
-import bannerImage from "../../../assets/images/banner.webp";
 import { IDetailsProps } from "../model/IDetailsProps";
 import "./Details.scss";
-import posterDetails from "../../../assets/images/poster-movies-details/details.jpg";
 import TheatersIcon from "@material-ui/icons/Theaters";
 import TicketIcon from "../../../components/Icons/TicketIcon";
 import { DETAILS_MODAL } from "../model/IDetailsState";
@@ -12,6 +10,9 @@ import { TrailerModal } from "./Trailer";
 import { ShowTimes } from "./ShowTimes";
 import { LoadingCustom } from "../../../components";
 import moment from "moment";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { ModalMapCinema } from "./ModalMapCinema";
+
 interface IProps extends RouteComponentProps, IDetailsProps {}
 
 const DetailsPage: React.FC<IProps> = props => {
@@ -34,33 +35,26 @@ const DetailsPage: React.FC<IProps> = props => {
         if (currentMovie === null) {
             history.push("/");
         }
+        window.scrollTo(0, 0);
+        return () => {
+            props.actions.handleClearSessionRecords();
+        };
     }, []);
+    
     return (
         <React.Fragment>
             <LoadingCustom spinning={loading} opacity={1} />
             {currentMovie && (
                 <>
                     <div className="wrapper-details-page">
-                        <div className="wrapper-banner">
-                            <div className="wrapper-img">
-                                <img src={bannerImage} alt="banner" />
-                            </div>
-
-                            <Box className="maturity-rating">
-                                <Box className="maturity-number">
-                                    {currentMovie.maturity}+
-                                </Box>
-                            </Box>
-                            <div className="trailer-vignette"></div>
-                        </div>
                         <div className="wrapper-details">
                             <Grid container className="wrapper-grid">
-                                <Grid item xs={3} className="grid-image">
+                                <Grid item lg={3} className="grid-image">
                                     <div className="wrapper-details-image">
-                                        <img src={posterDetails} alt="khong loi thoat" />
+                                        <img src={currentMovie.smallImage} alt="phim" />
                                     </div>
                                 </Grid>
-                                <Grid item xs={6} className="grid-description">
+                                <Grid item lg={6} className="grid-description">
                                     <div className="wrapper-details-description">
                                         <div id="#name-movies"></div>
                                         <h2>{currentMovie.name}</h2>
@@ -70,10 +64,10 @@ const DetailsPage: React.FC<IProps> = props => {
                                                 <li className="classify">
                                                     <div>Phân loại</div>
                                                     <div className="classify-details">
-                                                        C{currentMovie.maturity}{" "}- Phim
+                                                        C{currentMovie.maturity} - Phim
                                                         dành cho khán giả từ{" "}
-                                                        {currentMovie.maturity}{" "}
-                                                        tuổi trở lên
+                                                        {currentMovie.maturity} tuổi trở
+                                                        lên
                                                     </div>
                                                 </li>
                                                 <li className="director">
@@ -130,7 +124,7 @@ const DetailsPage: React.FC<IProps> = props => {
                                                 onClick={() =>
                                                     props.actions.toggleModal({
                                                         type: DETAILS_MODAL.TRAILER_MODAL,
-                                                        codeTrailer : currentMovie.trailer
+                                                        codeTrailer: currentMovie.trailer
                                                     })
                                                 }
                                             >
@@ -151,6 +145,7 @@ const DetailsPage: React.FC<IProps> = props => {
                     <TrailerModal {...props} />
                     <div ref={myRef}></div>
                     <ShowTimes {...props} />
+                    <ModalMapCinema {...props} />
                 </>
             )}
         </React.Fragment>

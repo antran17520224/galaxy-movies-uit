@@ -10,6 +10,7 @@ import { TabPanel } from "../../../../components/TabPanel";
 import { IDetailsProps } from "../../model/IDetailsProps";
 import "./ShowTimes.scss";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import { DETAILS_MODAL } from "../../model/IDetailsState";
 
 interface IProps extends RouteComponentProps, IDetailsProps {}
 
@@ -46,22 +47,24 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const ShowTimes: React.FC<IProps> = props => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-        setValue(newValue);
-    };
+    const { currentMovie } = props.store.HomePage;
+    const { sessionRecords } = props.store.DetailPage;
     const [arrayDate, setArrayDate] = React.useState<any[]>([]);
     const [arrayDayAndMonth, setArrayDayAndMonth] = React.useState<any[]>([]);
     const [isLoadDate, setIsLoadDate] = React.useState(true);
+    const [arrayIndexTabPanel, setIndexTabPanel] = React.useState([]);
+    const [load, setLoad] = React.useState(false);
+
+    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+        setValue(newValue);
+    };
+
     React.useEffect(() => {
         if (isLoadDate) {
             for (let i = 0; i < 14; i++) {
                 arrayDate.push(moment().add(i, "days").format("dddd"));
                 arrayDayAndMonth.push(
-                    moment()
-                        .add(i, "days")
-                        .format("L")
-                        .slice(0, -5)
-                        .replace("/", "-")
+                    moment().add(i, "days").format("L").slice(0, -5).replace("/", "-")
                 );
                 setArrayDate(arrayDate);
                 setArrayDayAndMonth(arrayDayAndMonth);
@@ -69,19 +72,27 @@ export const ShowTimes: React.FC<IProps> = props => {
                     setIsLoadDate(false);
                 }
             }
+            props.actions.getSessionByMovieId({
+                movieId: currentMovie._id
+            });
         }
-    }, [arrayDate.length, arrayDayAndMonth.length]);
+        if (sessionRecords.length > 0) {
+            sessionRecords.map((session, index) => {
+                console.log('date showing',moment(session.date).format("L").slice(0, -5).replace("/", "-"))
+                arrayDayAndMonth.map((day, index) => {
+                    if (
+                        day ===
+                        moment(session.date).format("L").slice(0, -5).replace("/", "-")
+                    ) {
+                        arrayIndexTabPanel.push(index);
+                        setIndexTabPanel(arrayIndexTabPanel);
+                    }
+                });
+            });
+            setLoad(true);
+        }
+    }, [sessionRecords.length, isLoadDate,load]);
 
-    // const dataAPI = [
-    //     {
-    //         date: "1/12/2021",
-    //         nameMovie: "tiệc trăng máu",
-    //         time: "19:50",
-    //         Cinema: "BHD Start",
-    //         addressCinema: "Thủ đức"
-    //     }
-    // ];
-    // console.log('arrayDayAndMonth',arrayDayAndMonth);
     return (
         <React.Fragment>
             <div className="wrapper-booking">
@@ -119,174 +130,85 @@ export const ShowTimes: React.FC<IProps> = props => {
                                 );
                             })}
                         </Tabs>
+                        {arrayIndexTabPanel.length > 0 &&
+                            sessionRecords.map((session, index) => {
+                                return (
+                                    <TabPanel
+                                        key={index}
+                                        value={value}
+                                        index={arrayIndexTabPanel[index]}
+                                    >
+                                        <div className="wrapper-list-showtimes">
+                                            <Grid container className="wrapper-showtime">
+                                                <Grid
+                                                    item
+                                                    lg={3}
+                                                    xs={8}
+                                                    className="theater"
+                                                >
+                                                    <div className="text">
+                                                        <h2 className="theater-name">
+                                                            {
+                                                                session.cinema_id
+                                                                    .cinema_Name
+                                                            }
+                                                        </h2>
+                                                        <p className="theater-location">
+                                                            {session.cinema_id.address}
+                                                        </p>
+                                                    </div>
+
+                                                    <div className="wrapper-button-location">
+                                                        <Button
+                                                            variant="contained"
+                                                            className="button-location"
+                                                            onClick={() => {
+                                                                props.actions.toggleModal({
+                                                                    type : DETAILS_MODAL.MAP_MODAL,
+                                                                    lat : 10.880372439554417,
+                                                                    long :106.8063153318776
+                                                                })
+                                                            }}
+                                                        >
+                                                            <LocationOnIcon /> Xem vị trí
+                                                        </Button>
+                                                    </div>
+                                                </Grid>
+                                                <Grid
+                                                    item
+                                                    lg={1}
+                                                    xs={1}
+                                                    className="class-and-theater"
+                                                >
+                                                    <>
+                                                        <span className="theater-name">{session.theaters_id.theaters_Name}</span>
+                                                        <span className="classify">{currentMovie.maturity}+</span>
+                                                    </>
+                                                    
+                                                </Grid>
+                                                <Grid
+                                                    item
+                                                    lg={6}
+                                                    xs={12}
+                                                    className="wrapper-time"
+                                                >
+                                                    <div className="wrapper-button-time">
+                                                        <Link to={`/ticketing/${session.movie_id.name}/${session.theaters_id.theaters_Name}/${session.date}`}>
+                                                            <Button
+                                                                variant="outlined"
+                                                                className="button-time"
+                                                            >
+                                                                {session.time}
+                                                            </Button>
+                                                        </Link>
+                                                    </div>
+                                                </Grid>
+                                            </Grid>
+                                        </div>
+                                    </TabPanel>
+                                );
+                            })}
                     </AppBar>
-                    <TabPanel value={value} index={0}>
-                        <div className="wrapper-list-showtimes">
-                            <Grid container className="wrapper-showtime">
-                                <Grid item xs={3} className="theater">
-                                    <div className="text">
-                                        <h2 className="theater-name">
-                                            BHD Star Bitexco
-                                        </h2>
-                                        <p className="theater-location">
-                                            Tang 3 & 4, TTTM ICON 68, 2 Hai
-                                            Trieu, Quan 1,TP.HCM
-                                        </p>
-                                    </div>
-
-                                    <div className="wrapper-button-location">
-                                        <Button
-                                            variant="contained"
-                                            className="button-location"
-                                        >
-                                            <LocationOnIcon /> Xem vị trí
-                                        </Button>
-                                    </div>
-                                </Grid>
-                                <Grid item xs={1} className="classify">
-                                    <div>
-                                        <span>3+</span>
-                                    </div>
-                                </Grid>
-                                <Grid item xs={6} className="wrapper-time">
-                                    <div className="wrapper-button-time">
-                                        <Link to="/ticketing">
-                                            <Button
-                                                variant="outlined"
-                                                className="button-time"
-                                            >
-                                                17:05
-                                            </Button>
-                                        </Link>
-                                    </div>
-                                    <div className="wrapper-button-time">
-                                        <Button
-                                            variant="outlined"
-                                            className="button-time"
-                                        >
-                                            17:05
-                                        </Button>
-                                    </div>
-                                    <div className="wrapper-button-time">
-                                        <Button
-                                            variant="outlined"
-                                            className="button-time"
-                                        >
-                                            17:05
-                                        </Button>
-                                    </div>
-                                </Grid>
-                            </Grid>
-                            <Grid container className="wrapper-showtime">
-                                <Grid item xs={3} className="theater">
-                                    <div className="text">
-                                        <h2 className="theater-name">
-                                            BHD Star Bitexco
-                                        </h2>
-                                        <p className="theater-location">
-                                            Tang 3 & 4, TTTM ICON 68, 2 Hai
-                                            Trieu, Quan 1,TP.HCM
-                                        </p>
-                                    </div>
-
-                                    <div className="wrapper-button-location">
-                                        <Button
-                                            variant="contained"
-                                            className="button-location"
-                                        >
-                                            <LocationOnIcon /> Xem vị trí
-                                        </Button>
-                                    </div>
-                                </Grid>
-                                <Grid item xs={1} className="classify">
-                                    <div>
-                                        <span>3+</span>
-                                    </div>
-                                </Grid>
-                                <Grid item xs={6} className="wrapper-time">
-                                    <div className="wrapper-button-time">
-                                        <Link to="/ticketing">
-                                            <Button
-                                                variant="outlined"
-                                                className="button-time"
-                                            >
-                                                17:05
-                                            </Button>
-                                        </Link>
-                                    </div>
-                                    <div className="wrapper-button-time">
-                                        <Button
-                                            variant="outlined"
-                                            className="button-time"
-                                        >
-                                            17:05
-                                        </Button>
-                                    </div>
-                                    <div className="wrapper-button-time">
-                                        <Button
-                                            variant="outlined"
-                                            className="button-time"
-                                        >
-                                            17:05
-                                        </Button>
-                                    </div>
-                                </Grid>
-                            </Grid>
-                            <Grid container className="wrapper-showtime">
-                                <Grid item xs={3} className="theater">
-                                    <div className="text">
-                                        <h2 className="theater-name">
-                                            BHD Star Bitexco
-                                        </h2>
-                                        <p className="theater-location">
-                                            Tang 3 & 4, TTTM ICON 68, 2 Hai
-                                            Trieu, Quan 1,TP.HCM
-                                        </p>
-                                    </div>
-
-                                    <div className="wrapper-button-location">
-                                        <Button
-                                            variant="contained"
-                                            className="button-location"
-                                        >
-                                            <LocationOnIcon /> Xem vị trí
-                                        </Button>
-                                    </div>
-                                </Grid>
-                                <Grid item xs={1} className="classify">
-                                    <div>
-                                        <span>3+</span>
-                                    </div>
-                                </Grid>
-                                <Grid item xs={6} className="wrapper-time">
-                                    <div className="wrapper-button-time">
-                                        <Button
-                                            variant="outlined"
-                                            className="button-time"
-                                        >
-                                            17:05
-                                        </Button>
-                                    </div>
-                                    <div className="wrapper-button-time">
-                                        <Button
-                                            variant="outlined"
-                                            className="button-time"
-                                        >
-                                            17:05
-                                        </Button>
-                                    </div>
-                                    <div className="wrapper-button-time">
-                                        <Button
-                                            variant="outlined"
-                                            className="button-time"
-                                        >
-                                            17:05
-                                        </Button>
-                                    </div>
-                                </Grid>
-                            </Grid>
-                        </div>
-                    </TabPanel>
                 </div>
             </div>
         </React.Fragment>

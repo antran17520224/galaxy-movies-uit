@@ -44,6 +44,7 @@ export const Seats: React.FC<IProps> = props => {
     const classes = useStyles();
     const handleFormat = (event, newSeats) => {
         setSeats(newSeats);
+        console.log('seats',seats)
     };
     React.useEffect(() => {
         if (seats.length > 0) {

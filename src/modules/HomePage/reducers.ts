@@ -125,6 +125,18 @@ const onGetMoviesByStatusSuccess = (
                 isProcessing: false
             };
         }
+        case "showing": {
+            return {
+                ...state,
+                movieShowing : data,
+            }
+        }
+        case "coming-soon" : {
+            return {
+                ...state,
+                movieComingSoon : data,
+            }
+        }
         default: {
             return {
                 ...state,

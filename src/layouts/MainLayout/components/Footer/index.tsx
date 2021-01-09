@@ -1,7 +1,7 @@
 import { Container, Grid } from "@material-ui/core";
 import React, { Component } from "react";
 import paymentPng from "../../../../assets/images/footer/payment.png";
-import logoWhite from "../../../../assets/images/logo/logo_white.webp";
+import logoWhite from "../../../../assets/images/logo/logo-GM-4.png";
 import "./Footer.scss";
 
 class Footer extends Component {

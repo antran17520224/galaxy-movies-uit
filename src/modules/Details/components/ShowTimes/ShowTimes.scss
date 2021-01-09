@@ -1,7 +1,8 @@
 .wrapper-booking {
     color: #fff;
     position: relative;
-    height: 1000px;
+    height: 100%;
+    padding-bottom: 50px;
     &:before {
         content: "";
         background: url("../../../../assets/images/bgFixed.png");
@@ -70,22 +71,32 @@
                     }
                 }
             }
-            .classify {
-                color: #f50057;
-                margin: 0 30px;
+            .class-and-theater {
                 font-weight: 600;
-                display: flex;
-                justify-content: center;
-                div {
+                margin: 35px;
+                .classify {
                     width: 46px;
                     border: 3px solid #f50057;
                     border-radius: 2px;
                     text-align: center;
                     padding: 5px 5px;
                     font-size: 15px;
-                    margin: auto;
+                    color: #f50057;
+                    display: block;
+                }
+                .theater-name {
+                    color: #0bd50b;
+                    width: 46px;
+                    border: 3px solid #0bd50b;
+                    border-radius: 2px;
+                    text-align: center;
+                    padding: 5px 5px;
+                    font-size: 15px;
+                    display: block;
+                    margin-bottom: 12px;
                 }
             }
+
             .wrapper-time {
                 display: flex;
                 .wrapper-button-time {
@@ -103,8 +114,7 @@
                         }
                     }
                 }
-            } 
-            
+            }
         }
         .wrapper-showtime::after {
             content: "";
@@ -116,6 +126,47 @@
             background: url(../../../../assets/images/line-gradient.png) center center
                 no-repeat;
         }
-        
+    }
+}
+@media only screen and (max-width: 1280px) {
+    .wrapper-booking .wrapper-tabs {
+        margin: 0 120px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper-booking .wrapper-tabs {
+        margin: 0 60px;
+    }
+    .wrapper-booking .wrapper-list-showtimes .wrapper-showtime .wrapper-time {
+        display: block;
+    }
+}
+@media only screen and (max-width: 540px) {
+    .wrapper-booking .wrapper-tabs {
+        margin: 0 60px;
+    }
+    .wrapper-booking .wrapper-list-showtimes .wrapper-showtime .theater .text {
+        padding: 10px;
+    }
+    .wrapper-booking
+        .wrapper-list-showtimes
+        .wrapper-showtime
+        .theater
+        .text
+        .theater-name {
+        font-size: 16px;
+    }
+    .wrapper-booking .wrapper-list-showtimes .wrapper-showtime .wrapper-time {
+        display: flex;
+        margin-top: 30px;
+    }
+    .wrapper-booking .wrapper-list-showtimes .wrapper-showtime {
+        padding-bottom: 77px;
+    }
+}
+@media only screen and (max-width: 411px) {
+    .wrapper-booking .wrapper-list-showtimes .wrapper-showtime {
+        padding-bottom: 55px;
     }
 }

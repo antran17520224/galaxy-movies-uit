@@ -25,6 +25,8 @@ export interface IHomePageState {
     isShowTrailerModal: boolean;
     movieRecords: IMovie[];
     movieBanner: IMovie | null;
+    movieShowing: IMovie[];
+    movieComingSoon: IMovie[];
     currentMovie: IMovie | null;
 }
 
@@ -38,5 +40,7 @@ export const initialState: IHomePageState = {
     isLoading: false,
     isProcessing: false,
     isShowTrailerModal: false,
+    movieShowing : [],
+    movieComingSoon : [],
     movieBanner: null
 };
