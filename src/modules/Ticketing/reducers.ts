@@ -19,6 +19,8 @@ export const reducer: Reducer<ITicketingState> = (
             return onToggleModal(state, action);
         case Keys.IS_SHOW_NEXT_BUTTON:
             return onShowNextButton(state, action);
+            case Keys.HANDLE_CHOOSE_SEATS:
+            return onHandleChooseSeats(state, action);
         default:
             return state;
     }
@@ -53,6 +55,19 @@ const onShowNextButton = (
     return {
         ...state,
         isShowNextButton: isShow
+    };
+};
+//#endregion
+
+//#region onHandleChooseSeats Reducers
+const onHandleChooseSeats = (
+    state: ITicketingState,
+    action: IActions.IHandleChooseSeats
+) => {
+    const { seats } = action.payload;
+    return {
+        ...state,
+        seats
     };
 };
 //#endregion

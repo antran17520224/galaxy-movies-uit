@@ -25,3 +25,11 @@ export interface IShowNextButton extends Action {
 }
 //#endregion
 
+//#region IHandleChooseSeats
+export interface IHandleChooseSeats extends Action {
+    readonly type: Keys.HANDLE_CHOOSE_SEATS;
+    payload :{
+        seats : string[];
+    }
+}
+//#endregion

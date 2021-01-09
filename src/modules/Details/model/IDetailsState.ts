@@ -1,6 +1,6 @@
 export enum DETAILS_MODAL {
     TRAILER_MODAL = 0,
-    MAP_MODAL = 1,
+    MAP_MODAL = 1
 }
 
 export interface ISession {
@@ -18,7 +18,7 @@ export interface ISession {
         _id: string;
         theaters_Name: string;
     };
-    price: string;
+    price: number;
     time: string;
     date: string;
 }
@@ -28,11 +28,12 @@ export interface IDetailsState {
     isLoading: boolean;
     codeTrailer: string;
     sessionRecords: ISession[];
-    toggleMapModal : boolean;
-    coordinate : {
-        long : number;
-        lat : number;
-    }
+    toggleMapModal: boolean;
+    coordinate: {
+        long: number;
+        lat: number;
+    };
+    currentSession: ISession;
 }
 /**
  --- InitialState
@@ -43,9 +44,10 @@ export const initialState: IDetailsState = {
     isProcessing: false,
     codeTrailer: null,
     sessionRecords: [],
-    toggleMapModal : false,
-    coordinate : {
-        long : 0,
-        lat : 0
-    }
+    toggleMapModal: false,
+    coordinate: {
+        long: 0,
+        lat: 0
+    },
+    currentSession: null
 };

@@ -1,17 +1,16 @@
-import { Box, Button, Grid } from "@material-ui/core";
-import React, { useRef } from "react";
-import { Link, RouteComponentProps, useHistory } from "react-router-dom";
-import { IDetailsProps } from "../model/IDetailsProps";
-import "./Details.scss";
+import { Button, Grid } from "@material-ui/core";
 import TheatersIcon from "@material-ui/icons/Theaters";
-import TicketIcon from "../../../components/Icons/TicketIcon";
-import { DETAILS_MODAL } from "../model/IDetailsState";
-import { TrailerModal } from "./Trailer";
-import { ShowTimes } from "./ShowTimes";
-import { LoadingCustom } from "../../../components";
 import moment from "moment";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import React, { useRef } from "react";
+import { RouteComponentProps, useHistory } from "react-router-dom";
+import { LoadingCustom } from "../../../components";
+import TicketIcon from "../../../components/Icons/TicketIcon";
+import { IDetailsProps } from "../model/IDetailsProps";
+import { DETAILS_MODAL } from "../model/IDetailsState";
+import "./Details.scss";
 import { ModalMapCinema } from "./ModalMapCinema";
+import { ShowTimes } from "./ShowTimes";
+import { TrailerModal } from "./Trailer";
 
 interface IProps extends RouteComponentProps, IDetailsProps {}
 
@@ -31,16 +30,17 @@ const DetailsPage: React.FC<IProps> = props => {
     React.useEffect(() => {
         setTimeout(() => {
             setLoading(false);
-        }, 500);
+            window.scrollTo(0, 0);
+        }, 1500);
         if (currentMovie === null) {
             history.push("/");
         }
-        window.scrollTo(0, 0);
+        
         return () => {
             props.actions.handleClearSessionRecords();
         };
     }, []);
-    
+
     return (
         <React.Fragment>
             <LoadingCustom spinning={loading} opacity={1} />

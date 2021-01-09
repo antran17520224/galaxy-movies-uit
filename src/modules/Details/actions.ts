@@ -1,6 +1,6 @@
 import Keys from "./actionTypeKeys";
 import * as IActions from "./IActions";
-import { DETAILS_MODAL } from "./model/IDetailsState";
+import { DETAILS_MODAL, ISession } from "./model/IDetailsState";
 
 //#region toggleModal Actions
 export const toggleModal = (data: {
@@ -48,3 +48,15 @@ export const handleClearSessionRecords = (): IActions.IHandleClearSessionRecords
         type: Keys.HANDLE_CLEAR_SESSION_RECORD,
     };
 };
+
+export const handleCurrentSession = (data : {
+    currentSession : ISession;
+}): IActions.IHandleCurrentSession => {
+    return {
+        type: Keys.HANDLE_CURRENT_SESSION,
+        payload : {
+            ...data
+        }
+    };
+};
+

@@ -18,11 +18,25 @@ export const toggleModal = (data: {
 
 //#region showNextButton Actions
 
-export const showNextButton = (isShow : boolean): IActions.IShowNextButton => {
+export const showNextButton = (isShow: boolean): IActions.IShowNextButton => {
     return {
         type: Keys.IS_SHOW_NEXT_BUTTON,
-        payload :{
+        payload: {
             isShow
+        }
+    };
+};
+//#endregion
+
+//#region handleChooseSeats Actions
+
+export const handleChooseSeats = (data: {
+    seats: string[];
+}): IActions.IHandleChooseSeats => {
+    return {
+        type: Keys.HANDLE_CHOOSE_SEATS,
+        payload: {
+            ...data
         }
     };
 };

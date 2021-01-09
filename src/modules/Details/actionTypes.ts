@@ -10,6 +10,7 @@ type ActionTypes =
     | IActions.IGetSessionByMovieIdSuccess
     | IActions.IGetSessionByMovieIdFail
     | IActions.IHandleClearSessionRecords
+    | IActions.IHandleCurrentSession
 
    
 

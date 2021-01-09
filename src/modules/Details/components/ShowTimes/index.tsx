@@ -78,7 +78,6 @@ export const ShowTimes: React.FC<IProps> = props => {
         }
         if (sessionRecords.length > 0) {
             sessionRecords.map((session, index) => {
-                console.log('date showing',moment(session.date).format("L").slice(0, -5).replace("/", "-"))
                 arrayDayAndMonth.map((day, index) => {
                     if (
                         day ===
@@ -162,6 +161,11 @@ export const ShowTimes: React.FC<IProps> = props => {
                                                         <Button
                                                             variant="contained"
                                                             className="button-location"
+                                                            //note
+                                                            // thêm cinema address
+                                                            // thêm cinema long and lat
+                                                            // thêm movie image
+                                                            // thêm price ở currentSession by movie id
                                                             onClick={() => {
                                                                 props.actions.toggleModal({
                                                                     type : DETAILS_MODAL.MAP_MODAL,
@@ -193,10 +197,15 @@ export const ShowTimes: React.FC<IProps> = props => {
                                                     className="wrapper-time"
                                                 >
                                                     <div className="wrapper-button-time">
-                                                        <Link to={`/ticketing/${session.movie_id.name}/${session.theaters_id.theaters_Name}/${session.date}`}>
+                                                        <Link to={`/ticketing/${session.movie_id.name}/${session.theaters_id.theaters_Name}`}>
                                                             <Button
                                                                 variant="outlined"
                                                                 className="button-time"
+                                                                onClick={() => {
+                                                                    props.actions.handleCurrentSession({
+                                                                        currentSession : session
+                                                                    })
+                                                                }}
                                                             >
                                                                 {session.time}
                                                             </Button>

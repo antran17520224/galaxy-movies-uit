@@ -86,7 +86,7 @@ const MainLayout: React.FC<IProps> = props => {
                         exact={item.exact}
                     />
                 ))}
-                {/* <Redirect from="*" to="/" /> */}
+                <Redirect from="*" to="/" />
             </Switch>
             <Footer />
             <ScrollTop {...props}>

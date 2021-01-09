@@ -5,7 +5,7 @@ import { IError } from './../../common/Interface/index';
 
 import { Action } from "redux";
 import Keys from "./actionTypeKeys";
-import { DETAILS_MODAL } from "./model/IDetailsState";
+import { DETAILS_MODAL, ISession } from "./model/IDetailsState";
 
 //#region IToggleModal
 export interface IToggleModal extends Action {
@@ -38,4 +38,11 @@ export interface IGetSessionByMovieIdFail extends Action {
 }
 //#endregion
 
-
+//#region Handle current Session
+export interface IHandleCurrentSession extends Action {
+    readonly type: Keys.HANDLE_CURRENT_SESSION;
+    payload: {
+        currentSession : ISession;
+    }
+}
+//#endregion

@@ -29,7 +29,7 @@ export interface RouteConfig {
 export const mainRoutes: RouteConfig[] = [
     {
         path: routeName.login,
-        exact: false,
+        exact: true,
         component: LoginPage,
     },
     {
@@ -39,12 +39,12 @@ export const mainRoutes: RouteConfig[] = [
     },
     {
         path: routeName.details,
-        exact : false,
+        exact : true,
         component: DetailsPage,
     },
     {
         path: routeName.ticketing,
-        exact : false,
+        exact : true,
         component: TicketingPage,
     },
 ];
