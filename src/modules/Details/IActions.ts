@@ -14,7 +14,7 @@ export interface IToggleModal extends Action {
         type: DETAILS_MODAL;
         codeTrailer? : string;
         lat? : number;
-        long? : number;
+        lng? : number;
     };
 }
 //#endregion

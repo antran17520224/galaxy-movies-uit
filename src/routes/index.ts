@@ -18,6 +18,9 @@ const DetailsPage = React.lazy(()=>
 const TicketingPage = React.lazy(()=>
     import("../modules/Ticketing/components/TicketingPageContainer")
 );
+const ResultPage = React.lazy(()=>
+    import("../modules/ResultPage/components/ResultPageContainer")
+);
 export interface RouteConfig {
     path: string;
     exact : boolean;
@@ -29,7 +32,7 @@ export interface RouteConfig {
 export const mainRoutes: RouteConfig[] = [
     {
         path: routeName.login,
-        exact: true,
+        exact: false,
         component: LoginPage,
     },
     {
@@ -39,13 +42,18 @@ export const mainRoutes: RouteConfig[] = [
     },
     {
         path: routeName.details,
-        exact : true,
+        exact : false,
         component: DetailsPage,
     },
     {
         path: routeName.ticketing,
         exact : true,
         component: TicketingPage,
+    },
+    {
+        path: routeName.result,
+        exact : false,
+        component: ResultPage,
     },
 ];
 

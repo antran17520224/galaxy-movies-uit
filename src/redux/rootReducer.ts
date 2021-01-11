@@ -12,6 +12,7 @@ import LoginPage, { name as nameOfLoginPage } from "../modules/LoginPage";
 import HomePage, { name as nameOfHomePage } from "../modules/HomePage";
 import DetailsPage, { name as nameOfDetailsPage } from "../modules/Details";
 import TicketingPage, { name as nameOfTicketingPage } from "../modules/Ticketing";
+import ResultPage, { name as nameOfResultPage } from "../modules/ResultPage";
 
 
 /*----Reducers List-----------------*/
@@ -21,6 +22,7 @@ const reducers = {
     [nameOfHomePage]: HomePage,
     [nameOfDetailsPage]: DetailsPage,
     [nameOfTicketingPage]: TicketingPage,
+    [nameOfResultPage]: ResultPage,
 
 };
 

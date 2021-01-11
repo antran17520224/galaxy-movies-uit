@@ -16,14 +16,14 @@ const TicketingPage: React.FC<IProps> = props => {
     React.useEffect(() => {
         setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 1500);
         if(loading) {
             window.scrollTo(0, 0);
         }
         if (currentSession === null) {
             history.push("/");
         }
-    });
+    },[]);
     return (
         <React.Fragment>
             <LoadingCustom spinning={loading} opacity={1} />

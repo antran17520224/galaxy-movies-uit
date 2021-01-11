@@ -10,11 +10,11 @@ import { YOUR_KEY_APP } from "../../../../common";
 interface IProps extends RouteComponentProps, IDetailsProps {}
 
 export const ModalMapCinema: React.FC<IProps> = (props: IProps) => {
-    const { toggleMapModal } = props.store.DetailPage;
+    const { toggleMapModal,coordinate } = props.store.DetailPage;
 
-    const coordinate = {
-        lat: 10.880372439554417,
-        lng: 106.8063153318776
+    const center = {
+        lat: coordinate.lng,
+        lng: coordinate.lat
     };
     const containerStyle = {
         width: "80%",
@@ -29,7 +29,7 @@ export const ModalMapCinema: React.FC<IProps> = (props: IProps) => {
             onClose={() =>
                 props.actions.toggleModal({
                     type: DETAILS_MODAL.MAP_MODAL,
-                    long: 0,
+                    lng: 0,
                     lat: 0
                 })
             }
@@ -43,14 +43,14 @@ export const ModalMapCinema: React.FC<IProps> = (props: IProps) => {
                 <Fade in={toggleMapModal}>
                     <LoadScript id="script-loader" googleMapsApiKey={YOUR_KEY_APP}>
                         <GoogleMap
-                            center={coordinate}
+                            center={center}
                             zoom={10}
                             mapContainerStyle={containerStyle}
                         >
                             <Marker
                                 position={{
-                                    lat: 10.880372439554417,
-                                    lng: 106.8063153318776
+                                    lat: coordinate.lng,
+                                    lng: coordinate.lat
                                 }}
                             />
                         </GoogleMap>

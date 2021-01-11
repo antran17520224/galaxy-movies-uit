@@ -3,20 +3,30 @@ export enum DETAILS_MODAL {
     MAP_MODAL = 1
 }
 
+interface ISeat {
+    isBooked: number;
+    isVIP: false;
+    _id: string;
+    code: string;
+}
 export interface ISession {
     _id: string;
     movie_id: {
         _id: string;
         name: string;
+        smallImage : string;
     };
     cinema_id: {
         _id: string;
         cinema_Name: string;
         address: string;
+        lng: number;
+        lat: number;
     };
     theaters_id: {
         _id: string;
         theaters_Name: string;
+        seats: ISeat[];
     };
     price: number;
     time: string;
@@ -30,7 +40,7 @@ export interface IDetailsState {
     sessionRecords: ISession[];
     toggleMapModal: boolean;
     coordinate: {
-        long: number;
+        lng: number;
         lat: number;
     };
     currentSession: ISession;
@@ -46,7 +56,7 @@ export const initialState: IDetailsState = {
     sessionRecords: [],
     toggleMapModal: false,
     coordinate: {
-        long: 0,
+        lng: 0,
         lat: 0
     },
     currentSession: null

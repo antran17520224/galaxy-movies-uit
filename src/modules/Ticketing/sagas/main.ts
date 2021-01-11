@@ -2,50 +2,53 @@ import { call, put, takeEvery, delay } from "redux-saga/effects";
 import * as actions from "../actions";
 import Keys from "../actionTypeKeys";
 import { message } from "antd";
+import * as FoodAPi from "../../../api/food";
+import * as TicketApi from "../../../api/ticket";
 
-//Handle POST Employee Login
-// function* handlePostEmployeeLogin(action) {
-//     try {
-//         let res = yield call(AuthApi.postEmployeeLogin, action.payload);
-//         yield delay(500);
-//         if (res.status === 200) {
-//             const { accessToken, refreshToken } = res.data.data;
-//             localStorage.setItem("accessToken", accessToken);
-//             localStorage.setItem("refreshToken", refreshToken);
-//             message.success("Đăng nhập thành công", 1);
-//             // yield put(actions.getPermissions());
-//             yield put(actions.postEmployeeLoginSuccess(res.data.data));
-//         } else {
-//             message.error("Đăng nhập thất bại", 1);
-//             yield put(actions.postEmployeeLoginFail(res));
-//         }
-//     } catch (error) {
-//         message.error("Không có kết nối");
-//         yield put(actions.postEmployeeLoginFail(error));
-//     }
-// }
+//Handle handleGetAllFoods
+function* handleGetAllFoods(action) {
+    try {
+        const res = yield call(FoodAPi.getAllFoods);
+        yield delay(500);
+        if (res.status === 200) {
+            yield put(actions.getAllFoodsSuccess(res.data));
+        } else {
+            yield put(actions.getAllFoodsFail(res));
+        }
+    } catch (error) {
+        yield put(actions.getAllFoodsFail(error));
+    }
+}
 
-// //Handle Get Permissions
-// function* handleGetPermissions(action) {
-//     try {
-//         let res = yield call(PermissionApi.getPermissions);
-//         yield delay(500);
-//         if (res.status === 200) {
-//             yield put(actions.getPermissionsSuccess(res.data.data));
-//         } else {
-//             yield put(actions.getPermissionsFail(res));
-//         }
-//     } catch (error) {
-//         yield put(actions.getPermissionsFail(error));
-//     }
-// }
+function* handleCreateTicket(action) {
+    try {
+        const res = yield call(TicketApi.createTicket, action.payload);
+        console.log('res create ticket',res);
+    } catch (error) {
+        yield put(actions.getAllFoodsFail(error));
+    }
+}
 
+function* handleConfirmPayment(action) {
+    try {
+        const res = yield call(TicketApi.confirmPayment, action.payload);
+        console.log('res confirm',res)
+        if(res.status === 200){
+            yield put(actions.confirmPaymentSuccess(res.data.data));
+        }
+    } catch (error) {
+        yield put(actions.getAllFoodsFail(error));
+    }
+}
 /*-----------------------------------------------------------------*/
-// function* watchPostEmployeeLogin() {
-//     yield takeEvery(Keys.POST_EMPLOYEE_LOGIN, handlePostEmployeeLogin);
-// }
-// function* watchGetPermissions() {
-//     yield takeEvery(Keys.GET_PERMISSIONS, handleGetPermissions);
-// }
+function* watchGetAllFoods() {
+    yield takeEvery(Keys.GET_ALL_FOODS, handleGetAllFoods);
+}
+function* watchCreateTicket() {
+    yield takeEvery(Keys.CREATE_TICKET, handleCreateTicket);
+}
+function* watchConfirmPayment() {
+    yield takeEvery(Keys.CONFIRM_PAYMENT, handleConfirmPayment);
+}
 /*-----------------------------------------------------------------*/
-export default [];
+export default [watchGetAllFoods, watchCreateTicket,watchConfirmPayment];

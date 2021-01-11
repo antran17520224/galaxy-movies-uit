@@ -19,7 +19,7 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { IMainLayoutProps } from "../../model/IMainLayoutProps";
 import "./Header.scss";
 import useStyles from "./styles";
-
+import logo from '../../../../assets/images/logo/logo-GM-4.png'
 interface IProps extends RouteComponentProps, IMainLayoutProps {
     window?: () => Window;
     children?: React.ReactElement;
@@ -154,9 +154,15 @@ const Header: React.FC<IProps> = props => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography className={classes.title} variant="h6" noWrap>
-                        Material-UI
-                    </Typography>
+                    <div className="logo" style={{
+                        width : '70px',
+                        height: '70px'
+                    }}>
+                        <img src={logo} alt="logo" style={{
+                            width: '100%',
+                            height: '100%'
+                        }} />
+                    </div>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />

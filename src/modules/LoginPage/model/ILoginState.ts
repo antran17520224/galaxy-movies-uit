@@ -2,16 +2,24 @@ export enum MODAL_USER_LOGIN {
     MODAL_CONFIRM_REGISTER = 1,
     MODAL_ACTIVE_ACCOUNT = 2,
     MODAL_FORGOT_PASSWORD = 3,
-    MODAL_RESET_PASSWORD = 4,
+    MODAL_RESET_PASSWORD = 4
 }
 
 export enum USER_PAGE_CLEAR {
-    CLEAR_STATE_ACTIVE = 0,
+    CLEAR_STATE_ACTIVE = 0
 }
 
-export interface IEmployeeInfo {
-    username: string;
-    password: string;
+export interface IUserInfo {
+    address: string;
+    avatarUrl: string;
+    dateOfBirth: string;
+    email: string;
+    fullName: string;
+    gender: string;
+    phone: string;
+    status: string;
+    userType: string;
+    _id: string;
 }
 export interface IRegister {
     fullName: string;
@@ -31,25 +39,26 @@ export interface ILogInState {
     isToggleModalConfirmRegister: boolean;
     isToggleModalActiveAccount: boolean;
     dataToRegister: IRegister;
-    isAccountActivated : boolean;
-    isToggleModalForgotPassword : boolean;
-    isRememberAccount : boolean;
-    isToggleModalResetPassword : boolean;
-
+    isAccountActivated: boolean;
+    isToggleModalForgotPassword: boolean;
+    isRememberAccount: boolean;
+    isToggleModalResetPassword: boolean;
+    userInfo : IUserInfo | any;
 }
 
 /**
  --- InitialState
  */
 export const initialState: ILogInState = {
-    accessToken: null || localStorage.getItem("accessToken"),
+    accessToken: null || localStorage.getItem('accessToken'),
     isLoading: false,
     isProcessing: false,
     isToggleModalConfirmRegister: false,
     isToggleModalActiveAccount: false,
     dataToRegister: null,
-    isAccountActivated : false,
+    isAccountActivated: false,
     isToggleModalForgotPassword: false,
-    isRememberAccount : false,
-    isToggleModalResetPassword : false,
+    isRememberAccount: false,
+    isToggleModalResetPassword: false,
+    userInfo : null || JSON.parse(localStorage.getItem('userInfo'))
 };

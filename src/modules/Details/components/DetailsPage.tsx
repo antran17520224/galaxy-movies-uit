@@ -24,18 +24,14 @@ const DetailsPage: React.FC<IProps> = props => {
 
     const myRef = useRef();
     const executeScroll = () => scrollToRef(myRef);
-    const [loading, setLoading] = React.useState(true);
     const history = useHistory();
     const { currentMovie } = props.store.HomePage;
+    const { isProcessing } = props.store.DetailPage;
     React.useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-            window.scrollTo(0, 0);
-        }, 1500);
+        window.scrollTo(0, 0);
         if (currentMovie === null) {
             history.push("/");
         }
-        
         return () => {
             props.actions.handleClearSessionRecords();
         };
@@ -43,7 +39,7 @@ const DetailsPage: React.FC<IProps> = props => {
 
     return (
         <React.Fragment>
-            <LoadingCustom spinning={loading} opacity={1} />
+            <LoadingCustom spinning={isProcessing} opacity={1} />
             {currentMovie && (
                 <>
                     <div className="wrapper-details-page">

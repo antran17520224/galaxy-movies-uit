@@ -6,7 +6,7 @@ import { DETAILS_MODAL, ISession } from "./model/IDetailsState";
 export const toggleModal = (data: {
     codeTrailer? : string;
     type: DETAILS_MODAL;
-    long? : number;
+    lng? : number;
     lat? : number
 }): IActions.IToggleModal => {
     return {

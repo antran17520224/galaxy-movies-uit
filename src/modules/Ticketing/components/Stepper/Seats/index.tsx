@@ -11,27 +11,36 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         rootButton: {
             color: "#fff",
-            border: "1px solid #fff"
+            width: "50px",
+            height: "48px"
         },
         groupRoot: {
             margin: "0px auto",
             "& .Mui-disabled": {
                 backgroundColor: "#505050",
-                color: "#fff"
+                color: "#fff",
+                width: "50px",
+                height: "48px"
             },
             "& .Mui-selected": {
                 backgroundColor: "#24baef",
-                color: "#fff"
+                color: "#fff",
+                width: "50px",
+                height: "48px"
             },
             "& .Mui-selected:hover": {
                 backgroundColor: "#24baef",
-                color: "#fff"
+                color: "#fff",
+                width: "50px",
+                height: "48px"
             }
         },
         groupRootDes: {
             "& .Mui-disabled": {
                 backgroundColor: "#505050",
-                color: "#fff"
+                color: "#fff",
+                width: "50px",
+                height: "48px"
             }
         }
     })
@@ -42,16 +51,28 @@ export const Seats: React.FC<IProps> = props => {
     const [isShowButton, setIsShowButton] = React.useState(false);
 
     const classes = useStyles();
-    
+
     const { seats } = props.store.TicketingPage;
 
+    const { currentSession } = props.store.DetailPage;
+
     const handleChooseSeats = (event, newSeats) => {
-        if (localSeat.length <= 9) {
-            console.log("true");
+        if (localSeat.length === 10) {
+            if (newSeats.length < 10) {
+                setLocalSeat(newSeats);
+            } else {
+                window.alert("Bạn chỉ có thể chọn tối đa 10 ghế !");
+                const lastSeats = newSeats.pop();
+                let temp = localSeat.filter(seat => {
+                    return seat !== lastSeats;
+                });
+                setLocalSeat(temp);
+            }
+        }
+        if (localSeat.length < 10) {
             setLocalSeat(newSeats);
         }
     };
-    console.log("seats", seats);
     React.useEffect(() => {
         if (localSeat.length > 0 && !isShowButton) {
             setIsShowButton(true);
@@ -65,6 +86,11 @@ export const Seats: React.FC<IProps> = props => {
             props.actions.showNextButton(false);
         }
     }, [localSeat.length, isShowButton]);
+
+    const renderSeats1 = () => {
+        let xhtml = null;
+        for (let i = 0; i < 12; i++) {}
+    };
 
     return (
         <React.Fragment>
@@ -88,127 +114,38 @@ export const Seats: React.FC<IProps> = props => {
                     </div>
                 </div>
                 <div className="wrapper-seats">
-                    <Grid container>
-                        <Grid item xs={12} className="grid-item">
-                            <ToggleButtonGroup
-                                value={localSeat}
-                                onChange={handleChooseSeats}
-                                aria-label="text formatting"
-                                classes={{
-                                    root: classes.groupRoot
-                                }}
-                            >
+                    <ToggleButtonGroup
+                        value={localSeat}
+                        onChange={handleChooseSeats}
+                        aria-label="text formatting"
+                        classes={{
+                            root: classes.groupRoot
+                        }}
+                        style={{
+                            display: "inline"
+                        }}
+                    >
+                        {currentSession.theaters_id.seats.map((seat, index) => {
+                            return (
                                 <ToggleButton
-                                    value="A1"
-                                    aria-label="A1"
+                                    key={index}
+                                    value={seat.code}
+                                    aria-label={seat.code}
                                     classes={{
                                         root: classes.rootButton
                                     }}
-                                >
-                                    A1
-                                </ToggleButton>
-                                <ToggleButton
-                                    value="A2"
-                                    aria-label="A2"
-                                    classes={{
-                                        root: classes.rootButton
+                                    disabled={seat.isBooked === 1 ? true : false}
+                                    style={{
+                                        border: "1px solid #fff",
+                                        borderRadius: "none",
+                                        marginLeft: "0"
                                     }}
                                 >
-                                    A2
+                                    {seat.code}
                                 </ToggleButton>
-                                <ToggleButton
-                                    value="A3"
-                                    aria-label="A3"
-                                    classes={{
-                                        root: classes.rootButton
-                                    }}
-                                >
-                                    A3
-                                </ToggleButton>
-                                <ToggleButton
-                                    value="A4"
-                                    aria-label="A4"
-                                    classes={{
-                                        root: classes.rootButton
-                                    }}
-                                >
-                                    A4
-                                </ToggleButton>
-                                <ToggleButton
-                                    value="A5"
-                                    aria-label="A5"
-                                    classes={{
-                                        root: classes.rootButton
-                                    }}
-                                >
-                                    A5
-                                </ToggleButton>
-                                <ToggleButton
-                                    value="A6"
-                                    aria-label="A6"
-                                    classes={{
-                                        root: classes.rootButton
-                                    }}
-                                >
-                                    A6
-                                </ToggleButton>
-                                <ToggleButton
-                                    value="A7"
-                                    aria-label="A7"
-                                    classes={{
-                                        root: classes.rootButton
-                                    }}
-                                >
-                                    A7
-                                </ToggleButton>
-                                <ToggleButton
-                                    value="A8"
-                                    aria-label="A8"
-                                    classes={{
-                                        root: classes.rootButton
-                                    }}
-                                >
-                                    A8
-                                </ToggleButton>
-                                <ToggleButton
-                                    value="A9"
-                                    aria-label="A9"
-                                    classes={{
-                                        root: classes.rootButton
-                                    }}
-                                >
-                                    A9
-                                </ToggleButton>
-                                <ToggleButton
-                                    value="A10"
-                                    aria-label="A10"
-                                    classes={{
-                                        root: classes.rootButton
-                                    }}
-                                >
-                                    A10
-                                </ToggleButton>
-                                <ToggleButton
-                                    value="A11"
-                                    aria-label="A11"
-                                    classes={{
-                                        root: classes.rootButton
-                                    }}
-                                >
-                                    A11
-                                </ToggleButton>
-                                <ToggleButton
-                                    value="A12"
-                                    aria-label="A12"
-                                    classes={{
-                                        root: classes.rootButton
-                                    }}
-                                >
-                                    A12
-                                </ToggleButton>
-                            </ToggleButtonGroup>
-                        </Grid>
-                    </Grid>
+                            );
+                        })}
+                    </ToggleButtonGroup>
 
                     <div className="note">* Lưu ý bạn chỉ có thể chọn tối đa 10 ghế</div>
                 </div>

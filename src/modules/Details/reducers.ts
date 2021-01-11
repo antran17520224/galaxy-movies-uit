@@ -45,10 +45,10 @@ const onHandleCurrentSession = (
 
 //#region onToggleModal Reducers
 const onToggleModal = (state: IDetailsState, action: IActions.IToggleModal) => {
-    const { type, codeTrailer, lat, long } = action.payload;
+    const { type, codeTrailer, lat, lng } = action.payload;
     const coordinate = {
         lat,
-        long
+        lng
     };
     switch (type) {
         case DETAILS_MODAL.TRAILER_MODAL:

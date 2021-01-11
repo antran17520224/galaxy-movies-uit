@@ -1,26 +1,24 @@
 import { Grid } from "@material-ui/core";
 import moment from "moment";
 import React from "react";
-import imgBooked from "../../../../assets/images/poster-movies-home/5.jpg";
 import { ITicketingProps } from "../../model/ITicketingProps";
 import "./Ticket.scss";
 
 interface IProps extends ITicketingProps {}
 
 export const Ticket: React.FC<IProps> = props => {
-    const [currentPrice, setCurrentPrice] = React.useState<number>(95000);
-
     const { currentSession } = props.store.DetailPage;
-    const { seats } = props.store.TicketingPage;
-    console.log("currentSession", currentSession);
+    const { seats, priceFood, quantityFood, foodRecords } = props.store.TicketingPage;
+
+    React.useEffect(() => {}, [priceFood]);
 
     return (
         <React.Fragment>
             <Grid container className="wrapper-ticket">
                 <div className="bg-top-ticket"></div>
-                <Grid item xs={4} className="wrapper-movie-being-booked">
+                <Grid item xs={2} className="wrapper-movie-being-booked">
                     <div className="wrapper-image">
-                        <img src={imgBooked} alt="img-movies" />
+                        <img src={currentSession.movie_id.smallImage} alt="img-movies" />
                     </div>
                 </Grid>
                 <Grid item xs={4} className="ticket-theater">
@@ -35,7 +33,7 @@ export const Ticket: React.FC<IProps> = props => {
                         <span>{moment(currentSession.date).format("L")}</span>
                     </div>
                 </Grid>
-                <Grid item xs={4} className="cart">
+                <Grid item xs={5} className="cart">
                     <div className="seat-picking">
                         Ghế đang chọn :
                         {seats.map((seat, index) => {
@@ -43,7 +41,7 @@ export const Ticket: React.FC<IProps> = props => {
                                 return (
                                     <span
                                         style={{
-                                            marginLeft: "20px"
+                                            marginLeft: "10px"
                                         }}
                                         key={index}
                                     >{`${seat}`}</span>
@@ -57,20 +55,38 @@ export const Ticket: React.FC<IProps> = props => {
                         Combo food :
                         <span
                             style={{
-                                marginLeft: "20px"
+                                marginLeft: "10px"
                             }}
                         >
-                            {new Intl.NumberFormat().format(currentPrice * seats.length)}đ
+                            {new Intl.NumberFormat().format(priceFood)}đ
                         </span>
+                    </div>
+                    <div className="combo-food">
+                        Tên combo :
+                        {quantityFood.map((food, index) => {
+                            if (food !== 0) {
+                                return (
+                                    <p
+                                        style={{
+                                            margin: "0"
+                                        }}
+                                    >
+                                        {foodRecords[index].food_Name + "x" + food}
+                                    </p>
+                                );
+                            }
+                        })}
                     </div>
                     <div className="total-price">
                         Tổng tiền :
                         <span
                             style={{
-                                marginLeft: "20px"
+                                marginLeft: "10px"
                             }}
                         >
-                            {new Intl.NumberFormat().format(currentSession.price * seats.length)}{" "}
+                            {new Intl.NumberFormat().format(
+                                currentSession.price * seats.length + priceFood
+                            )}{" "}
                             đ
                         </span>
                     </div>

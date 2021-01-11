@@ -162,15 +162,14 @@ export const ShowTimes: React.FC<IProps> = props => {
                                                             variant="contained"
                                                             className="button-location"
                                                             //note
-                                                            // thêm cinema address
-                                                            // thêm cinema long and lat
                                                             // thêm movie image
                                                             // thêm price ở currentSession by movie id
+                                                            // thêm food image
                                                             onClick={() => {
                                                                 props.actions.toggleModal({
                                                                     type : DETAILS_MODAL.MAP_MODAL,
-                                                                    lat : 10.880372439554417,
-                                                                    long :106.8063153318776
+                                                                    lat : session.cinema_id.lat,
+                                                                    lng : session.cinema_id.lng
                                                                 })
                                                             }}
                                                         >
@@ -207,7 +206,7 @@ export const ShowTimes: React.FC<IProps> = props => {
                                                                     })
                                                                 }}
                                                             >
-                                                                {session.time}
+                                                                {session.time.slice(0,5)}
                                                             </Button>
                                                         </Link>
                                                     </div>

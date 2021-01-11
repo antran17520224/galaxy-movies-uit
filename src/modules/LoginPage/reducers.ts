@@ -52,12 +52,12 @@ export const reducer: Reducer<ILogInState> = (
         case Keys.SENT_MAIL_FORGOT_FAIL:
             return onSentMailForgotFail(state, action);
 
-            case Keys.RESET_PASSWORD:
-                return onResetPassword(state, action);
-            case Keys.RESET_PASSWORD_SUCCESS:
-                return onResetPasswordSuccess(state, action);
-            case Keys.RESET_PASSWORD_FAIL:
-                return onResetPasswordFail(state, action);
+        case Keys.RESET_PASSWORD:
+            return onResetPassword(state, action);
+        case Keys.RESET_PASSWORD_SUCCESS:
+            return onResetPasswordSuccess(state, action);
+        case Keys.RESET_PASSWORD_FAIL:
+            return onResetPasswordFail(state, action);
 
         default:
             return state;
@@ -126,16 +126,14 @@ const onUserRegisterSuccess = (
     state: ILogInState,
     action: IActions.IUserRegisterSuccess
 ) => {
+
     return {
         ...state,
         isProcessing: false,
-        isToggleModalActiveAccount: true
+        isToggleModalActiveAccount: true,
     };
 };
-const onUserRegisterFail = (
-    state: ILogInState,
-    action: IActions.IUserRegisterFail
-) => {
+const onUserRegisterFail = (state: ILogInState, action: IActions.IUserRegisterFail) => {
     return {
         ...state,
         isProcessing: false
@@ -144,10 +142,7 @@ const onUserRegisterFail = (
 //#endregion
 
 //#region Active Account
-const onActiveAccount = (
-    state: ILogInState,
-    action: IActions.IActiveAccount
-) => {
+const onActiveAccount = (state: ILogInState, action: IActions.IActiveAccount) => {
     return {
         ...state,
         isProcessing: true
@@ -164,10 +159,7 @@ const onActiveAccountSuccess = (
         isAccountActivated: true
     };
 };
-const onActiveAccountFail = (
-    state: ILogInState,
-    action: IActions.IActiveAccountFail
-) => {
+const onActiveAccountFail = (state: ILogInState, action: IActions.IActiveAccountFail) => {
     return {
         ...state,
         isProcessing: false,
@@ -185,21 +177,16 @@ const onUserLogin = (state: ILogInState, action: IActions.IUserLogin) => {
         isRememberAccount: remember
     };
 };
-const onUserLoginSuccess = (
-    state: ILogInState,
-    action: IActions.IUserLoginSuccess
-) => {
-    const { token } = action.payload;
+const onUserLoginSuccess = (state: ILogInState, action: IActions.IUserLoginSuccess) => {
+    const { token,data } = action.payload;
     return {
         ...state,
         isProcessing: false,
-        accessToken: token
+        accessToken: token,
+        userInfo : data,
     };
 };
-const onUserLoginFail = (
-    state: ILogInState,
-    action: IActions.IUserLoginFail
-) => {
+const onUserLoginFail = (state: ILogInState, action: IActions.IUserLoginFail) => {
     return {
         ...state,
         isProcessing: false,
@@ -209,10 +196,7 @@ const onUserLoginFail = (
 //#endregion
 
 //#region Sent Mail Forgot
-const onSentMailForgot = (
-    state: ILogInState,
-    action: IActions.ISentMailForgot
-) => {
+const onSentMailForgot = (state: ILogInState, action: IActions.ISentMailForgot) => {
     return {
         ...state,
         isProcessing: true
@@ -226,7 +210,7 @@ const onSentMailForgotSuccess = (
         ...state,
         isProcessing: false,
         isToggleModalResetPassword: true,
-        isToggleModalForgotPassword : false,
+        isToggleModalForgotPassword: false
     };
 };
 const onSentMailForgotFail = (
@@ -241,10 +225,7 @@ const onSentMailForgotFail = (
 //#endregion
 
 //#region Reset Password
-const onResetPassword = (
-    state: ILogInState,
-    action: IActions.IResetPassword
-) => {
+const onResetPassword = (state: ILogInState, action: IActions.IResetPassword) => {
     return {
         ...state,
         isProcessing: true
@@ -257,17 +238,13 @@ const onResetPasswordSuccess = (
     return {
         ...state,
         isProcessing: false,
-        isToggleModalResetPassword: false,
+        isToggleModalResetPassword: false
     };
 };
-const onResetPasswordFail = (
-    state: ILogInState,
-    action: IActions.IResetPasswordFail
-) => {
+const onResetPasswordFail = (state: ILogInState, action: IActions.IResetPasswordFail) => {
     return {
         ...state,
         isProcessing: false
     };
 };
 //#endregion
-

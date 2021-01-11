@@ -1,13 +1,14 @@
-.wrapper-step-content{
+.wrapper-step-content {
     .wrapper-ticket {
-        margin: 50px auto 0px;
+        margin: 30px auto 0px;
         padding: 8px;
-        width: 70%;
+        width: 73%;
         border-radius: 10px;
         background: #141414;
         justify-content: center;
         align-items: center;
-        font-size: 18px;
+        font-size: 17px;
+        justify-content: space-between;
         .wrapper-movie-being-booked {
             img {
                 height: 200px;
@@ -17,15 +18,15 @@
         }
         .bg-top-ticket {
             width: 100%;
-            background: url("../../../../assets/images/bg-bottom-seatmap.png")
-                repeat-x top left transparent;
+            background: url("../../../../assets/images/bg-bottom-seatmap.png") repeat-x
+                top left transparent;
             height: 8px;
             overflow: hidden;
         }
         .bg-bottom-ticket {
             width: 100%;
-            background: url("../../../../assets/images/bg-bottom-seatmap.png")
-                repeat-x bottom left transparent;
+            background: url("../../../../assets/images/bg-bottom-seatmap.png") repeat-x
+                bottom left transparent;
             height: 8px;
             overflow: hidden;
         }

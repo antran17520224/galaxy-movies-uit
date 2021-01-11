@@ -112,6 +112,7 @@ function* handleUserLogin(action) {
             });
             const { token } = res.data;
             localStorage.setItem("accessToken", token);
+            localStorage.setItem('userInfo',JSON.stringify(res.data.data));
             yield delay(2000);
             yield put(actions.userLoginSuccess(res.data));
         } else {

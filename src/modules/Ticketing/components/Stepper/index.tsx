@@ -22,6 +22,7 @@ import "./Stepper.scss";
 import { ITicketingProps } from "../../model/ITicketingProps";
 import { Ticket } from "../Ticket";
 import { Foods } from "./Foods";
+import { ConfirmTicket } from "./Confirm";
 
 interface IProps extends ITicketingProps {}
 
@@ -130,7 +131,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getSteps() {
-    return ["Chọn ghế", "Chọn đồ ăn", "Thanh toán", "Đặt vé thành công"];
+    return ["Chọn ghế", "Chọn đồ ăn", "Thanh toán"];
 }
 
 export const CustomizedSteppers: React.FC<IProps> = props => {
@@ -144,7 +145,7 @@ export const CustomizedSteppers: React.FC<IProps> = props => {
             case 1:
                 return <Foods {...props} />;
             case 2:
-                return "This is the bit I really care about!";
+                return <ConfirmTicket {...props} />
             default:
                 return "Unknown step";
         }
@@ -209,6 +210,9 @@ export const CustomizedSteppers: React.FC<IProps> = props => {
                                 color="primary"
                                 onClick={handleNext}
                                 className={classes.button}
+                                style={{
+                                    display : activeStep === steps.length - 1 ? 'none' : 'block'
+                                }}
                             >
                                 {activeStep === steps.length - 1
                                     ? "Hoàn thành"

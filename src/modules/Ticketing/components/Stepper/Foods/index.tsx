@@ -1,56 +1,121 @@
 import React from "react";
-import foodsImg1 from "../../../../../assets/images/foods/1.png";
-import foodsImg2 from "../../../../../assets/images/foods/2.png";
-import foodsImg3 from "../../../../../assets/images/foods/3.png";
-import foodsImg4 from "../../../../../assets/images/foods/4.png";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import "./Food.scss";
-interface IProps {}
+import { ITicketingProps } from "../../../model/ITicketingProps";
+import { Grid } from "@material-ui/core";
+interface IProps extends ITicketingProps {}
 
 export const Foods: React.FC<IProps> = props => {
-    const [amountOfFoods, setAmountOfFoods] = React.useState(0);
-    React.useEffect(() => {}, [amountOfFoods]);
-    const handleIncreaseAmount = () => {
-        if (amountOfFoods < 4) {
-            setAmountOfFoods(amountOfFoods + 1);
+    const { foodRecords } = props.store.TicketingPage;
+    const [arrayQuantityFood, setArrayQuantityFood] = React.useState<number[]>([]);
+    let [currentPriceFood, setCurrentPriceFood] = React.useState<number>(0);
+    const [changeArrayQuantity, setChangeArrayQuantity] = React.useState(false);
+
+    React.useEffect(() => {
+        if (foodRecords.length === 0) {
+            props.actions.getAllFoods();
+            window.scroll(0, 0);
+        }
+        arrayQuantityFood.length === 0 &&
+            foodRecords.forEach(item => {
+                arrayQuantityFood.push(0);
+                setArrayQuantityFood(arrayQuantityFood);
+                setChangeArrayQuantity(true);
+            });
+    }, [arrayQuantityFood.length, foodRecords.length, changeArrayQuantity]);
+
+    const handleIncreaseAmount = (index: number) => {
+        if (arrayQuantityFood[index] < foodRecords[index].quantity) {
+            arrayQuantityFood[index]++;
+            currentPriceFood += foodRecords[index].price;
+            setCurrentPriceFood(currentPriceFood);
+            props.actions.handleChooseFoods({
+                priceFood: currentPriceFood,
+                arrayQuantity: arrayQuantityFood
+            });
+            setArrayQuantityFood(arrayQuantityFood);
+            setChangeArrayQuantity(!changeArrayQuantity);
         }
     };
-    const handleDecreaseAmount = () => {
-        if (amountOfFoods <= 4 && amountOfFoods > 0) {
-            setAmountOfFoods(amountOfFoods - 1);
+    const handleDecreaseAmount = (index: number) => {
+        if (
+            arrayQuantityFood[index] <= foodRecords[index].quantity &&
+            arrayQuantityFood[index] > 0
+        ) {
+            arrayQuantityFood[index]--;
+            currentPriceFood -= foodRecords[index].price;
+            setCurrentPriceFood(currentPriceFood);
+            props.actions.handleChooseFoods({
+                priceFood: currentPriceFood,
+                arrayQuantity: arrayQuantityFood
+            });
+            setArrayQuantityFood(arrayQuantityFood);
+            setChangeArrayQuantity(!changeArrayQuantity);
         }
     };
     return (
         <React.Fragment>
-            <div className="wrapper-foods">
-                <div className="foods">
-                    <div className="img-food">
-                        <img src={foodsImg1} alt="foods" />
-                    </div>
-                    <div className="wrapper-foods-name">
-                        <h2 className="name">JUNGLE BROWN COMBO</h2>
-                        <div className="description">
-                            1 bình Jungle Brown + 1 nước + 1 bắp Caramel và
-                            Chocolate
-                        </div>
-                        <div className="note">
-                            ***Nhận trong ngày xem phim***
-                        </div>
-                        <div className="price">
-                            Giá : <span> 230000 đ</span>
-                        </div>
-                    </div>
-                    <div className="wrapper-button">
-                        <span className="add">
-                            <AddIcon onClick={handleIncreaseAmount} />
-                        </span>
-                        <span className="amount">{amountOfFoods}</span>
-                        <span className="sub">
-                            <RemoveIcon onClick={handleDecreaseAmount} />
-                        </span>
-                    </div>
-                </div>
+            <div className="wrapper-foods-page">
+                <Grid
+                    container
+                    style={{
+                        alignItems: "flex-end"
+                    }}
+                >
+                    {foodRecords &&
+                        foodRecords.map((food, index) => {
+                            return (
+                                <Grid item xs={3} key={index}>
+                                    <div className="wrapper-foods">
+                                        <div className="foods">
+                                            <div className="img-food">
+                                                <img src={food.food_Image} alt="foods" />
+                                            </div>
+                                            <div className="wrapper-foods-name">
+                                                <h2 className="name">{food.food_Name}</h2>
+                                                <div className="description">
+                                                    {food.desc}
+                                                </div>
+                                                <div className="note">
+                                                    ***Nhận trong ngày xem phim***
+                                                </div>
+                                                <div className="price">
+                                                    Giá :{" "}
+                                                    <span>
+                                                        {" "}
+                                                        {new Intl.NumberFormat().format(
+                                                            food.price
+                                                        )}{" "}
+                                                        đ
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="wrapper-button">
+                                                <span className="add">
+                                                    <AddIcon
+                                                        onClick={() =>
+                                                            handleIncreaseAmount(index)
+                                                        }
+                                                    />
+                                                </span>
+                                                <span className="amount">
+                                                    {arrayQuantityFood[index]}
+                                                </span>
+                                                <span className="sub">
+                                                    <RemoveIcon
+                                                        onClick={() =>
+                                                            handleDecreaseAmount(index)
+                                                        }
+                                                    />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Grid>
+                            );
+                        })}
+                </Grid>
             </div>
         </React.Fragment>
     );
