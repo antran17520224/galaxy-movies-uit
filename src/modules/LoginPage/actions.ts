@@ -6,6 +6,24 @@ import {
     USER_PAGE_CLEAR
 } from "./model/ILoginState";
 
+
+export const changeAvatarUser = (data : {
+    avatar : any
+}): IActions.IChangeAvatarUser => {
+    return {
+        type: Keys.CHANGE_AVATAR_USER,
+        payload: {
+            ...data
+        }
+    };
+};
+
+export const changeAvatarSuccess = (res : any): IActions.IChangeAvatarUserSuccess => {
+    return {
+        type: Keys.CHANGE_AVATAR_USER_SUCCESS,
+        payload: res
+    };
+};
 //#region Handle Clear Actions
 export const handleClear = (data : {
     type : USER_PAGE_CLEAR

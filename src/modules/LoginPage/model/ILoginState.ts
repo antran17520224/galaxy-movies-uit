@@ -43,7 +43,7 @@ export interface ILogInState {
     isToggleModalForgotPassword: boolean;
     isRememberAccount: boolean;
     isToggleModalResetPassword: boolean;
-    userInfo : IUserInfo | any;
+    userInfo : IUserInfo;
 }
 
 /**

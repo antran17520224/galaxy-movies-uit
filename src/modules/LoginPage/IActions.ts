@@ -18,6 +18,17 @@ export interface IHandleClear extends Action {
     };
 }
 
+
+export interface IChangeAvatarUser extends Action {
+    readonly type: Keys.CHANGE_AVATAR_USER;
+    payload: {
+        avatar: any;
+    };
+}
+export interface IChangeAvatarUserSuccess extends Action {
+    readonly type: Keys.CHANGE_AVATAR_USER_SUCCESS;
+    payload: any
+}
 //#region Toggle Modal
 export interface IToggleModal extends Action {
     readonly type: Keys.TOGGLE_MODAL;

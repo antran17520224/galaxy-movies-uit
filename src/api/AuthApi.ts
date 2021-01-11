@@ -31,3 +31,9 @@ export const resetPassword = (data: {
         confirmPassword: data.confirmPassword
     });
 };
+export const uploadAvatar = data => {
+    const formData = new FormData();
+    formData.append("avatar", data.avatar);
+    const endpoint = `/users/upload-avatar`;
+    return request(endpoint, "POST", formData, true);
+};

@@ -19,7 +19,7 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { IMainLayoutProps } from "../../model/IMainLayoutProps";
 import "./Header.scss";
 import useStyles from "./styles";
-import logo from '../../../../assets/images/logo/logo-GM-4.png'
+import logo from "../../../../assets/images/logo/logo-GM-4.png";
 interface IProps extends RouteComponentProps, IMainLayoutProps {
     window?: () => Window;
     children?: React.ReactElement;
@@ -77,12 +77,16 @@ const Header: React.FC<IProps> = props => {
             ) : (
                 <div>
                     <MenuItem onClick={handleMenuClose}>
-                        Tài khoản của tôi
+                        <Link className={classes.link} to="/customer">
+                            Tài khoản của tôi
+                        </Link>
                     </MenuItem>
-                    <MenuItem onClick={() => {
-                        localStorage.clear();
-                        location.reload();
-                    }}>
+                    <MenuItem
+                        onClick={() => {
+                            localStorage.clear();
+                            location.reload();
+                        }}
+                    >
                         Đăng xuất
                     </MenuItem>
                 </div>
@@ -110,10 +114,7 @@ const Header: React.FC<IProps> = props => {
                 <p>Messages</p>
             </MenuItem>
             <MenuItem>
-                <IconButton
-                    aria-label="show 11 new notifications"
-                    color="inherit"
-                >
+                <IconButton aria-label="show 11 new notifications" color="inherit">
                     <Badge badgeContent={11} color="secondary">
                         <NotificationsIcon />
                     </Badge>
@@ -154,15 +155,24 @@ const Header: React.FC<IProps> = props => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <div className="logo" style={{
-                        width : '70px',
-                        height: '70px'
-                    }}>
-                        <img src={logo} alt="logo" style={{
-                            width: '100%',
-                            height: '100%'
-                        }} />
-                    </div>
+                    <Link to="/">
+                        <div
+                            className="logo"
+                            style={{
+                                width: "70px",
+                                height: "70px"
+                            }}
+                        >
+                            <img
+                                src={logo}
+                                alt="logo"
+                                style={{
+                                    width: "100%",
+                                    height: "100%"
+                                }}
+                            />
+                        </div>
+                    </Link>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />

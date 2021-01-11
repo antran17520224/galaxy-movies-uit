@@ -58,10 +58,33 @@ export const reducer: Reducer<ILogInState> = (
             return onResetPasswordSuccess(state, action);
         case Keys.RESET_PASSWORD_FAIL:
             return onResetPasswordFail(state, action);
-
+        case Keys.CHANGE_AVATAR_USER:
+            return onChangeAvatarUser(state, action);
+        case Keys.CHANGE_AVATAR_USER_SUCCESS:
+            return onChangeAvatarUserSuccess(state, action);
         default:
             return state;
     }
+};
+
+const onChangeAvatarUser = (state: ILogInState, action: IActions.IChangeAvatarUser) => {
+    return {
+        ...state,
+        isProcessing: true
+    };
+};
+const onChangeAvatarUserSuccess = (
+    state: ILogInState,
+    action: IActions.IChangeAvatarUserSuccess
+) => {
+    const avatarUrl = action.payload;
+    const userInfo = state.userInfo;
+    userInfo.avatarUrl = avatarUrl;
+    return {
+        ...state,
+        isProcessing: false,
+        userInfo
+    };
 };
 
 //#region Handle Clear
@@ -126,11 +149,10 @@ const onUserRegisterSuccess = (
     state: ILogInState,
     action: IActions.IUserRegisterSuccess
 ) => {
-
     return {
         ...state,
         isProcessing: false,
-        isToggleModalActiveAccount: true,
+        isToggleModalActiveAccount: true
     };
 };
 const onUserRegisterFail = (state: ILogInState, action: IActions.IUserRegisterFail) => {
@@ -178,12 +200,12 @@ const onUserLogin = (state: ILogInState, action: IActions.IUserLogin) => {
     };
 };
 const onUserLoginSuccess = (state: ILogInState, action: IActions.IUserLoginSuccess) => {
-    const { token,data } = action.payload;
+    const { token, data } = action.payload;
     return {
         ...state,
         isProcessing: false,
         accessToken: token,
-        userInfo : data,
+        userInfo: data
     };
 };
 const onUserLoginFail = (state: ILogInState, action: IActions.IUserLoginFail) => {

@@ -4,5 +4,5 @@ export const routeName = {
     details: '/details/:slug',
     ticketing: '/ticketing/:slug/:theater',
     result: '/result',
-    user : '/my-account',
+    customer : '/customer',
 };

@@ -22,5 +22,7 @@ type ActionTypes =
     | IActions.IResetPassword
     | IActions.IResetPasswordSuccess
     | IActions.IResetPasswordFail
+    | IActions.IChangeAvatarUser
+    | IActions.IChangeAvatarUserSuccess
 
 export default ActionTypes;

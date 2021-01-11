@@ -210,6 +210,42 @@ function* handleResetPassword(action) {
 }
 //#endregion
 
+//#region handleUserChangeAvatar
+function* handleUserChangeAvatar(action) {
+    try {
+        console.log('action.payload',action.payload)
+        const res = yield call(AuthApi.uploadAvatar, action.payload);
+        console.log('res',res)
+        yield delay(500);
+        if (res.data.message !== undefined) {
+            toast.success("✔️ Đổi ảnh đại diện thành công !", {
+                position: "top-right",
+                autoClose: 3500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined
+            });
+            localStorage.setItem('userInfo',JSON.stringify(res.data.data));
+            yield put(actions.changeAvatarSuccess(res.data.data.avatarUrl));
+        } else {
+            toast.error(`❌ Đổi ảnh đại diện thất bại!`, {
+                position: "top-right",
+                autoClose: 3500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined
+            });
+            throw res;
+        }
+    } catch (error) {
+        yield put(actions.resetPasswordFail(error));
+    }
+}
+//#endregion
 
 /*-----------------------------------------------------------------*/
 function* watchUserRegister() {
@@ -227,11 +263,15 @@ function* watchUserForgotPassword() {
 function* watchUserResetPassword() {
     yield takeEvery(Keys.RESET_PASSWORD, handleResetPassword);
 }
+function* watchUserChangeAvatar() {
+    yield takeEvery(Keys.CHANGE_AVATAR_USER, handleUserChangeAvatar);
+}
 /*-----------------------------------------------------------------*/
 export default [
     watchUserRegister,
     watchActiveAccount,
     watchUserLogin,
     watchUserForgotPassword,
-    watchUserResetPassword
+    watchUserResetPassword,
+    watchUserChangeAvatar
 ];
