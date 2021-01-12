@@ -24,10 +24,7 @@ import {
     initialState as ResultPageInitialState,
     name as ResultPage
 } from "../../modules/ResultPage";
-import {
-    initialState as UserPageInitialState,
-    name as UserPage
-} from "../../modules/UserPage";
+
 
 export const initialState: IStore = {
     [MainLayout]: MainLayoutInitialState,
@@ -36,7 +33,6 @@ export const initialState: IStore = {
     [DetailsPage]: DetailsPageInitialState,
     [TicketingPage]: TicketingPageInitialState,
     [ResultPage]: ResultPageInitialState,
-    [UserPage]: UserPageInitialState,
     router: null
 };
 

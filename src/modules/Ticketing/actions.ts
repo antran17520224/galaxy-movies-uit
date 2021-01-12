@@ -61,6 +61,7 @@ export const confirmPayment = (data: {
     bankCode: string;
     orderDescription: string;
     orderType: string;
+    orderInfo : string;
 }): IActions.IConfirmPayment => {
     return {
         type: Keys.CONFIRM_PAYMENT,
@@ -70,7 +71,16 @@ export const confirmPayment = (data: {
     };
 };
 //#endregion
-
+export const handleActiveStep = (data : {
+    activeStep : number
+}): IActions.IHandleActiveStep => {
+    return {
+        type: Keys.HANDLE_ACTIVE_STEP,
+        payload: {
+            ...data
+        }
+    };
+};
 //#region createTicket Actions
 export const createTicket = (data: {
     sessionId: string;
@@ -78,12 +88,38 @@ export const createTicket = (data: {
     totalPrice: number;
     seatCodes: string[];
     foodId?: string[];
+    movieId : string;
+    theatersId : string;
+    cinemaId : string;
 }): IActions.ICreateTicket => {
     return {
         type: Keys.CREATE_TICKET,
         payload: {
             ...data
         }
+    };
+};
+export const getTicketByIdUser = (): IActions.IGetTicketByIdUser => {
+    return {
+        type: Keys.GET_TICKET_BY_USER_ID,
+    };
+};
+export const getTicketByIdUserSuccess = (res : any): IActions.IGetTicketByIdUserSuccess => {
+    return {
+        type: Keys.GET_TICKET_BY_USER_ID_SUCCESS,
+        payload : res
+    };
+};
+export const createTicketSuccess = (res): IActions.ICreateTicketSuccess => {
+    return {
+        type: Keys.CREATE_TICKET_SUCCESS,
+        payload: res
+    };
+};
+export const createTicketFail = (res): IActions.ICreateTicketFail => {
+    return {
+        type: Keys.CREATE_TICKET_FAIL,
+        payload: res
     };
 };
 //#endregion

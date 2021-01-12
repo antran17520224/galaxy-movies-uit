@@ -11,22 +11,24 @@ const TicketingPage: React.FC<IProps> = props => {
     const [loading, setLoading] = React.useState(true);
 
     const { currentSession } = props.store.DetailPage;
+    const { isProcessing } = props.store.TicketingPage;
     const history = useHistory();
 
     React.useEffect(() => {
         setTimeout(() => {
             setLoading(false);
         }, 1500);
-        if(loading) {
+        if (loading) {
             window.scrollTo(0, 0);
         }
         if (currentSession === null) {
             history.push("/");
         }
-    },[]);
+    }, [isProcessing]);
     return (
         <React.Fragment>
             <LoadingCustom spinning={loading} opacity={1} />
+            <LoadingCustom spinning={isProcessing} opacity={1} />
             {currentSession && (
                 <>
                     <div className="wrapper-ticketing-page">

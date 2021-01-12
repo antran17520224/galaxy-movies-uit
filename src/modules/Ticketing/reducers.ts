@@ -30,8 +30,24 @@ export const reducer: Reducer<ITicketingState> = (
         case Keys.GET_ALL_FOODS_FAIL:
             return onGetAllFoodsFail(state, action);
 
+        case Keys.CREATE_TICKET:
+            return onCreateTicket(state, action);
+        case Keys.CREATE_TICKET_SUCCESS:
+            return onCreateTicketSuccess(state, action);
+        case Keys.CREATE_TICKET_FAIL:
+            return onCreateTicketFail(state, action);
+
+        case Keys.CONFIRM_PAYMENT:
+            return onConfirmPayment(state, action);
         case Keys.CONFIRM_PAYMENT_SUCCESS:
             return onConfirmPaymentSuccess(state, action);
+        case Keys.HANDLE_ACTIVE_STEP:
+            return onHandleActiveStep(state, action);
+
+        case Keys.GET_TICKET_BY_USER_ID:
+            return onGetTicketByUserId(state, action);
+        case Keys.GET_TICKET_BY_USER_ID_SUCCESS:
+            return onGetTicketByUserIdSuccess(state, action);
 
         default:
             return state;
@@ -56,6 +72,17 @@ const onToggleModal = (state: ITicketingState, action: IActions.IToggleModal) =>
 //#endregion
 
 //#region onShowNextButton Reducers
+
+const onConfirmPayment = (
+    state: ITicketingState,
+    action: IActions.IConfirmPayment
+) => {
+    return {
+        ...state,
+    };
+};
+//#endregion
+
 const onConfirmPaymentSuccess = (
     state: ITicketingState,
     action: IActions.IConfirmPaymentSuccess
@@ -63,7 +90,9 @@ const onConfirmPaymentSuccess = (
     const linkPayment = action.payload;
     return {
         ...state,
-        linkPayment
+        linkPayment,
+        activeStep: 3
+
     };
 };
 //#endregion
@@ -96,15 +125,48 @@ const onHandleChooseFoods = (
     state: ITicketingState,
     action: IActions.IHandleChooseFoods
 ) => {
-    const { priceFood,arrayQuantity } = action.payload;
+    const { priceFood, arrayQuantity } = action.payload;
     return {
         ...state,
         priceFood,
-        quantityFood : arrayQuantity
+        quantityFood: arrayQuantity
     };
 };
 //#endregion
 
+const onHandleActiveStep = (
+    state: ITicketingState,
+    action: IActions.IHandleActiveStep
+) => {
+    const { activeStep } = action.payload;
+
+    return {
+        ...state,
+        activeStep
+    };
+};
+const onGetTicketByUserId = (
+    state: ITicketingState,
+    action: IActions.IGetTicketByIdUser
+) => {
+    return {
+        ...state,
+        isProcessing: true
+    };
+};
+const onGetTicketByUserIdSuccess = (
+    state: ITicketingState,
+    action: IActions.IGetTicketByIdUserSuccess
+) => {
+    const ticketsByUserId = action.payload;
+    console.log('ticketsByUserId',ticketsByUserId)
+
+    return {
+        ...state,
+        isProcessing: false,
+        ticketsByUserId
+    };
+};
 //#region onGetAllFoods
 const onGetAllFoods = (state: ITicketingState, action: IActions.IGetAllFoods) => {
     return {
@@ -131,3 +193,33 @@ const onGetAllFoodsFail = (state: ITicketingState, action: IActions.IGetAllFoods
     };
 };
 //#endregion
+
+//#region onCreateTicket
+const onCreateTicket = (state: ITicketingState, action: IActions.ICreateTicket) => {
+    return {
+        ...state,
+        isProcessing: true
+    };
+};
+const onCreateTicketSuccess = (
+    state: ITicketingState,
+    action: IActions.ICreateTicketSuccess
+) => {
+    const idTicket = action.payload;
+    return {
+        ...state,
+        isProcessing: true,
+        isCreateTicketSuccess: true,
+        idTicket,
+    };
+};
+const onCreateTicketFail = (
+    state: ITicketingState,
+    action: IActions.ICreateTicketFail
+) => {
+    return {
+        ...state,
+        isProcessing: false
+    };
+};
+// #endregion

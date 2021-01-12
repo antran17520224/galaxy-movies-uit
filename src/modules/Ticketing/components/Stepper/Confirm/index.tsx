@@ -16,14 +16,12 @@ export const ConfirmTicket: React.FC<IProps> = props => {
     } = props.store.TicketingPage;
     const [temptFoodId, setFoodId] = React.useState([]);
     const [temptQuantityFood, setTemptQuantityFood] = React.useState([]);
-    const { currentSession } = props.store.DetailPage;
 
+    const { currentSession } = props.store.DetailPage;
     const { userInfo } = props.store.LoginPage;
+    const { isCreateTicketSuccess, idTicket } = props.store.TicketingPage;
 
     React.useEffect(() => {
-        if (linkPayment) {
-            window.location.href = `${linkPayment}`;
-        }
         quantityFood.map((amount, index) => {
             if (amount !== 0) {
                 temptFoodId.push(foodRecords[index]._id);
@@ -33,74 +31,88 @@ export const ConfirmTicket: React.FC<IProps> = props => {
             }
         });
         window.scroll(20, 0);
-    }, [linkPayment]);
-    console.log("temptFoodId", temptFoodId);
-    console.log("temptQuantityFood", temptQuantityFood);
+        if (!userInfo) {
+            window.location.assign("http://localhost:4050/");
+        }
+        if (isCreateTicketSuccess) {
+            props.actions.confirmPayment({
+                amount: currentSession.price * seats.length + priceFood,
+                bankCode: "NCB",
+                orderDescription: idTicket,
+                orderType: "test",
+                orderInfo: "test"
+            });
+        }
+    }, [linkPayment, isCreateTicketSuccess]);
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = (data: any) => {
-        props.actions.confirmPayment({
-            amount: currentSession.price * seats.length + priceFood,
-            bankCode: "NCB",
-            orderDescription: "test",
-            orderType: "thanh toan"
-        });
         if (temptFoodId.length > 0) {
             props.actions.createTicket({
                 seatCodes: seats,
                 sessionId: currentSession._id,
                 totalPrice: currentSession.price * seats.length + priceFood,
                 foodId: temptFoodId,
-                quantityFood: temptQuantityFood
+                quantityFood: temptQuantityFood,
+                movieId: currentSession.movie_id._id,
+                theatersId: currentSession.theaters_id._id,
+                cinemaId: currentSession.cinema_id._id
             });
         } else {
             props.actions.createTicket({
                 seatCodes: seats,
                 sessionId: currentSession._id,
-                totalPrice: currentSession.price * seats.length + priceFood
+                totalPrice: currentSession.price * seats.length + priceFood,
+                movieId: currentSession.movie_id._id,
+                theatersId: currentSession.theaters_id._id,
+                cinemaId: currentSession.cinema_id._id
             });
         }
     };
     return (
-        <div className="wrapper-payment">
-            <h1
-                style={{
-                    textAlign: "center",
-                    marginBottom: "30px",
-                    fontSize: "30px"
-                }}
-            >
-                Thông tin giỏ hàng
-            </h1>
-            <div className="wrapper-user-info">
-                <span>Tên : {userInfo.fullName}</span>
-                <span>Email : {userInfo.email}</span>
-                <span>Số điện thoại : {userInfo.phone}</span>
-            </div>
+        userInfo && (
+            <div className="wrapper-payment">
+                <h1
+                    style={{
+                        textAlign: "center",
+                        marginBottom: "30px",
+                        fontSize: "30px"
+                    }}
+                >
+                    Thông tin giỏ hàng
+                </h1>
+                <div className="wrapper-user-info">
+                    <span>Tên : {userInfo.fullName}</span>
+                    <span>Email : {userInfo.email}</span>
+                    <span>Số điện thoại : {userInfo.phone}</span>
+                </div>
 
-            <div className="button-payment">
-                <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                    <FormControlLabel
-                        control={<Checkbox value={true} color="primary" name="accept" />}
-                        label="Tôi đồng ý điều khoản sử dụng"
-                        inputRef={register({
-                            required: "Bắt buộc"
-                        })}
-                    />
-                    {errors.accept && <p>{errors.accept.message}</p>}
-                    <Button
-                        style={{
-                            backgroundColor: "rgba(0,212,255,1)",
-                            color: "#fff",
-                            display: "block",
-                            marginTop: "10px"
-                        }}
-                        variant="outlined"
-                        type="submit"
-                    >
-                        Thanh toán
-                    </Button>
-                </form>
+                <div className="button-payment">
+                    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox value={true} color="primary" name="accept" />
+                            }
+                            label="Tôi đồng ý điều khoản sử dụng"
+                            inputRef={register({
+                                required: "Bắt buộc"
+                            })}
+                        />
+                        {errors.accept && <p>{errors.accept.message}</p>}
+                        <Button
+                            style={{
+                                backgroundColor: "rgba(0,212,255,1)",
+                                color: "#fff",
+                                display: "block",
+                                marginTop: "10px"
+                            }}
+                            variant="outlined"
+                            type="submit"
+                        >
+                            Thanh toán
+                        </Button>
+                    </form>
+                </div>
             </div>
-        </div>
+        )
     );
 };

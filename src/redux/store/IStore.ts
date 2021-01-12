@@ -23,10 +23,7 @@ import {
     IResultState,
     name as ResultState,
 } from "../../modules/ResultPage";
-import {
-    IUserState,
-    name as UserState,
-} from "../../modules/UserPage";
+
 export default interface IStore {
     [MainLayoutState]: IMainLayoutState;
     [LoginPageState]: ILogInState;
@@ -34,6 +31,5 @@ export default interface IStore {
     [DetailsState]: IDetailsState;
     [TicketingState]: ITicketingState;
     [ResultState]: IResultState;
-    [UserState]: IUserState;
     router:  any;
 }

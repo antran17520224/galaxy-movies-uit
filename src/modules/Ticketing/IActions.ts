@@ -67,6 +67,7 @@ export interface IConfirmPayment extends Action {
         bankCode : string;
         orderDescription : string;
         orderType : string;
+        orderInfo : string;
     }
 }
 
@@ -84,8 +85,35 @@ export interface ICreateTicket extends Action {
         quantityFood? : string[],
         totalPrice : number,
         seatCodes : string[],
-        foodId? : string[]
+        foodId? : string[],
+        movieId : string;
+        theatersId : string;
+        cinemaId : string;
+    }
+}
+export interface ICreateTicketSuccess extends Action {
+    readonly type: Keys.CREATE_TICKET_SUCCESS;
+    payload : any
+}
+export interface ICreateTicketFail extends Action {
+    readonly type: Keys.CREATE_TICKET_FAIL;
+    payload : any
+}
+//#endregion
+
+
+
+export interface IHandleActiveStep extends Action {
+    readonly type: Keys.HANDLE_ACTIVE_STEP;
+    payload : {
+        activeStep : number;
     }
 }
 
-//#endregion
+export interface IGetTicketByIdUser extends Action {
+    readonly type: Keys.GET_TICKET_BY_USER_ID;
+}
+export interface IGetTicketByIdUserSuccess extends Action {
+    readonly type: Keys.GET_TICKET_BY_USER_ID_SUCCESS;
+    payload : any
+}

@@ -70,6 +70,7 @@ export const Ticket: React.FC<IProps> = props => {
                                         style={{
                                             margin: "0"
                                         }}
+                                        key={index}
                                     >
                                         {foodRecords[index].food_Name + "x" + food}
                                     </p>

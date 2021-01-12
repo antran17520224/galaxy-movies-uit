@@ -15,6 +15,11 @@ type ActionTypes =
     | IActions.IConfirmPayment
     | IActions.IConfirmPaymentSuccess
     | IActions.ICreateTicket
+    | IActions.ICreateTicketSuccess
+    | IActions.ICreateTicketFail
+    | IActions.IHandleActiveStep
+    | IActions.IGetTicketByIdUser
+    | IActions.IGetTicketByIdUserSuccess
    
 
 export default ActionTypes;

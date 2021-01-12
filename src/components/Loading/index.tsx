@@ -76,3 +76,19 @@ export const LoadingCustom: React.FC<ILoadingProps> = ({
         </React.Fragment>
     ) : null;
 };
+export const LoadingResult: React.FC<ILoadingProps> = ({
+    spinning,opacity
+}: ILoadingProps) => {
+    return spinning ? (
+        <React.Fragment>
+            <div className="wrapper-loading-custom" style={{
+                opacity : opacity
+            }}>
+                <div className="arc"></div>
+                <h1>
+                    <span>Đang xử lý thanh toán</span>
+                </h1>
+            </div>
+        </React.Fragment>
+    ) : null;
+};

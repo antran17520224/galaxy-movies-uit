@@ -4,12 +4,7 @@ import StepConnector from "@material-ui/core/StepConnector";
 import { StepIconProps } from "@material-ui/core/StepIcon";
 import StepLabel from "@material-ui/core/StepLabel";
 import Stepper from "@material-ui/core/Stepper";
-import {
-    createStyles,
-    makeStyles,
-    Theme,
-    withStyles
-} from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
 import EventSeatIcon from "@material-ui/icons/EventSeat";
@@ -23,6 +18,7 @@ import { ITicketingProps } from "../../model/ITicketingProps";
 import { Ticket } from "../Ticket";
 import { Foods } from "./Foods";
 import { ConfirmTicket } from "./Confirm";
+import { ResultPayment } from "./Result";
 
 interface IProps extends ITicketingProps {}
 
@@ -131,12 +127,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getSteps() {
-    return ["Chọn ghế", "Chọn đồ ăn", "Thanh toán"];
+    return ["Chọn ghế", "Chọn đồ ăn", "Thanh toán", "Hoàn thành"];
 }
 
 export const CustomizedSteppers: React.FC<IProps> = props => {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
     const getStepContent = (step: number) => {
         switch (step) {
@@ -145,22 +140,22 @@ export const CustomizedSteppers: React.FC<IProps> = props => {
             case 1:
                 return <Foods {...props} />;
             case 2:
-                return <ConfirmTicket {...props} />
+                return <ConfirmTicket {...props} />;
+            case 3:
+                return <ResultPayment {...props} />;
             default:
                 return "Unknown step";
         }
     };
+
+    const { activeStep } = props.store.TicketingPage;
+
     const handleNext = () => {
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
+        props.actions.handleActiveStep({
+            activeStep: activeStep + 1
+        });
     };
 
-    const handleBack = () => {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
-    };
-
-    const handleReset = () => {
-        setActiveStep(0);
-    };
     const { isShowNextButton } = props.store.TicketingPage;
 
     return (
@@ -190,14 +185,7 @@ export const CustomizedSteppers: React.FC<IProps> = props => {
             <>
                 {activeStep === steps.length ? (
                     // lúc đặt thành công
-                    <>
-                        <Button
-                            onClick={handleReset}
-                            className={classes.button}
-                        >
-                            Reset
-                        </Button>
-                    </>
+                    <></>
                 ) : (
                     <>
                         <div className="wrapper-step-content">
@@ -211,7 +199,8 @@ export const CustomizedSteppers: React.FC<IProps> = props => {
                                 onClick={handleNext}
                                 className={classes.button}
                                 style={{
-                                    display : activeStep === steps.length - 1 ? 'none' : 'block'
+                                    display:
+                                        activeStep > 1 ? "none" : "block"
                                 }}
                             >
                                 {activeStep === steps.length - 1

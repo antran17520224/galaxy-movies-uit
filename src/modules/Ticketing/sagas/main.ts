@@ -23,7 +23,13 @@ function* handleGetAllFoods(action) {
 function* handleCreateTicket(action) {
     try {
         const res = yield call(TicketApi.createTicket, action.payload);
-        console.log('res create ticket',res);
+        console.log('res',res);
+        if(res.status === 200){
+            yield put(actions.createTicketSuccess(res.data.data._id));
+        }else{
+            yield put(actions.createTicketFail(res.data.data));
+
+        }
     } catch (error) {
         yield put(actions.getAllFoodsFail(error));
     }
@@ -40,6 +46,17 @@ function* handleConfirmPayment(action) {
         yield put(actions.getAllFoodsFail(error));
     }
 }
+function* handleGetTicketByUserId(action) {
+    try {
+        const res = yield call(TicketApi.getTicketByUserId);
+        console.log('res confirm',res)
+        if(res.status === 200){
+            yield put(actions.getTicketByIdUserSuccess(res.data.data));
+        }
+    } catch (error) {
+        yield put(actions.getAllFoodsFail(error));
+    }
+}
 /*-----------------------------------------------------------------*/
 function* watchGetAllFoods() {
     yield takeEvery(Keys.GET_ALL_FOODS, handleGetAllFoods);
@@ -50,5 +67,8 @@ function* watchCreateTicket() {
 function* watchConfirmPayment() {
     yield takeEvery(Keys.CONFIRM_PAYMENT, handleConfirmPayment);
 }
+function* watchGetTicketByUserId() {
+    yield takeEvery(Keys.GET_TICKET_BY_USER_ID, handleGetTicketByUserId);
+}
 /*-----------------------------------------------------------------*/
-export default [watchGetAllFoods, watchCreateTicket,watchConfirmPayment];
+export default [watchGetAllFoods, watchCreateTicket,watchConfirmPayment,watchGetTicketByUserId];
