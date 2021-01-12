@@ -44,7 +44,8 @@
         "build": "webpack --config=webpack/webpack.dist.js",
         "build:test": "webpack --config=webpack/webpack.dist.js --env.ENV=test",
         "build:qa": "webpack --config=webpack/webpack.dist.js --env.ENV=qa",
-        "build:prod": "webpack --config=webpack/webpack.dist.js --env.ENV=production"
+        "build:prod": "webpack --config=webpack/webpack.dist.js --env.ENV=production",
+        "heroku-prebuild": "npm install --dev"
     },
     "devDependencies": {
         "@types/enzyme": "^3.10.5",
