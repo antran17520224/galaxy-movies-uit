@@ -14,7 +14,7 @@ import { IMainLayoutProps } from "./layouts/MainLayout/model/IMainLayoutProps";
 import { ILogInState } from "./modules/LoginPage";
 import { storeConfig } from "./redux/store/configureStore.dev";
 import { mainRoutes, RouteConfig } from "./routes";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
 
 
