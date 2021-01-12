@@ -41,7 +41,6 @@
     },
     "scripts": {
         "start": "webpack-dev-server --inline --open --progress --colors --config=webpack/webpack.develop.js --hot",
-        "build": "webpack --config=webpack/webpack.dist.js",
         "build:test": "webpack --config=webpack/webpack.dist.js --env.ENV=test",
         "build:qa": "webpack --config=webpack/webpack.dist.js --env.ENV=qa",
         "build:prod": "webpack --config=webpack/webpack.dist.js --env.ENV=production",
