@@ -14,17 +14,6 @@ class Footer extends Component {
                         <Grid container className="footer-container">
                             <Grid item lg={3} sm={12}>
                                 <div className="footer-grid">
-                                    <a
-                                        className="logo d-block"
-                                        href="https://amanto-store-demo.myshopify.com"
-                                    >
-                                        <img
-                                            src={logoWhite}
-                                            width="230px;"
-                                            className="image-fluid"
-                                            alt="logo"
-                                        />
-                                    </a>
                                     <h3>Contact</h3>
                                     <div className="contact">
                                         <p>
