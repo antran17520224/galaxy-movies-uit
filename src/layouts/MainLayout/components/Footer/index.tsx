@@ -2,6 +2,7 @@ import { Container, Grid } from "@material-ui/core";
 import React, { Component } from "react";
 import paymentPng from "../../../../assets/images/footer/payment.png";
 import logoWhite from "../../../../assets/images/logo/logo-GM-4.png";
+import vnpay from '../../../../assets/images/vnpay.jpg';
 import "./Footer.scss";
 
 class Footer extends Component {
@@ -71,7 +72,7 @@ class Footer extends Component {
                                 <div className="footer-grid">
                                     <div className="payment_methods">
                                         <h3>WE ACCEPT</h3>
-                                        <img src={paymentPng} alt="payment" />
+                                        <img src={vnpay} alt="payment" />
                                     </div>
                                     <div className="follow">
                                         <h3>Follow us</h3>
