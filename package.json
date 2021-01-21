@@ -1,5 +1,5 @@
 {
-	"name": "galaxy-movies",
+	"name": "galaxy-movies-client",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -94,7 +94,7 @@
 		"stylelint": "^13.7.2",
 		"stylelint-config-recommended": "^3.0.0",
 		"ts-jest": "^26.4.4",
-		"typescript": "^4.0.5"
+		"typescript": "4.0.5"
 	},
 	"husky": {
 		"hooks": {
