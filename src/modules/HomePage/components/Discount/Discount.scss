@@ -1,0 +1,23 @@
+.wrapper-discount-promotion{
+    background: #141414;
+    height: 100%;
+    text-align: center;
+    padding: 20px 65px;
+    .discount-header{
+        color: #fff;
+    }
+    .wrapper-image-promotion{
+        height: 300px;
+        width: 400px;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+@media only screen and (max-width: 768px){
+    .wrapper-discount-promotion .wrapper-image-promotion{
+        height: 170px;
+    }
+}

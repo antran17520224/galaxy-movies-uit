@@ -1,0 +1,25 @@
+.wrapper-payment {
+    margin: 0px auto 0px;
+    padding: 8px;
+    width: 70%;
+    .wrapper-user-info{
+        display: grid;
+        font-size: 20px;
+        span{
+            line-height: 37px;
+        }
+    }
+    .button-payment {
+        position: absolute;
+        bottom: 30px;
+    }
+    p {
+        color: #df0753;
+        margin: 5px;
+        display: inline;
+        &::before {
+            content: "⚠";
+            margin-right: 4px;
+        }
+    }
+}

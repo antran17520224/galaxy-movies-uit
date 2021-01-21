@@ -1,0 +1,263 @@
+.wrapper-banner {
+    position: relative;
+    height: 100%;
+    .wrapper-img {
+        height: 100%;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
+    .content-banner {
+        width: 35%;
+        position: absolute;
+        left: 0;
+        bottom: 32%;
+        margin-left: 65px;
+        z-index: 3;
+        .title-banner {
+            margin-bottom: 30px;
+            h1 {
+                font-size: 50px;
+                font-weight: 700;
+                line-height: 1.2;
+                color: #fff;
+                margin: 0;
+            }
+            p {
+                color: #fff;
+                font-size: 1.3vw;
+                font-weight: 400;
+            }
+        }
+        .des-banner {
+            font-weight: 600;
+            span {
+                color: #fff;
+                padding-right: 23px;
+                margin-left: 23px;
+                font-size: 17px;
+            }
+            .span1 {
+                border-right: 1.7px solid #fff;
+                margin-left: 0;
+            }
+            .span2 {
+                border-right: 1.7px solid #fff;
+            }
+        }
+        .wrapper-button {
+            margin-top: 30px;
+            .button-booking {
+                background: #24baef;
+                padding: 1.3rem 3.5rem;
+                transition: 0.2s all ease;
+                margin-right: 1.5rem;
+                font-weight: 600;
+                color: #fff;
+                outline: none;
+            }
+            .button-booking:hover {
+                box-shadow: 0 4px 11px rgba(36, 186, 239, 0.35);
+            }
+            .button-trailer {
+                background: transparent;
+                border: 2px solid #f7faff;
+                padding: 1.3rem 3.2rem;
+                transition: 0.3s all ease;
+                font-weight: 600;
+                color: #fff;
+                outline: none;
+                &:hover {
+                    background: #f7faff;
+                    box-shadow: 0 4px 11px rgba(255, 255, 255, 0.35);
+                    color: #19272e;
+                }
+            }
+        }
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 0;
+        height: 80px;
+        background-image: linear-gradient(
+            to top,
+            rgba(20, 20, 20, 0) 0,
+            rgba(20, 20, 20, 0.15) 15%,
+            rgba(20, 20, 20, 0.35) 29%,
+            #141414 100%
+        );
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        height: 100px;
+        background-image: linear-gradient(
+            to bottom,
+            rgba(20, 20, 20, 0) 0,
+            rgba(20, 20, 20, 0.15) 15%,
+            rgba(20, 20, 20, 0.35) 29%,
+            rgba(20, 20, 20, 0.58) 44%,
+            #141414 68%,
+            #141414 100%
+        );
+    }
+
+    .maturity-rating {
+        position: absolute;
+        right: 0;
+        bottom: 33%;
+        padding: 1vw 4vw 1vw 1vw;
+        border: solid 3px #dcdcdc;
+        border-style: none none none solid;
+        background-color: rgba(51, 51, 51, 0.6);
+        display: flex;
+        align-items: center;
+        height: 2.4vw;
+        .maturity-number {
+            color: #fff;
+            font-size: 1.1vw;
+            font-weight: 700;
+        }
+    }
+    .trailer-vignette {
+        background: -webkit-linear-gradient(
+            13deg,
+            rgba(0, 0, 0, 0.6) 0,
+            rgba(0, 0, 0, 0) 85%
+        );
+        background: -moz-
+            oldlinear-gradient(
+                13deg,
+                rgba(0, 0, 0, 0.6) 0,
+                rgba(0, 0, 0, 0) 85%
+            );
+        background: -o-linear-gradient(
+            13deg,
+            rgba(0, 0, 0, 0.6) 0,
+            rgba(0, 0, 0, 0) 85%
+        );
+        background: linear-gradient(
+            77deg,
+            rgba(20, 20, 20, 0.6) 0,
+            rgba(0, 0, 0, 0) 85%
+        );
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 26.09%;
+        bottom: 0;
+        opacity: 1;
+        -webkit-transition: opacity 0.5s;
+        -o-transition: opacity 0.5s;
+        -moz-transition: opacity 0.5s;
+        transition: opacity 0.5s;
+        z-index: 2;
+    }
+}
+@media only screen and (max-width: 1280px) {
+    .wrapper-banner .content-banner .title-banner h1 {
+        font-size: 45px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .wrapper-banner .content-banner .wrapper-button .button-booking {
+        padding: 1rem 2.5rem;
+    }
+    .wrapper-banner .content-banner .wrapper-button .button-trailer {
+        font-size: 14px;
+        padding: 0.7rem 1.9rem;
+    }
+
+    .wrapper-banner .content-banner {
+        width: 46%;
+        bottom: 28%;
+    }
+    .wrapper-banner .content-banner .title-banner {
+        margin-bottom: 15px;
+    }
+    .wrapper-banner .content-banner .title-banner h1 {
+        font-size: 33px;
+    }
+    .wrapper-banner .content-banner .wrapper-button{
+        margin-top: 15px;
+    }
+
+}
+@media only screen and (max-width: 540px) {
+    .wrapper-banner .content-banner .wrapper-button .button-trailer {
+        font-size: 11px;
+        padding: 0.5rem 1rem;
+        svg {
+            font-size: 16px;
+        }
+    }
+    .wrapper-banner .content-banner .wrapper-button .button-booking {
+        padding: 0.55rem 1.4rem;
+        font-size: 11px;
+        margin-right: 1rem;
+    }
+    .wrapper-banner .content-banner .des-banner span {
+        font-size: 13px;
+        padding-right: 12px;
+        margin-left: 13px;
+    }
+    .wrapper-banner .content-banner .title-banner h1 {
+        font-size: 13px;
+    }
+    .wrapper-banner .content-banner .wrapper-button {
+        margin-top: 15px;
+    }
+    .wrapper-banner .content-banner {
+        width: 50%;
+        bottom: 22%;
+    }
+}
+@media only screen and (max-width: 411px) {
+    .wrapper-banner .content-banner {
+        margin-left: 35px;
+        bottom: 16%;
+    }
+    .wrapper-banner .content-banner .wrapper-button .button-trailer {
+        font-size: 9px;
+        padding: 7px 10px;
+        border: 1.5px solid #fff;
+    }
+    .wrapper-banner .content-banner .wrapper-button .button-booking {
+        font-size: 9px;
+        margin-right: 9px;
+        padding: 9px 16px;
+    }
+    .wrapper-banner .content-banner .des-banner span {
+        font-size: 11px;
+        padding-right: 11px;
+        margin-left: 12px;
+    }
+    .wrapper-banner .content-banner .title-banner p {
+        font-size: 8px;
+    }
+    .wrapper-banner .content-banner .wrapper-button{
+        margin-top: 9px;
+    }
+    .wrapper-banner .content-banner .title-banner{
+        margin-bottom: 10px;
+    }
+}
+@media only screen and (max-width: 375px){
+    .wrapper-banner .content-banner{
+        width: 54%;
+        margin-left: 22px;
+    }
+    .wrapper-banner .content-banner .des-banner span{
+        font-size: 9px;
+    }
+    .wrapper-banner .content-banner .title-banner p{
+        margin-bottom: 0;
+    }
+}
