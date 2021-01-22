@@ -12,11 +12,24 @@
 /coverage
 
 # production
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 607ef4b9a7f6510efbb0d2bb558d4a68f0896850
 /build
 
 # misc
 .DS_Store
 .env
+<<<<<<< HEAD
+=======
+=======
+# /build
+
+# misc
+.DS_Store
+>>>>>>> 5a9494756605abd91a5d21e12b9dacc61b61b7c5
+>>>>>>> 607ef4b9a7f6510efbb0d2bb558d4a68f0896850
 .env.local
 .env.development.local
 .env.test.local

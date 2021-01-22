@@ -15,11 +15,6 @@
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react",
-		// "baseUrl": "." /* Base directory to resolve non-absolute module names. */,
-		// "paths": {
-		// 	"*": ["src/*"],
-		// 	"tests": ["tests/*"]
-		// }
 	},
 	"include": ["src"]
 }
