@@ -1,0 +1,12 @@
+.form-dialog {
+    width: 100%;
+    margin-top: 8px;
+    p {
+        color: #b40843;
+        margin: 5px;
+        &::before {
+            content: "⚠";
+            margin-right: 4px;
+        }
+    }
+}

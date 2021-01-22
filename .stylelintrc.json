@@ -1,0 +1,16 @@
+{
+	"extends": ["stylelint-config-recommended"],
+	"rules": {
+		"indentation": "tab",
+		"number-leading-zero": null,
+		"color-no-invalid-hex": true,
+		"at-rule-no-unknown": [
+			true,
+			{
+				"ignoreAtRules": ["extends"]
+			}
+		],
+		"block-no-empty": null,
+		"unit-allowed-list": ["em", "rem", "%", "px", "s","deg"]
+	}
+}

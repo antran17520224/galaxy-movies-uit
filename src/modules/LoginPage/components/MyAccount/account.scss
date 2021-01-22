@@ -1,0 +1,75 @@
+.wrapper-account-page {
+    height: auto;
+    padding: 70px 350px;
+    background-color: #242333;
+    color: #000;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    h1 {
+        text-align: center;
+        font-size: 30px;
+        position: relative;
+        letter-spacing: 0.1em;
+        color: #fff;
+        &::before {
+            position: absolute;
+            content: "";
+            width: 200px;
+            height: 1px;
+            background-color: #109fe0;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -8px;
+        }
+    }
+    .wrapper-user-info {
+        margin-top: 70px;
+        .wrapper-info {
+            position: relative;
+            background: #fff;
+            border-radius: 10px;
+            margin: auto;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            width: 450px;
+            .box1 {
+                background: #62e34b;
+                border: 10px 10px 0px 0px;
+                border-radius: 10px 10px 0px 0px;
+                height: 175px;
+                position: relative;
+            }
+            .wrapper-input {
+                position: absolute;
+                right: 156px;
+                top: 193px;
+            }
+        }
+    }
+
+    .wrapper-avatar {
+        margin: auto;
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -60px;
+        border: 4px solid #fff;
+        width: 140px;
+        height: 140px;
+    }
+    ul {
+        font-size: 17px;
+        padding-bottom: 30px !important;
+        margin-top: 84px!important;
+        width: 80%;
+        margin-left: 118px !important;
+        li {
+            text-align: initial;
+            line-height: 35px;
+        }
+    }
+}

@@ -1,0 +1,224 @@
+.wrapper-slider {
+    height: 100%;
+    background-color: #141414;
+    .wrapper-showing {
+        margin: 0 65px;
+        padding-top: 50px;
+        z-index: 4;
+        top: -230px;
+        position: relative;
+        .header-title {
+            font-size: 1.4vw;
+            color: #fff;
+            font-weight: 700;
+            margin: 0 0 20px 20px;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 6em;
+        }
+        .wrapper-movies {
+            height: 300px;
+            width: 200px;
+            padding: 0 10px;
+            margin: 20px 0px;
+            .wrapper-poster {
+                height: 100%;
+                width: 100%;
+                cursor: pointer;
+                &:hover img {
+                    opacity: 0.55;
+                }
+                &:hover .wrapper-button {
+                    transform: translateY(-10px);
+                    opacity: 1;
+                }
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    opacity: 1;
+                    -webkit-transition: all 0.35s ease-in-out;
+                    -moz-transition: all 0.35s ease-in-out;
+                    -ms-transition: all 0.35s ease-in-out;
+                    -o-transition: all 0.35s ease-in-out;
+                    transition: all 0.35s ease-in-out;
+                }
+                .wrapper-button {
+                    position: absolute;
+                    bottom: 75px;
+                    transition: all 0.3s ease;
+                    opacity: 0;
+                    .button-booking {
+                        font-size: 12px;
+                        background: #24baef;
+                        transition: 0.2s all ease;
+                        font-weight: 600;
+                        color: #fff;
+                        outline: none;
+                        &:hover {
+                            box-shadow: 0 4px 11px rgba(36, 186, 239, 0.35);
+                        }
+                    }
+                    .button-trailer {
+                        font-size: 12px;
+                        background: #f50057;
+                        transition: 0.3s all ease;
+                        font-weight: 600;
+                        color: #fff;
+                        outline: none;
+                        &:hover {
+                            background: #f50057;
+                            box-shadow: 0 4px 11px rgba(245, 0, 87, 0.35);
+                        }
+                    }
+                }
+            }
+            .wrapper-description {
+                padding: 1rem 0 0;
+                color: rgb(233, 233, 233);
+                width: 100%;
+                .des-k-y-m {
+                    display: flex;
+                    flex-wrap: wrap;
+                    .des-year {
+                        margin-right: 12px;
+                        font-weight: 600px;
+                    }
+                    .des-kind {
+                        display: inline-block;
+                        margin: 0;
+                        padding: 0;
+                        font-weight: 600;
+                        color: #28c3fc;
+                        font-size: 14px;
+                    }
+                    .des-maturity {
+                        margin-left: auto;
+                        border: 1px solid #c7c7c7;
+                        font-size: 13px;
+                    }
+                }
+                .des-name {
+                    margin: 7px 0 0;
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #fff;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 100%;
+                }
+            }
+        }
+        .slick-arrow {
+            height: 87%;
+            width: 50px;
+            z-index: 4;
+            background: transparent;
+        }
+        .slick-prev {
+            left: -55px;
+            &::before {
+                color: transparent;
+            }
+        }
+        .slick-next {
+            right: -55px;
+            &::before {
+                color: transparent;
+            }
+        }
+        .nextArrow {
+            color: #fff;
+            position: absolute;
+            top: 56%;
+            -webkit-transform: translateX(0%);
+            -ms-transform: translateX(0%);
+            transform: translateX(0%);
+            width: 50px;
+            right: -55px;
+            z-index: 2;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .prevArrow {
+            color: #fff;
+            position: absolute;
+            top: 56%;
+            -webkit-transform: translateX(0%);
+            -ms-transform: translateX(0%);
+            transform: translateX(0%);
+            width: 50px;
+            left: -55px;
+            z-index: 2;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+    }
+}
+@media only screen and (max-width: 1280px) {
+    .wrapper-slider .wrapper-showing .wrapper-movies {
+        height: 270px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    
+    .wrapper-slider .wrapper-showing {
+        margin: 0 55px;
+        top: -120px;
+        padding-top: 30px;
+    }
+    .wrapper-slider .wrapper-showing .header-title {
+        font-size: 17px;
+        margin: 0 0 20px 15px;
+    }
+    .wrapper-slider
+        .wrapper-showing
+        .wrapper-movies
+        .wrapper-poster
+        .wrapper-button
+        .button-trailer {
+        font-size: 10px;
+    }
+    .wrapper-slider
+        .wrapper-showing
+        .wrapper-movies
+        .wrapper-poster
+        .wrapper-button
+        .button-booking {
+        font-size: 10px;
+        margin-right: 8px;
+    }
+}
+@media only screen and (max-width: 540px){
+    .wrapper-slider .wrapper-showing{
+        top: -65px;
+        padding-top: 30px;
+    }
+    .wrapper-slider .wrapper-showing .header-title{
+        font-size: 14px;
+    }
+    .wrapper-slider .wrapper-showing .wrapper-movies {
+        height: 250px;
+    }
+    .wrapper-slider{
+        height: 1162px;
+    }
+
+}
+@media only screen and (max-width: 411px) {
+    .wrapper-slider .wrapper-showing{
+        padding-top: 0;
+        top: -25px;
+    }
+    .wrapper-slider .wrapper-showing .wrapper-movies {
+        height: 355px;
+    }
+    .wrapper-slider{
+        height: 100%;
+    }
+    .wrapper-slider .wrapper-showing .header-title {
+        font-size: 17px;
+        margin: 0 0 3px 15px;
+    }
+}
