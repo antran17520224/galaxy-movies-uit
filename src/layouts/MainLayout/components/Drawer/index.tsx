@@ -42,7 +42,7 @@ const SideBar: React.FC<IProps> = (props) => {
 	};
 
 	const list = () => (
-		<div className={clsx(classes.list)} role="presentation">
+		<div className={classes.list} role="presentation">
 			<List>
 				<a href="/" onClick={props.actions.toggleSideBar}>
 					<ListItem button>
