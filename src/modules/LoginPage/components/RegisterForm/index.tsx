@@ -30,7 +30,7 @@ interface IProps extends RouteComponentProps, ILogInProps {}
 const RegisterForm: React.FC<IProps> = props => {
     const [isShowPass, setShowPass] = React.useState(false);
     const [isShowConfirmPass, setShowConfirmPass] = React.useState(false);
-    const [selectedDate, setSelectedDate] = React.useState<Date | null>(
+    const [selectedDate, setSelectedDate] = React.useState<Date>(
         new Date()
     );
     const [gender, setGender] = React.useState("female");
@@ -40,11 +40,11 @@ const RegisterForm: React.FC<IProps> = props => {
     const password = React.useRef({});
     password.current = watch("password", "");
 
-    const handleDateChange = (date: Date | null) => {
+    const handleDateChange = (date: Date) => {
         setSelectedDate(date);
     };
 
-    const handleChangeGender = event => {
+    const handleChangeGender = (event : any) => {
         setGender(event.target.value);
     };
 
@@ -223,7 +223,7 @@ const RegisterForm: React.FC<IProps> = props => {
                                 label="Ngày sinh"
                                 format="dd/MM/yyyy"
                                 value={selectedDate}
-                                onChange={handleDateChange}
+                                onChange={(selectedDate) => handleDateChange(selectedDate as Date)}
                                 KeyboardButtonProps={{
                                     "aria-label": "change date"
                                 }}

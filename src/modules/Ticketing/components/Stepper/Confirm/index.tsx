@@ -1,6 +1,7 @@
 import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { DOMAIN_WEB } from "../../../../../common";
 import { ITicketingProps } from "../../../model/ITicketingProps";
 import "./Confirm.scss";
 
@@ -30,7 +31,7 @@ export const ConfirmTicket: React.FC<ITicketingProps> = props => {
         });
         window.scroll(20, 0);
         if (!userInfo) {
-            window.location.assign("http://localhost:4050/");
+            window.location.assign(DOMAIN_WEB);
         }
         if (isCreateTicketSuccess) {
             props.actions.confirmPayment({

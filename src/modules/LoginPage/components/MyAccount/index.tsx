@@ -11,6 +11,7 @@ import { FormResetPassword } from "../FormResetPassword";
 import avatar from '../../../../assets/images/logo/logo-GM-1.png'
 
 import "./account.scss";
+import { DOMAIN_WEB } from "../../../../common";
 interface IProps extends RouteComponentProps, ILogInProps {}
 
 export const MyAccount: React.FC<IProps> = props => {
@@ -24,7 +25,7 @@ export const MyAccount: React.FC<IProps> = props => {
 
     React.useEffect(() => {
         if (!userInfo) {
-            window.location.assign("http://localhost:4050/");
+            window.location.assign(DOMAIN_WEB);
         }
     }, [userInfo]);
     return (

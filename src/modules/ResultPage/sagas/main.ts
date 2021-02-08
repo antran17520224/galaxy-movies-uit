@@ -6,7 +6,7 @@ import * as FoodAPi from "../../../api/food";
 import * as TicketApi from "../../../api/ticket";
 
 //Handle handleGetAllFoods
-function* handleGetAllFoods(action) {
+function* handleGetAllFoods(action : any) {
     try {
         const res = yield call(FoodAPi.getAllFoods);
         yield delay(500);

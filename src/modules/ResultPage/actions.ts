@@ -26,13 +26,13 @@ export const getAllFoods = (): IActions.IGetAllFoods => {
         type: Keys.GET_ALL_FOODS
     };
 };
-export const getAllFoodsSuccess = (res): IActions.IGetAllFoodsSuccess => {
+export const getAllFoodsSuccess = (res : any): IActions.IGetAllFoodsSuccess => {
     return {
         type: Keys.GET_ALL_FOODS_SUCCESS,
         payload: res
     };
 };
-export const getAllFoodsFail = (res): IActions.IGetAllFoodsFail => {
+export const getAllFoodsFail = (res : any): IActions.IGetAllFoodsFail => {
     return {
         type: Keys.GET_ALL_FOODS_FAIL,
         payload: res

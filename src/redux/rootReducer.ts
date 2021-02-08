@@ -26,7 +26,7 @@ const reducers = {
 
 };
 
-const rootReducer = (history) =>
+const rootReducer = (history : any) =>
     combineReducers<IStore>({
         ...reducers,
         router: connectRouter(history),

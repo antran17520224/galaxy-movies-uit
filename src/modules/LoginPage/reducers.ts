@@ -6,6 +6,7 @@ import * as IActions from "./IActions";
 import {
     ILogInState,
     initialState,
+    IRegister,
     MODAL_USER_LOGIN,
     USER_PAGE_CLEAR
 } from "./model/ILoginState";
@@ -112,7 +113,7 @@ const onToggleModal = (state: ILogInState, action: IActions.IToggleModal) => {
             return {
                 ...state,
                 isToggleModalConfirmRegister: !state.isToggleModalConfirmRegister,
-                dataToRegister: data
+                dataToRegister: data as IRegister
             };
         case MODAL_USER_LOGIN.MODAL_ACTIVE_ACCOUNT:
             return {
