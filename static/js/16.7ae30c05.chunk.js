@@ -1,0 +1,2 @@
+(this["webpackJsonpgalaxy-movies-client"]=this["webpackJsonpgalaxy-movies-client"]||[]).push([[16],{535:function(t,e,n){"use strict";n.r(e);var c=n(2),i=n(91),r=n(38),a=n(58),s=n(0),o=n.n(s),u=n(3),b=function(t){return Object(u.jsx)(o.a.Fragment,{children:Object(u.jsx)("h1",{children:"Hello"})})},l=n(22);e.default=Object(l.i)(Object(a.c)((function(t){return{store:t}}),(function(t){var e=Object(c.a)({},i);return{actions:Object(r.bindActionCreators)(e,t)}}))(b))}}]);
+//# sourceMappingURL=16.7ae30c05.chunk.js.map
