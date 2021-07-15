@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoadingResult } from '../../../../../components';
+import { LoadingCustom } from '../../../../../components';
 import { ITicketingProps } from '../../../model/ITicketingProps';
 import './Result.scss';
 
@@ -42,7 +42,14 @@ export const ResultPayment: React.FC<ITicketingProps> = (props) => {
 	return (
 		<React.Fragment>
 			{getTicket === 1 ? (
-				<LoadingResult spinning={loading} />
+				<h1
+					style={{
+						textAlign: 'center',
+						color: '#47c7c5',
+					}}
+				>
+					Đang xử lý thanh toán ...
+				</h1>
 			) : getTicket === 2 ? (
 				<h1
 					style={{

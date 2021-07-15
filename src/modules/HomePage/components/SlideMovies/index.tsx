@@ -9,10 +9,19 @@ import Slider from 'react-slick';
 import TicketIcon from '../../../../components/Icons/TicketIcon';
 import { IHomePageProps } from '../../model/IHomePageProps';
 import { HOME_PAGE_MODAL } from '../../model/IHomePageState';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import './SlideMovies.scss';
+import { URL_CINEMA } from '../../../../common';
 
 const SlideMovies: React.FC<IHomePageProps> = (props) => {
 	const { movieShowing, movieComingSoon } = props.store.HomePage;
+	const { userInfo } = props.store.LoginPage;
+
+	const [showDialogAlertLogin, setShowDialogAlertLogin] = React.useState<boolean>(false);
 
 	React.useEffect(() => {
 		props.actions.getMoviesByStatus({
@@ -71,8 +80,32 @@ const SlideMovies: React.FC<IHomePageProps> = (props) => {
 			},
 		],
 	};
+
 	return (
 		<React.Fragment>
+			<Dialog
+				open={showDialogAlertLogin}
+				aria-labelledby="alert-dialog-title"
+				aria-describedby="alert-dialog-description"
+			>
+				<DialogTitle id="alert-dialog-title">{`${URL_CINEMA} says`}</DialogTitle>
+				<DialogContent>
+					<DialogContentText id="alert-dialog-description">
+						Bạn vui lòng đăng nhập để tiến hành đặt vé !
+					</DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={() => setShowDialogAlertLogin(false)} variant="contained">
+						Từ chối
+					</Button>
+					<Link to={`/login`}>
+						<Button variant="contained" color="primary">
+							Chấp nhận
+						</Button>
+					</Link>
+				</DialogActions>
+			</Dialog>
+
 			<div className="wrapper-slider">
 				<div id="showing" className="wrapper-showing">
 					<div className="header-title">Phim đang chiếu</div>
@@ -82,16 +115,16 @@ const SlideMovies: React.FC<IHomePageProps> = (props) => {
 								<div className="wrapper-poster">
 									<img src={movie.smallImage} alt="Movies" />
 									<div className="wrapper-button">
-										<Link to={`/details/${movie.name}`}>
+										<Link to={userInfo ? `/details/${movie.name}` : '/'}>
 											<Button
 												variant="contained"
 												className="button-booking"
 												onClick={() => {
-													props.actions.handleCurrentMovie(
-														{
-															currentMovie: movie,
-														}
-													);
+													userInfo
+														? props.actions.handleCurrentMovie({
+																currentMovie: movie,
+														  })
+														: setShowDialogAlertLogin(true);
 												}}
 											>
 												Đặt vé
@@ -110,8 +143,7 @@ const SlideMovies: React.FC<IHomePageProps> = (props) => {
 											className="button-trailer"
 											onClick={() =>
 												props.actions.toggleModal({
-													type:
-														HOME_PAGE_MODAL.TRAILER_MODAL,
+													type: HOME_PAGE_MODAL.TRAILER_MODAL,
 													code: movie.trailer,
 												})
 											}
@@ -129,16 +161,10 @@ const SlideMovies: React.FC<IHomePageProps> = (props) => {
 								<div className="wrapper-description">
 									<div className="des-k-y-m">
 										<span className="des-year">
-											{moment(movie.launchDate).format(
-												'YYYY'
-											)}
+											{moment(movie.launchDate).format('YYYY')}
 										</span>
-										<span className="des-kind">
-											{movie.genre}
-										</span>
-										<span className="des-maturity">
-											{movie.maturity}+
-										</span>
+										<span className="des-kind">{movie.genre}</span>
+										<span className="des-maturity">{movie.maturity}+</span>
 									</div>
 									<h3 className="des-name">{movie.name}</h3>
 								</div>
@@ -161,16 +187,16 @@ const SlideMovies: React.FC<IHomePageProps> = (props) => {
 								<div className="wrapper-poster">
 									<img src={movie.smallImage} alt="Movies" />
 									<div className="wrapper-button">
-										<Link to={`/details/${movie.name}`}>
+										<Link to={userInfo ? `/details/${movie.name}` : '/'}>
 											<Button
 												variant="contained"
 												className="button-booking"
 												onClick={() => {
-													props.actions.handleCurrentMovie(
-														{
-															currentMovie: movie,
-														}
-													);
+													userInfo
+														? props.actions.handleCurrentMovie({
+																currentMovie: movie,
+														  })
+														: setShowDialogAlertLogin(true);
 												}}
 											>
 												Đặt vé
@@ -189,8 +215,7 @@ const SlideMovies: React.FC<IHomePageProps> = (props) => {
 											className="button-trailer"
 											onClick={() =>
 												props.actions.toggleModal({
-													type:
-														HOME_PAGE_MODAL.TRAILER_MODAL,
+													type: HOME_PAGE_MODAL.TRAILER_MODAL,
 													code: movie.trailer,
 												})
 											}
@@ -208,16 +233,10 @@ const SlideMovies: React.FC<IHomePageProps> = (props) => {
 								<div className="wrapper-description">
 									<div className="des-k-y-m">
 										<span className="des-year">
-											{moment(movie.launchDate).format(
-												'YYYY'
-											)}
+											{moment(movie.launchDate).format('YYYY')}
 										</span>
-										<span className="des-kind">
-											{movie.genre}
-										</span>
-										<span className="des-maturity">
-											{movie.maturity}+
-										</span>
+										<span className="des-kind">{movie.genre}</span>
+										<span className="des-maturity">{movie.maturity}+</span>
 									</div>
 									<h3 className="des-name">{movie.name}</h3>
 								</div>

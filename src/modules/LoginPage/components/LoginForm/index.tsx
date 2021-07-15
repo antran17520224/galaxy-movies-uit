@@ -61,6 +61,7 @@ const LoginForm: React.FC<IProps> = (props) => {
 							message: 'Email không hợp lệ',
 						},
 					})}
+					autoComplete="new-password"
 				/>
 				{errors.email && <p>{errors.email.message}</p>}
 				<FormControl className="form-control text-field" variant="outlined">
@@ -84,6 +85,7 @@ const LoginForm: React.FC<IProps> = (props) => {
 						inputRef={register({
 							required: 'Bạn phải nhập mật khẩu',
 						})}
+						autoComplete="new-password"
 					/>
 				</FormControl>
 				{errors.password && <p>{errors.password.message}</p>}

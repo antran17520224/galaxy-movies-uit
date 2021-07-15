@@ -1,5 +1,5 @@
-export const URL_CINEMA = 'www.galaxy-movies.heroku.com'
+export const URL_CINEMA = 'Galaxy Movies';
 
-export const YOUR_KEY_APP = "AIzaSyDztP6SDtzPiVhZauiUZMWvQWF1ZCclh7w"
+export const YOUR_KEY_APP = 'AIzaSyDztP6SDtzPiVhZauiUZMWvQWF1ZCclh7w';
 
-export const DOMAIN_WEB = 'http://localhost:4050/'
+export const DOMAIN_WEB = 'https://antran17520224.github.io/galaxy-movies-uit/';
