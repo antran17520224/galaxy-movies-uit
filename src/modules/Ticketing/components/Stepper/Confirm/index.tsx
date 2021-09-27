@@ -1,7 +1,6 @@
 import { Button, Checkbox, FormControlLabel } from '@material-ui/core';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { DOMAIN_WEB } from '../../../../../common';
 import { ITicketingProps } from '../../../model/ITicketingProps';
 import './Confirm.scss';
 

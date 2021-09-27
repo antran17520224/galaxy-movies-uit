@@ -5,17 +5,18 @@ import Zoom from '@material-ui/core/Zoom';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import * as React from 'react';
 import {
+	BrowserRouter,
 	Redirect,
 	Route,
 	RouteComponentProps,
 	Switch,
 	useLocation,
 } from 'react-router-dom';
+import { RouteConfig } from '../../../routes';
+import { IMainLayoutProps } from '../model/IMainLayoutProps';
 import SideBar from './Drawer';
 import Footer from './Footer';
 import Header from './Header';
-import { RouteConfig } from '../../../routes';
-import { IMainLayoutProps } from '../model/IMainLayoutProps';
 import useStyles from './styles';
 
 interface IProps extends RouteComponentProps, IMainLayoutProps {
@@ -34,9 +35,9 @@ function ScrollTop(props: IProps) {
 	});
 
 	const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-		const anchor = (
-			(event.target as HTMLDivElement).ownerDocument || document
-		).querySelector('#top');
+		const anchor = ((event.target as HTMLDivElement).ownerDocument || document).querySelector(
+			'#top'
+		);
 		if (anchor) {
 			anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		}
@@ -44,11 +45,7 @@ function ScrollTop(props: IProps) {
 
 	return (
 		<Zoom in={trigger}>
-			<div
-				onClick={handleClick}
-				role="presentation"
-				className={classes.root}
-			>
+			<div onClick={handleClick} role="presentation" className={classes.root}>
 				{children}
 			</div>
 		</Zoom>
@@ -77,17 +74,20 @@ const MainLayout: React.FC<IProps> = (props) => {
 			<Box>
 				<SideBar {...props} />
 			</Box>
-			<Switch>
-				{props.routes?.map((item) => (
-					<Route
-						key={item.path}
-						path={item.path}
-						component={item.component}
-						exact={item.exact}
-					/>
-				))}
-				<Redirect from="*" to="/" />
-			</Switch>
+			<BrowserRouter basename="/galaxy-movies-uit">
+				<Switch>
+					{props.routes?.map((item) => (
+						<Route
+							key={item.path}
+							path={item.path}
+							component={item.component}
+							exact={item.exact}
+						/>
+					))}
+					<Redirect from="*" to="/" />
+				</Switch>
+			</BrowserRouter>
+
 			<Footer />
 			<ScrollTop {...props}>
 				<Fab
