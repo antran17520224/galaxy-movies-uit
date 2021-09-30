@@ -62,6 +62,7 @@ const LoginForm: React.FC<IProps> = (props) => {
 						},
 					})}
 					autoComplete="new-password"
+					aria-autocomplete="list"
 				/>
 				{errors.email && <p>{errors.email.message}</p>}
 				<FormControl className="form-control text-field" variant="outlined">

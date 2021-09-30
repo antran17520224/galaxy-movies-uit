@@ -4,14 +4,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Zoom from '@material-ui/core/Zoom';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import * as React from 'react';
-import {
-	BrowserRouter,
-	Redirect,
-	Route,
-	RouteComponentProps,
-	Switch,
-	useLocation,
-} from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps, Switch, useLocation } from 'react-router-dom';
 import { RouteConfig } from '../../../routes';
 import { IMainLayoutProps } from '../model/IMainLayoutProps';
 import SideBar from './Drawer';
@@ -74,19 +67,17 @@ const MainLayout: React.FC<IProps> = (props) => {
 			<Box>
 				<SideBar {...props} />
 			</Box>
-			<BrowserRouter basename="/galaxy-movies-uit">
-				<Switch>
-					{props.routes?.map((item) => (
-						<Route
-							key={item.path}
-							path={item.path}
-							component={item.component}
-							exact={item.exact}
-						/>
-					))}
-					<Redirect from="*" to="/" />
-				</Switch>
-			</BrowserRouter>
+			<Switch>
+				{props.routes?.map((item) => (
+					<Route
+						key={item.path}
+						path={item.path}
+						component={item.component}
+						exact={item.exact}
+					/>
+				))}
+				<Redirect from="*" to="/" />
+			</Switch>
 
 			<Footer />
 			<ScrollTop {...props}>

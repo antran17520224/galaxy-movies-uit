@@ -10,8 +10,9 @@ import { LoadingScreen } from './components';
 import MainLayout from './layouts/MainLayout/components/MainLayoutContainer';
 import IStore from './redux/store/IStore';
 import { mainRoutes } from './routes';
-import { ToastContainer } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css'; 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter } from 'react-router-dom';
 
 const App: React.FC = (props) => {
 	return (
@@ -20,7 +21,9 @@ const App: React.FC = (props) => {
 				<CssBaseline />
 				<ToastContainer />
 				<React.Suspense fallback={<LoadingScreen size="large" />}>
-					<MainLayout routes={mainRoutes} />
+					<BrowserRouter basename="/galaxy-movies-uit">
+						<MainLayout routes={mainRoutes} />
+					</BrowserRouter>
 				</React.Suspense>
 			</ThemeProvider>
 		</React.Fragment>

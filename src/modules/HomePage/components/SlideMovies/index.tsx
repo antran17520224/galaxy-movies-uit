@@ -98,7 +98,7 @@ const SlideMovies: React.FC<IHomePageProps> = (props) => {
 					<Button onClick={() => setShowDialogAlertLogin(false)} variant="contained">
 						Từ chối
 					</Button>
-					<Link to={`/login`}>
+					<Link to="/login">
 						<Button variant="contained" color="primary">
 							Chấp nhận
 						</Button>
