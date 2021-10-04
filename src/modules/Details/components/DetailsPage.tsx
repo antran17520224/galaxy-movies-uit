@@ -11,6 +11,7 @@ import './Details.scss';
 import { ModalMapCinema } from './ModalMapCinema';
 import { ShowTimes } from './ShowTimes';
 import { TrailerModal } from './Trailer';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 interface IProps extends RouteComponentProps, IDetailsProps {}
 
@@ -140,6 +141,21 @@ const DetailsPage: React.FC<IProps> = (props) => {
 					<TrailerModal {...props} />
 					<div ref={myRef}></div>
 					<ShowTimes {...props} />
+					<Button
+						variant="contained"
+						className="button-location"
+						onClick={() => {
+							props.actions.toggleModal({
+								type: DETAILS_MODAL.MAP_MODAL,
+								coordinate: {
+									lat: 10.884559,
+									lng: 107.174659,
+								},
+							});
+						}}
+					>
+						<LocationOnIcon /> Xem vị trí
+					</Button>
 					<ModalMapCinema {...props} />
 				</>
 			)}
